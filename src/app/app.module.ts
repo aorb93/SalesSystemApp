@@ -30,8 +30,6 @@ import { JwtInterceptor } from './security/jwt.interceptor';
 import { SaleComponent } from './sale/sale.component';
 import { ProductComponent } from './product/product.component';
 import { MatTable } from '@angular/material/table';
-import { SpinnerComponent } from './common/spinner/spinner/spinner.component';
-// import { SpinnerInterceptor } from './security/spinner.interceptor';
 
 
 @NgModule({
@@ -44,7 +42,6 @@ import { SpinnerComponent } from './common/spinner/spinner/spinner.component';
     LoginComponent,
     SaleComponent,
     ProductComponent,
-    SpinnerComponent
   ],
   imports: [
     BrowserModule,

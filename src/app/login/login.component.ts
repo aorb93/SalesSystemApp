@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { apiAuthService } from "../services/apiAuth.service";
 import { Router } from "@angular/router";
 import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
-import { SpinnerComponent } from "../common/spinner/spinner/spinner.component";
 
 @Component({ 
     templateUrl: 'login.component.html',

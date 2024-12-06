@@ -6,7 +6,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
-import { SpinnerComponent } from './common/spinner/spinner/spinner.component';
 
 @Component({
   selector: 'app-root',
@@ -20,12 +19,10 @@ export class AppComponent {
 
   public pageTitle!: string;
 
-  constructor(public apiAuthService: apiAuthService, private router: Router, public spinner: SpinnerComponent){
+  constructor(public apiAuthService: apiAuthService, private router: Router){
     this.apiAuthService.user.subscribe(res => {
       this.user = res;
     })
-
-    this.spinner.spinnerShow = true;
   }
 
   setInfo(pageTitle: string){
