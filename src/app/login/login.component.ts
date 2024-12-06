@@ -41,8 +41,6 @@ export class LoginComponent implements OnInit{
         this.apiAuthService.login(this.loginForm.value).subscribe(response => {
             if(response.result){
                 this.router.navigate(['/']);
-                // this.spinner.spinnerShow = false;
-                this.spinner.hide();
             }
         })
     }

@@ -4,6 +4,7 @@ import { Home } from '../models/home';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { AppComponent } from '../app.component';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,7 @@ export class HomeComponent {
   public user!: Observable<User>;
   public companyId!: number;
 
-  constructor(public appComponent: AppComponent){
+  constructor(public appComponent: AppComponent, private spinner: NgxSpinnerService){
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('User')!));
     this.user = this.userSubject.asObservable();
 
@@ -30,5 +31,7 @@ export class HomeComponent {
       {routerLink: '', text: 'Three', cols: 1, rows: 1, color: 'lightpink'},
       {routerLink: '/category', text: 'Categorías', cols: 2, rows: 1, color: '#DDBDF1'},
     ];
+
+    this.spinner.hide();
   }
 }
