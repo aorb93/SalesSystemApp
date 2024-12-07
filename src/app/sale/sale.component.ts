@@ -28,12 +28,14 @@ export class SaleComponent {
   public addSelectProduct: Product[] = [];
   public columns: string[] = ['productId', 'productName', 'price', 'quantity'];
   public total: number = 0;
+  public showTable!: boolean;
   
   @ViewChild(MatTable) table!: MatTable<Product>;
 
   constructor(private apiProduct: ApiProductService, public option: MatOptionModule, private spinner: NgxSpinnerService){
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('User')!));
     this.companyId = this.userSubject.value.infoUser.companyId;
+    this.showTable = true;
   }
 
   ngOnInit(): void {
@@ -93,5 +95,20 @@ export class SaleComponent {
     });
     this.table.renderRows();
     this.getTotal();
+  }
+
+  cleanTable(){
+    this.addSelectProduct = [];
+    this.table.renderRows();
+    // this.showTableDisplay();
+    this.getTotal();
+  }
+
+  showTableDisplay(){
+    this.showTable = this.addSelectProduct.length > 0 ? true : false;
+  }
+
+  sale(){
+    
   }
 }

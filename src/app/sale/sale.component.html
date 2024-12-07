@@ -1,13 +1,30 @@
 <div>
-  <mat-form-field>
-    <mat-select (selectionChange)="selectOpt($event)" placeholder="Productos" [(ngModel)]="productSelect" [value]='productId'>
-      <mat-option *ngFor="let p of selectProduct" [value]="p.productId">{{p.productName}}</mat-option>
-    </mat-select>
-  </mat-form-field> 
-  <button mat-raised-button color="primaty" (click)="addProduct()">Agregar</button>
+  <section>
+    <div style="font-size: 8px">
+      <mat-form-field>
+        <mat-select (selectionChange)="selectOpt($event)" placeholder="Productos" [(ngModel)]="productSelect" [value]="productId">
+          <mat-option *ngFor="let p of selectProduct" [value]="p.productId">{{p.productName}}</mat-option>
+        </mat-select>
+      </mat-form-field> 
+    </div>
+    <div class="example-button-row">
+      <div class="example-flex-container">
+        <div class="example-button-container">
+          <button mat-mini-fab color="primaty" (click)="addProduct()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="example-button-container">
+          <button mat-mini-fab color="primaty" (click)="cleanTable()">
+            <mat-icon>autorenew</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
-<div>
+<div *ngIf="showTable">
   <table mat-table [dataSource]="addSelectProduct" class="mat-elevation-z4">
     <ng-contanier matColumnDef="productId">
         <th mat-header-cell *matHeaderCellDef>Id</th>
@@ -33,10 +50,19 @@
     <tr mat-header-row *matHeaderRowDef="columns"></tr>
     <tr mat-row *matRowDef="let row; columns: columns"></tr>
   </table>
-</div>
 
-<div>
   <br><br>
-  <p>Total: {{ total | currency:'USD':'symbol' }}</p>
+  <section>
+    <p>Total: {{ total | currency:'USD':'symbol' }}</p>
+    <div class="example-button-row">
+      <div class="example-flex-container">
+        <div class="example-button-container">
+          <button mat-mini-fab color="primaty" (click)="sale()">
+            <mat-icon>attach_money</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
