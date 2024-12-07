@@ -7,6 +7,8 @@ import { Product } from '../models/product';
 import { ApiProductService } from '../services/api-product.service';
 import { MatTable } from '@angular/material/table';
 import { NgxSpinnerService } from "ngx-spinner";
+import { ApiClientService } from '../services/api-client.service';
+import { Client } from '../models/client';
 
 @Component({
   selector: 'app-sale',
@@ -29,24 +31,30 @@ export class SaleComponent {
   public columns: string[] = ['productId', 'productName', 'price', 'quantity'];
   public total: number = 0;
   public showTable!: boolean;
+
+  public clientSelect!: string;
+  public selectClient!: Client[];
+  public selectClientId!: number;
+  public clientId!: number;
   
   @ViewChild(MatTable) table!: MatTable<Product>;
 
-  constructor(private apiProduct: ApiProductService, public option: MatOptionModule, private spinner: NgxSpinnerService){
+  constructor(private apiProduct: ApiProductService, private apiClient: ApiClientService, public option: MatOptionModule, private spinner: NgxSpinnerService){
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('User')!));
     this.companyId = this.userSubject.value.infoUser.companyId;
     this.showTable = true;
   }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.getProduct(this.companyId);
+    this.getClients(this.companyId);
+    this.spinner.hide();
   }
   
   getProduct(companyId: number) {
-    this.spinner.show();
     this.apiProduct.getProducts(companyId).subscribe(response => {
       this.selectProduct = response;
-      this.spinner.hide();
     });
   }
 
@@ -89,7 +97,7 @@ export class SaleComponent {
 
   add(id: number){
     this.addSelectProduct.map(function(p){
-      if(p.productId == id){
+      if(p.productId == id && p.quantitySale < p.quantity){
         p.quantitySale++;
       }
     });
@@ -108,7 +116,15 @@ export class SaleComponent {
     this.showTable = this.addSelectProduct.length > 0 ? true : false;
   }
 
+  getClients(companyId: number) {
+    this.apiClient.getClients(companyId).subscribe(response => {
+      this.selectClient = response;
+    });
+  }
+
   sale(){
-    
+    if(this.addSelectProduct.length > 0){
+
+    }
   }
 }

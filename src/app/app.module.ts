@@ -32,6 +32,7 @@ import { JwtInterceptor } from './security/jwt.interceptor';
 import { SaleComponent } from './sale/sale.component';
 import { ProductComponent } from './product/product.component';
 import { MatTable } from '@angular/material/table';
+import { ClientComponent } from './client/client.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { MatTable } from '@angular/material/table';
     LoginComponent,
     SaleComponent,
     ProductComponent,
+    ClientComponent,
   ],
   imports: [
     BrowserModule,

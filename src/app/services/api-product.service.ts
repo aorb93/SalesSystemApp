@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Response } from '../models/response';
-import { Category } from '../models/category';
 import { Product } from '../models/product';
 
 const httpOption = {

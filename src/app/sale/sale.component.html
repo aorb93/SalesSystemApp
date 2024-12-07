@@ -1,6 +1,15 @@
 <div>
   <section>
-    <div style="font-size: 8px">
+    <div>
+      <mat-form-field>
+        <mat-select (selectionChange)="selectOpt($event)" placeholder="Clientes" [(ngModel)]="clientSelect" [value]="clientId">
+          <mat-option *ngFor="let c of selectClient" [value]="c.clientId">{{c.clientName}}</mat-option>
+        </mat-select>
+      </mat-form-field> 
+    </div>
+  </section>
+  <section>
+    <div>
       <mat-form-field>
         <mat-select (selectionChange)="selectOpt($event)" placeholder="Productos" [(ngModel)]="productSelect" [value]="productId">
           <mat-option *ngFor="let p of selectProduct" [value]="p.productId">{{p.productName}}</mat-option>
