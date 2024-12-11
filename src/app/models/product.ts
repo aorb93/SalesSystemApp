@@ -16,4 +16,6 @@ export interface Product{
     ModifyDate: Date;
     CompanyId: number;
     quantitySale: number;
+    iconRemove: string;
+    iconColor: string;
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Client } from '../models/client';
+import { Sale } from '../models/sale';
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -12,16 +12,14 @@ const httpOption = {
 @Injectable({
   providedIn: 'root'
 })
-export class ApiClientService {
-  url: string = 'http://192.168.0.172/Client';
+export class ApiSaleService {
+  url: string = 'http://192.168.0.172/Sale/';
 
   constructor(
     private _http: HttpClient
   ) { }
 
-  getClients(companyId: number): Observable<Client[]>{
-    const _companyId: string = '/List?CompanyId=';
-    return this._http.get<Client[]>(`${this.url}${_companyId}${companyId}`);
+  postSale(sale: Sale): Observable<Sale[]>{
+    return this._http.post<Sale[]>(this.url + 'Sale', sale, httpOption);
   }
-
 }

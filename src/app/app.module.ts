@@ -19,6 +19,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
@@ -33,6 +34,7 @@ import { SaleComponent } from './sale/sale.component';
 import { ProductComponent } from './product/product.component';
 import { MatTable } from '@angular/material/table';
 import { ClientComponent } from './client/client.component';
+import { DialogSaleComponent } from './sale/dialog-sale/dialog-sale.component';
 
 
 @NgModule({
@@ -46,6 +48,7 @@ import { ClientComponent } from './client/client.component';
     SaleComponent,
     ProductComponent,
     ClientComponent,
+    DialogSaleComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,8 @@ import { ClientComponent } from './client/client.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatButtonToggleModule
   ],
   providers: [
     provideAnimationsAsync(),

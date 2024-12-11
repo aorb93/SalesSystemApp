@@ -9,6 +9,10 @@ import { MatTable } from '@angular/material/table';
 import { NgxSpinnerService } from "ngx-spinner";
 import { ApiClientService } from '../services/api-client.service';
 import { Client } from '../models/client';
+import { Sale } from '../models/sale';
+import { ProductSale } from '../models/sale';
+import { ApiSaleService } from '../services/api-sale.service';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @Component({
   selector: 'app-sale',
@@ -36,10 +40,15 @@ export class SaleComponent {
   public selectClient!: Client[];
   public selectClientId!: number;
   public clientId!: number;
+
+  public saleInfo!: Sale;
+  public saleDetail!: ProductSale;
+  public isChecked: boolean = false;
+  public toggleChanged!: boolean;
   
   @ViewChild(MatTable) table!: MatTable<Product>;
 
-  constructor(private apiProduct: ApiProductService, private apiClient: ApiClientService, public option: MatOptionModule, private spinner: NgxSpinnerService){
+  constructor(private apiProduct: ApiProductService, private apiClient: ApiClientService, private apiSale: ApiSaleService, public option: MatOptionModule, private spinner: NgxSpinnerService){
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('User')!));
     this.companyId = this.userSubject.value.infoUser.companyId;
     this.showTable = true;
@@ -55,24 +64,58 @@ export class SaleComponent {
   getProduct(companyId: number) {
     this.apiProduct.getProducts(companyId).subscribe(response => {
       this.selectProduct = response;
+      this.disabledButtonAdd(true);
+      this.disabledButtonSale();
     });
   }
 
   addProduct(){
-    this.spinner.show();
     if(this.selectProductId !== 0 && this.selectProductId !== undefined){
-      this.apiProduct.getProduct(this.companyId, this.selectProductId).subscribe(response => {
-        response[0].quantitySale = 1;
-        this.addSelectProduct.push(response[0]);
-        this.table.renderRows();
-        this.selectProductId = 0;
-        this.getTotal();
-      });
+      this.spinner.show();
+      if(this.addProductDuplicate(this.selectProductId)){
+        this.apiProduct.getProduct(this.companyId, this.selectProductId).subscribe(response => {
+          response[0].quantitySale = 1;
+          response[0].iconRemove = 'delete';
+          response[0].iconColor = 'text-danger'
+          this.addSelectProduct.push(response[0]);
+          this.table.renderRows();
+          this.productSelect = '';
+          this.getTotal();
+          this.disabledButtonAdd(true);
+        });
+      }
     }
   }
 
-  selectOpt(event: any){
+  addProductDuplicate(id: number){
+    let add: boolean = false;
+    if(this.addSelectProduct.length > 0){
+      this.addSelectProduct.map(function(p){
+        if(p.productId == id){
+          p.quantitySale++;
+          add = false;
+        }
+        else{
+          add = true;
+        }
+      });
+    }
+    else{
+      add = true;
+    }
+    this.table.renderRows();
+    this.productSelect = '';
+    this.getTotal();
+    return add;
+  }
+
+  selectProductOpt(event: any){
+    this.disabledButtonAdd(false);
     this.selectProductId = event.value;
+  }
+
+  selectClientOpt(event: any){
+    this.selectClientId = event.value;
   }
 
   getTotal(){
@@ -80,25 +123,48 @@ export class SaleComponent {
     for(let i = 0; i < this.addSelectProduct.length; i++){
       this.total += (this.addSelectProduct[i].price * this.addSelectProduct[i].quantitySale);
     }
+    this.disabledButtonSale();
     this.spinner.hide();
   }
 
   subtract(id: number){
+    let idDelete: number = 0;
     this.addSelectProduct.map(function(p){
       if(p.productId == id){
         p.quantitySale--;
-        if(p.quantitySale === 0)
-          p.quantitySale = 1;
+        p.iconRemove = p.quantitySale > 1 ? 'remove' : 'delete'
+        p.iconColor = p.quantitySale > 1 ? 'text-warning' : 'text-danger'
+        if(p.quantitySale === 0){
+          idDelete = p.productId;
+        }
       }
     });
+    if(idDelete > 0){
+      this.delete(idDelete);
+    }
     this.table.renderRows();
     this.getTotal();
+  }
+
+  delete(id: number){
+    let borrar = -1;
+    
+    this.addSelectProduct.forEach((item, index) => {
+      if(item.productId == id) {
+          borrar = index;
+      }
+    });
+    if(borrar >= 0) {
+      this.addSelectProduct.splice(borrar, 1);
+    }
   }
 
   add(id: number){
     this.addSelectProduct.map(function(p){
       if(p.productId == id && p.quantitySale < p.quantity){
         p.quantitySale++;
+        p.iconRemove = p.quantitySale > 1 ? 'remove' : 'delete'
+        p.iconColor = p.quantitySale > 1 ? 'text-warning' : 'text-danger'
       }
     });
     this.table.renderRows();
@@ -108,6 +174,7 @@ export class SaleComponent {
   cleanTable(){
     this.addSelectProduct = [];
     this.table.renderRows();
+    this.productSelect = '';
     // this.showTableDisplay();
     this.getTotal();
   }
@@ -124,7 +191,59 @@ export class SaleComponent {
 
   sale(){
     if(this.addSelectProduct.length > 0){
+      this.spinner.show();
 
+      let productsList: ProductSale[] = [];
+
+      for(let i = 0; i < this.addSelectProduct.length; i++){
+        let productsListTmp = {
+          productSaleId: 0,
+          saleId: 0,
+          productId: this.addSelectProduct[i].productId,
+          quantity: this.addSelectProduct[i].quantitySale,
+          unitPrice: this.addSelectProduct[i].price,
+          companyId: this.companyId
+        };
+
+        productsList.push(productsListTmp);
+      }
+
+      this.saleInfo = {
+        saleId: 0,
+        clientId: this.selectClientId,
+        total: this.total,
+        companyId: this.companyId,
+        productSale: productsList
+      }
+
+      this.apiSale.postSale(this.saleInfo).subscribe(response => {
+        if(response){
+          this.spinner.hide();
+          window.location.reload();
+        }
+      });
     }
+  }
+
+  disabledButtonAdd(disabled: boolean){
+    var addButton = <HTMLInputElement> document.getElementById("addButton");
+    addButton.disabled = disabled ? true : false;
+  }
+
+  disabledButtonSale(){
+    var saleButton = <HTMLInputElement> document.getElementById("saleButton");
+    var cleanButton = <HTMLInputElement> document.getElementById("cleanButton");
+    saleButton.disabled = this.addSelectProduct.length === 0 ? true : false;
+    cleanButton.disabled = this.addSelectProduct.length === 0 ? true : false;
+  }
+
+  onChange(group: any) {
+      group.value = "";
+  }
+
+  // iconSubtract
+  colorIconSubtract(){
+    var iconSubtract = <HTMLInputElement> document.getElementById("iconSubtract");
+    iconSubtract.disabled = this.addSelectProduct.length === 0 ? true : false;
   }
 }

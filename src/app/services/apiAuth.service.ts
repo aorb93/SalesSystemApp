@@ -50,7 +50,10 @@ export class apiAuthService {
 
     isAuth(): boolean {
         const info = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('User')!));
-        const token = info.value.token;
+        let token = '';
+
+        if(info.value !== null)
+            token = info.value.token;
 
         if(!token)
             return false;
