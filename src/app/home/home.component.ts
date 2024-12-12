@@ -28,7 +28,7 @@ export class HomeComponent {
     this.tiles = [
       {routerLink: '/sale', text: 'Venta', cols: 3, rows: 1, color: 'lightblue'},
       {routerLink: '/product', text: 'Productos', cols: 1, rows: 2, color: 'lightgreen'},
-      {routerLink: '', text: 'Three', cols: 1, rows: 1, color: 'lightpink'},
+      {routerLink: '/sales', text: 'Ventas', cols: 1, rows: 1, color: 'lightpink'},
       {routerLink: '/category', text: 'Categorías', cols: 2, rows: 1, color: '#DDBDF1'},
     ];
 

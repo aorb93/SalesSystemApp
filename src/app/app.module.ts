@@ -36,6 +36,7 @@ import { MatTable } from '@angular/material/table';
 import { ClientComponent } from './client/client.component';
 import { DialogSaleComponent } from './sale/dialog-sale/dialog-sale.component';
 import { SalesComponent } from './sales/sales.component';
+import { DialogSalesComponent } from './sales/dialog-sales/dialog-sales.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { SalesComponent } from './sales/sales.component';
     ProductComponent,
     ClientComponent,
     DialogSaleComponent,
-    SalesComponent
+    SalesComponent,
+    DialogSalesComponent
   ],
   imports: [
     BrowserModule,

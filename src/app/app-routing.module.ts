@@ -6,6 +6,7 @@ import { AuthGuard } from './security/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { ProductComponent } from './product/product.component';
 import { SaleComponent } from './sale/sale.component';
+import { SalesComponent } from './sales/sales.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'category', component: CategoryComponent, canActivate: [AuthGuard] },
   { path: 'product', component: ProductComponent, canActivate: [AuthGuard] },
-  { path: 'sale', component: SaleComponent, canActivate: [AuthGuard] }
+  { path: 'sale', component: SaleComponent, canActivate: [AuthGuard] },
+  { path: 'sales', component: SalesComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

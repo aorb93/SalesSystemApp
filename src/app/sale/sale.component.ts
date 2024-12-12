@@ -104,6 +104,7 @@ export class SaleComponent {
       this.addSelectProduct.map(function(p){
         if(p.productId == id){
           p.quantitySale++;
+          p.iconRemove = p.quantitySale > 1 ? 'remove' : 'delete'
           add = false;
         }
         else{
@@ -229,13 +230,6 @@ export class SaleComponent {
 
       this.spinner.show();
       this.openAdd(this.saleInfo);
-
-      // this.apiSale.postSale(this.saleInfo).subscribe(response => {
-      //   if(response){
-      //     this.spinner.hide();
-      //     window.location.reload();
-      //   }
-      // });
     }
   }
 
@@ -255,7 +249,6 @@ export class SaleComponent {
       group.value = "";
   }
 
-  // iconSubtract
   colorIconSubtract(){
     var iconSubtract = <HTMLInputElement> document.getElementById("iconSubtract");
     iconSubtract.disabled = this.addSelectProduct.length === 0 ? true : false;
@@ -269,7 +262,7 @@ export class SaleComponent {
     this.spinner.hide();
 
     dialogRef.afterClosed().subscribe(result => {
-      // this.getCategory();
+      
     });
   }
 }
