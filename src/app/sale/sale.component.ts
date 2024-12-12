@@ -13,6 +13,8 @@ import { Sale } from '../models/sale';
 import { ProductSale } from '../models/sale';
 import { ApiSaleService } from '../services/api-sale.service';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { DialogSaleComponent } from './dialog-sale/dialog-sale.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-sale',
@@ -45,10 +47,19 @@ export class SaleComponent {
   public saleDetail!: ProductSale;
   public isChecked: boolean = false;
   public toggleChanged!: boolean;
+
+  readonly width: string = '300px';
   
   @ViewChild(MatTable) table!: MatTable<Product>;
 
-  constructor(private apiProduct: ApiProductService, private apiClient: ApiClientService, private apiSale: ApiSaleService, public option: MatOptionModule, private spinner: NgxSpinnerService){
+  constructor(
+    private apiProduct: ApiProductService, 
+    private apiClient: ApiClientService, 
+    private apiSale: ApiSaleService, 
+    public option: MatOptionModule, 
+    private spinner: NgxSpinnerService,
+    public dialog: MatDialog
+  ){
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('User')!));
     this.companyId = this.userSubject.value.infoUser.companyId;
     this.showTable = true;
@@ -216,12 +227,14 @@ export class SaleComponent {
         productSale: productsList
       }
 
-      this.apiSale.postSale(this.saleInfo).subscribe(response => {
-        if(response){
-          this.spinner.hide();
-          window.location.reload();
-        }
-      });
+      this.openAdd(this.saleInfo);
+
+      // this.apiSale.postSale(this.saleInfo).subscribe(response => {
+      //   if(response){
+      //     this.spinner.hide();
+      //     window.location.reload();
+      //   }
+      // });
     }
   }
 
@@ -245,5 +258,17 @@ export class SaleComponent {
   colorIconSubtract(){
     var iconSubtract = <HTMLInputElement> document.getElementById("iconSubtract");
     iconSubtract.disabled = this.addSelectProduct.length === 0 ? true : false;
+  }
+
+  openAdd(saleData: Sale){
+    const dialogRef = this.dialog.open(DialogSaleComponent, {
+      width: this.width,
+      data: saleData
+    });
+    this.spinner.hide();
+
+    dialogRef.afterClosed().subscribe(result => {
+      // this.getCategory();
+    });
   }
 }

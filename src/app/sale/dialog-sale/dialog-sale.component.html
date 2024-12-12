@@ -1,1 +1,4 @@
-<p>dialog-sale works!</p>
+<div mat-dialog-actions>
+    <button mat-raised-button (click)="close()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="sale != null ? saveSale() : ''">Guardar</button>
+</div>
