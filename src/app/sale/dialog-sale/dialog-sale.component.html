@@ -1,4 +1,32 @@
+<div mat-dialog-title>Confirmar Venta</div>
+<div mat-dialog-content>
+    <table>
+        <tr class="borderButton">
+            <td>Cliente:</td>
+            <td>{{ saleConfirm.clientName }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Producto</th>
+            <th align="center">Cantidad</th>
+            <th align="right">Precio</th>
+        </tr>
+        @for (item of saleConfirm.productSale; track $index) {
+            <tr>
+                <td>{{ item.productName }}</td>
+                <td align="center">{{ item.quantity }}</td>
+                <td align="right">{{ item.quantity * item.unitPrice | currency:'USD':'symbol' }}</td>
+            </tr>
+        }
+        <tr class="borderTop">
+            <td>Total:</td>
+            <td align="center">{{ totalQuantity }}</td>
+            <td align="right">{{ Sale.total | currency:'USD':'symbol' }}</td>
+        </tr>
+    </table>
+</div>
 <div mat-dialog-actions>
     <button mat-raised-button (click)="close()">Cancelar</button>
-    <button mat-raised-button color="primary" (click)="sale != null ? saveSale() : ''">Guardar</button>
+    <button mat-raised-button color="primary" (click)="Sale != null ? saveSale() : ''">Guardar</button>
 </div>
+

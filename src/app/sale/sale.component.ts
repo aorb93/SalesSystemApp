@@ -48,7 +48,7 @@ export class SaleComponent {
   public isChecked: boolean = false;
   public toggleChanged!: boolean;
 
-  readonly width: string = '300px';
+  readonly width: string = '350px';
   
   @ViewChild(MatTable) table!: MatTable<Product>;
 
@@ -227,6 +227,7 @@ export class SaleComponent {
         productSale: productsList
       }
 
+      this.spinner.show();
       this.openAdd(this.saleInfo);
 
       // this.apiSale.postSale(this.saleInfo).subscribe(response => {
