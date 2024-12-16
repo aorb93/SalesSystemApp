@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { User } from './models/user';
 import { apiAuthService } from './services/apiAuth.service';
 import { Router } from '@angular/router';
@@ -6,6 +6,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
@@ -15,14 +17,31 @@ import { MatListModule } from '@angular/material/list';
 })
 export class AppComponent {
   title = 'SalesSystemApp';
-  user!: User;
+  public user!: User;
 
   public pageTitle!: string;
+  @ViewChild(MatSidenav)
+  sidenav!: MatSidenav;
+  isMobile= true;
+  isCollapsed = true;
 
-  constructor(public apiAuthService: apiAuthService, private router: Router){
+  constructor(
+    public apiAuthService: apiAuthService, 
+    private router: Router,
+    private observer: BreakpointObserver){
     this.apiAuthService.user.subscribe(res => {
       this.user = res;
     })
+  }
+
+  ngOnInit() {
+    this.observer.observe(['(max-width: 800px)']).subscribe((screenSize) => {
+      if(screenSize.matches){
+        this.isMobile = true;
+      } else {
+        this.isMobile = false;
+      }
+    });
   }
 
   setInfo(pageTitle: string){
@@ -32,5 +51,15 @@ export class AppComponent {
   logout(){
     this.apiAuthService.logout();
     this.router.navigate(['/login']);
+  }
+
+  toggleMenu() {
+    if(this.isMobile){
+      this.sidenav.toggle();
+      this.isCollapsed = false; // On mobile, the menu can never be collapsed
+    } else {
+      this.sidenav.open(); // On desktop/tablet, the menu can never be fully closed
+      this.isCollapsed = !this.isCollapsed;
+    }
   }
 }

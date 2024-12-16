@@ -5,6 +5,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms"
 import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({ 
+    selector: 'app-login',
     templateUrl: 'login.component.html',
     styleUrls: ['./login.component.scss']
 })

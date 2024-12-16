@@ -1,4 +1,128 @@
-<mat-grid-list cols="4" rowHeight="100px">
+ <!-- site icon -->
+ <link rel="icon" href="https://themewagon.github.io/pluto/images/fevicon.png" type="image/png" />
+ <!-- bootstrap css -->
+ <link rel="stylesheet" href="https://themewagon.github.io/pluto/css/bootstrap.min.css" />
+ <!-- site css -->
+ <link rel="stylesheet" href="https://themewagon.github.io/pluto/style.css" />
+ <!-- responsive css -->
+ <link rel="stylesheet" href="https://themewagon.github.io/pluto/css/responsive.css" />
+ <!-- color css -->
+ <link rel="stylesheet" href="https://themewagon.github.io/pluto/css/colors.css" />
+ <!-- select bootstrap -->
+ <link rel="stylesheet" href="https://themewagon.github.io/pluto/css/bootstrap-select.css" />
+ <!-- scrollbar css -->
+ <link rel="stylesheet" href="https://themewagon.github.io/pluto/css/perfect-scrollbar.css" />
+ <!-- custom css -->
+ <link rel="stylesheet" href="https://themewagon.github.io/pluto/css/custom.css" />
+
+<div class="container">
+  <div class="col-12 col-lg-9">
+    <div class="row">
+      @for (tile of tiles; track tile) {
+        <div class="col-6 col-lg-3 col-md-6">
+          <a [routerLink]="[tile.routerLink]">
+            <div class="card">
+              <div class="card-body px-4 py-4-5">
+                <div class="row">
+                  <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                    <div class="stats-icon red mb-2">
+                      <i class="iconly-boldBookmark"></i>
+                    </div>
+                  </div>
+                  <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                    <h6 class="text-muted font-semibold">{{ tile.text }}</h6>
+                    <h6 class="font-extrabold mb-0">112</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+<div class="row column1 social_media_section">
+  <div class="col-md-6 col-lg-3">
+     <div class="full socile_icons fb margin_bottom_30">
+        <div class="social_icon">
+           <i class="fa fa-facebook"></i>
+        </div>
+        <div class="social_cont">
+           <ul>
+              <li>
+                 <span><strong>35k</strong></span>
+                 <span>Friends</span>
+              </li>
+              <li>
+                 <span><strong>128</strong></span>
+                 <span>Feeds</span>
+              </li>
+           </ul>
+        </div>
+     </div>
+  </div>
+  <div class="col-md-6 col-lg-3">
+     <div class="full socile_icons tw margin_bottom_30">
+        <div class="social_icon">
+           <i class="fa fa-twitter"></i>
+        </div>
+        <div class="social_cont">
+           <ul>
+              <li>
+                 <span><strong>584k</strong></span>
+                 <span>Followers</span>
+              </li>
+              <li>
+                 <span><strong>978</strong></span>
+                 <span>Tweets</span>
+              </li>
+           </ul>
+        </div>
+     </div>
+  </div>
+  <div class="col-md-6 col-lg-3">
+     <div class="full socile_icons linked margin_bottom_30">
+        <div class="social_icon">
+           <i class="fa fa-linkedin"></i>
+        </div>
+        <div class="social_cont">
+           <ul>
+              <li>
+                 <span><strong>758+</strong></span>
+                 <span>Contacts</span>
+              </li>
+              <li>
+                 <span><strong>365</strong></span>
+                 <span>Feeds</span>
+              </li>
+           </ul>
+        </div>
+     </div>
+  </div>
+  <div class="col-md-6 col-lg-3">
+     <div class="full socile_icons google_p margin_bottom_30">
+        <div class="social_icon">
+           <i class="fa fa-google-plus"></i>
+        </div>
+        <div class="social_cont">
+           <ul>
+              <li>
+                 <span><strong>450</strong></span>
+                 <span>Followers</span>
+              </li>
+              <li>
+                 <span><strong>57</strong></span>
+                 <span>Circles</span>
+              </li>
+           </ul>
+        </div>
+     </div>
+  </div>
+</div>
+
+<!-- <mat-grid-list cols="4" rowHeight="100px">
     @for (tile of tiles; track tile) {
       <a [routerLink]="[tile.routerLink]">
         <mat-grid-tile
@@ -8,4 +132,4 @@
         </mat-grid-tile>
       </a>
     }
-</mat-grid-list>
+</mat-grid-list> -->

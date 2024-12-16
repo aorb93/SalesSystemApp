@@ -105,6 +105,7 @@ export class SaleComponent {
         if(p.productId == id){
           p.quantitySale++;
           p.iconRemove = p.quantitySale > 1 ? 'remove' : 'delete'
+          p.iconColor = p.quantitySale > 1 ? 'text-warning' : 'text-danger'
           add = false;
         }
         else{
