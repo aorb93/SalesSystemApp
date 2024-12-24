@@ -37,6 +37,7 @@
     <mat-sidenav-container autosize *ngIf="this.user">
         <mat-sidenav [mode]="isMobile ? 'push' : 'side'" [opened]="isMobile ? 'false' : 'true'">
             <mat-nav-list>
+                <br>
                 <a mat-list-item  [routerLink]="['/home']">
                     <span class="entry">
                        <mat-icon>house</mat-icon>
@@ -53,7 +54,8 @@
             </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content>
-            <h2>Content</h2>
+            <!-- <h2>Content</h2> -->
+             <br>
             <router-outlet></router-outlet>
         </mat-sidenav-content>
     </mat-sidenav-container>

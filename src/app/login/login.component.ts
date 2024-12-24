@@ -23,16 +23,16 @@ export class LoginComponent implements OnInit{
     // });
     
     constructor(public apiAuthService: apiAuthService, private router: Router, private formBuilder: FormBuilder, private spinner: NgxSpinnerService){
-        // if(this.apiAuthService.userData){
-        //     this.router.navigate(['/']);
-        // }
+        if(this.apiAuthService.userData){
+            this.router.navigate(['/']);
+        }
         spinner.show();
     }
     
     ngOnInit(): void {
         this.loginForm = this.formBuilder.group({
             userLogin: ['', Validators.required],
-        password: ['', Validators.required]
+            password: ['', Validators.required]
         });
         this.spinner.hide();
     }

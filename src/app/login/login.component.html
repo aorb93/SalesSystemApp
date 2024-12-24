@@ -1,11 +1,31 @@
-<mat-card>
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+            <!-- Icon -->
+            <div class="fadeIn first">
+                <i class="fa fa-user-circle"></i>
+            </div>
+
+            <!-- Login Form -->
+            <input type="text" id="login" class="fadeIn second" placeholder="Usuario" formControlName="userLogin">
+            <input type="password" id="password" class="fadeIn third" placeholder="Contraseña" formControlName="password">
+            <hr>
+            <button type="submit" [disabled]="!loginForm.valid" class="fadeIn fourth">Iniciar Sesión</button>
+
+            <!-- Remind Passowrd -->
+            <div id="formFooter">
+                <a class="underlineHover" href="#">Forgot Password?</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- <mat-card>
     <mat-card-content>
         <form [formGroup]="loginForm" (ngSubmit)="login()">
             <mat-card-title>Inicio de Sesión</mat-card-title>
             <br>
-            <!-- <mat-error *ngIf="!loginValid">
-                The username and password were not recognized
-            </mat-error> -->
             <mat-form-field>
                 <input matInput placeholder="Usuario" formControlName="userLogin">
                 <mat-error>Please provide a valid user name</mat-error>
@@ -16,9 +36,8 @@
                 <mat-error>Please provide a valid password</mat-error>
             </mat-form-field>
             <br>
-            <!-- <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid">Login</button> -->
             <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid" mat-raised-button>Iniciar Sesión</button>
         </form>
     </mat-card-content>
-</mat-card>
+</mat-card> -->
 <!-- <app-spinner/> -->

@@ -1,21 +1,4 @@
- <!-- site icon -->
- <link rel="icon" href="https://themewagon.github.io/pluto/images/fevicon.png" type="image/png" />
- <!-- bootstrap css -->
- <link rel="stylesheet" href="https://themewagon.github.io/pluto/css/bootstrap.min.css" />
- <!-- site css -->
- <link rel="stylesheet" href="https://themewagon.github.io/pluto/style.css" />
- <!-- responsive css -->
- <link rel="stylesheet" href="https://themewagon.github.io/pluto/css/responsive.css" />
- <!-- color css -->
- <link rel="stylesheet" href="https://themewagon.github.io/pluto/css/colors.css" />
- <!-- select bootstrap -->
- <link rel="stylesheet" href="https://themewagon.github.io/pluto/css/bootstrap-select.css" />
- <!-- scrollbar css -->
- <link rel="stylesheet" href="https://themewagon.github.io/pluto/css/perfect-scrollbar.css" />
- <!-- custom css -->
- <link rel="stylesheet" href="https://themewagon.github.io/pluto/css/custom.css" />
-
-<div class="container">
+<!-- <div class="container">
   <div class="col-12 col-lg-9">
     <div class="row">
       @for (tile of tiles; track tile) {
@@ -41,87 +24,50 @@
       }
     </div>
   </div>
-</div>
+</div> -->
 
-<div class="row column1 social_media_section">
-  <div class="col-md-6 col-lg-3">
-     <div class="full socile_icons fb margin_bottom_30">
-        <div class="social_icon">
-           <i class="fa fa-facebook"></i>
-        </div>
-        <div class="social_cont">
-           <ul>
-              <li>
-                 <span><strong>35k</strong></span>
-                 <span>Friends</span>
-              </li>
-              <li>
-                 <span><strong>128</strong></span>
-                 <span>Feeds</span>
-              </li>
-           </ul>
-        </div>
-     </div>
-  </div>
-  <div class="col-md-6 col-lg-3">
-     <div class="full socile_icons tw margin_bottom_30">
-        <div class="social_icon">
-           <i class="fa fa-twitter"></i>
-        </div>
-        <div class="social_cont">
-           <ul>
-              <li>
-                 <span><strong>584k</strong></span>
-                 <span>Followers</span>
-              </li>
-              <li>
-                 <span><strong>978</strong></span>
-                 <span>Tweets</span>
-              </li>
-           </ul>
-        </div>
-     </div>
-  </div>
-  <div class="col-md-6 col-lg-3">
-     <div class="full socile_icons linked margin_bottom_30">
-        <div class="social_icon">
-           <i class="fa fa-linkedin"></i>
-        </div>
-        <div class="social_cont">
-           <ul>
-              <li>
-                 <span><strong>758+</strong></span>
-                 <span>Contacts</span>
-              </li>
-              <li>
-                 <span><strong>365</strong></span>
-                 <span>Feeds</span>
-              </li>
-           </ul>
-        </div>
-     </div>
-  </div>
-  <div class="col-md-6 col-lg-3">
-     <div class="full socile_icons google_p margin_bottom_30">
-        <div class="social_icon">
-           <i class="fa fa-google-plus"></i>
-        </div>
-        <div class="social_cont">
-           <ul>
-              <li>
-                 <span><strong>450</strong></span>
-                 <span>Followers</span>
-              </li>
-              <li>
-                 <span><strong>57</strong></span>
-                 <span>Circles</span>
-              </li>
-           </ul>
-        </div>
-     </div>
+<div class="container">
+  <div class="row column1 social_media_section">
+    @for (tile of tiles; track tile) {
+      <div class="col-sm-6 col-md-6 col-lg-3" *ngIf="(tile.needAdmin && this.userSubject.value.infoUser.userTypeId === 2) || (!tile.needAdmin)">
+        <a [routerLink]="[tile.routerLink]">
+          <div class="full socile_icons fb margin_bottom_30">
+              <div class="social_icon">
+                <i class="{{ tile.icon }}"></i>
+              </div>
+              <div class="social_cont">
+                <span><strong>{{ tile.text }}</strong></span>
+              </div>
+          </div>
+        </a>
+      </div>
+    }
   </div>
 </div>
 
+@if(this.userSubject.value.infoUser.userTypeId === 2){
+  <br>
+  <div class="container">
+    <div class="row column1 social_media_section">
+      <div class="col-sm-6 col-md-6 col-lg-3">
+        <canvas id="chart">{{ chart }}</canvas>
+
+        <!-- <table>
+          <th>NombreProducto</th>
+          <th></th>
+          <th>Ventas</th>
+          @for (bp of lstBestProduct; track bp) {
+            <tr>
+              <td>{{ bp.productName }}</td>
+              <td></td>
+              <td>{{ bp.quantity }}%</td>
+            </tr>
+          }
+        </table> -->
+      </div>
+    </div>
+  </div>
+}
 <!-- <mat-grid-list cols="4" rowHeight="100px">
     @for (tile of tiles; track tile) {
       <a [routerLink]="[tile.routerLink]">

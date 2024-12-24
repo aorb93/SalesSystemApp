@@ -5,6 +5,7 @@ import { map, retry } from "rxjs/operators";
 import { Response } from "../models/response";
 import { User } from "../models/user";
 import { Login } from "../models/login";
+import { Router } from "@angular/router";
 
 const httpOption = {
     headers: new HttpHeaders({
@@ -17,7 +18,7 @@ const httpOption = {
 })
 
 export class apiAuthService {
-    url: string = 'http://192.168.0.172/Access/Login';
+    url: string = 'http://192.168.100.57/Access/Login';
 
     public userSubject!: BehaviorSubject<User>;
     public user!: Observable<User>;
@@ -25,7 +26,7 @@ export class apiAuthService {
         return this.userSubject.value;
     }
 
-    constructor(private _http: HttpClient){
+    constructor(private _http: HttpClient, private router: Router,){
         this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('User')!));
         this.user = this.userSubject.asObservable();
     }

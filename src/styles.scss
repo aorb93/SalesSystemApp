@@ -23,6 +23,8 @@ section {
   margin-left: 30px;
 }
 
+@import url("https://themewagon.github.io/pluto/style.css");
+
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap");
 :root,
 [data-bs-theme=light] {
@@ -12132,4 +12134,75 @@ textarea.form-control-lg {
 
 .margin-btn-group-right {
   margin-right: 15px;
+}
+
+.socile_icons {
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    background: #fff;
+    min-height: 165px;
+}
+
+.social_icon {
+    width: 100%;
+    text-align: center;
+    font-size: 45px;
+    background: black;
+    padding: 10px 0 8px;
+    color: #fff;
+    background: #222;
+}
+
+.fb .social_icon {
+    background: #3b5998;
+}
+
+.tw .social_icon {
+    background: #00aced;
+}
+
+.linked .social_icon {
+    background: #0077B5;
+}
+
+.google_p .social_icon {
+    background: #d34836;
+}
+
+.socile_icons .social_cont {
+    float: left;
+    text-align: center;
+    width: 100%;
+    padding: 15px 0 15px;
+    font-weight: 600;
+    color: #455a64;
+    font-size: 18px;
+}
+
+.socile_icons .social_cont ul {
+    margin: 0;
+    list-style: none;
+}
+
+.socile_icons .social_cont ul li {
+    float: left;
+    width: 50%;
+    font-size: 18px;
+    color: #455a64;
+    line-height: 24px;
+}
+
+.socile_icons .social_cont ul li span {
+    float: left;
+    width: 100%;
+    color: #99abb4;
+    font-size: 17px;
+    font-weight: 300;
+}
+
+.socile_icons .social_cont ul li span strong {
+    font-weight: 600;
+    color: #455a64;
+    font-size: 18px;
 }

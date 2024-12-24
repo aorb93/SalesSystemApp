@@ -4,4 +4,6 @@ export interface Home {
     cols: number;
     rows: number;
     text: string;
+    icon: string;
+    needAdmin: boolean;
   }
