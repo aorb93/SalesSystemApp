@@ -14,7 +14,7 @@ const httpOption = {
   providedIn: 'root'
 })
 export class ApiCategoryService {
-  url: string = 'http://192.168.100.57/Category';
+  url: string = 'http://192.168.100.69/Category';
 
   constructor(
     private _http: HttpClient

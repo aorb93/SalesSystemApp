@@ -1,4 +1,9 @@
 export interface BestProduct{
     productName: string,
-    quantity: number,
+    quantity: number
+}
+
+export interface BestClient{
+    clientName: string,
+    quantity: number
 }

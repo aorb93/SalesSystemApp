@@ -6,7 +6,7 @@ import { User } from '../models/user';
 import { pieChart } from '../models/pieChart'
 import { AppComponent } from '../app.component';
 import { NgxSpinnerService } from "ngx-spinner";
-import { BestProduct } from '../models/statistics';
+import { BestProduct, BestClient } from '../models/statistics';
 import { ApiStatisticsService } from '../services/api-statistics.service';
 import { Chart, ChartType } from 'chart.js/auto';
 
@@ -48,42 +48,13 @@ export class HomeComponent {
   }
 
   getBestProduct(companyId: number){
-    this.apiStatistics.getBestProduc(companyId).subscribe(BP => {
-      this.lstBestProduct = BP;
-      // this.getPieChart(BP);
-      this.testPie(BP);
+    this.apiStatistics.getBestProduct(companyId).subscribe(BP => {
+      this.getPieChart(BP);
     });
   }
+   
 
   getPieChart(BP: BestProduct[]){
-    const _data = {
-      labels: [
-        'Red',
-        'Green',
-        'Yellow',
-        'Grey',
-        'Blue'
-      ],
-      datasets: [{
-        data: [11, 16, 7, 3, 14],
-        backgroundColor: [
-          'rgb(255, 99, 132)',
-          'rgb(75, 192, 192)',
-          'rgb(255, 205, 86)',
-          'rgb(201, 203, 207)',
-          'rgb(54, 162, 235)'
-        ]
-      }]
-    };
- 
-     // Creamos la gráfica
-    this.chart = new Chart("chart", {
-      type: 'pie' as ChartType, // tipo de la gráfica 
-      data: _data, // datos 
-    });
-  }
-
-  testPie(BP: BestProduct[]){
     let productos: string[] = [];
     let quantity: number[] = [];
 
@@ -110,5 +81,9 @@ export class HomeComponent {
       type: 'pie' as ChartType, // tipo de la gráfica 
       data: _data, // datos 
     });
+  }
+
+  getBarChart(BC: BestClient[]){
+
   }
 }

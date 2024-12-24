@@ -18,7 +18,7 @@ const httpOption = {
 })
 
 export class apiAuthService {
-    url: string = 'http://192.168.100.57/Access/Login';
+    url: string = 'http://192.168.100.69/Access/Login';
 
     public userSubject!: BehaviorSubject<User>;
     public user!: Observable<User>;
