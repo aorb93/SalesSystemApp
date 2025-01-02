@@ -51,24 +51,20 @@
     <div class="row column1 social_media_section">
       <div class="col-sm-12 col-md-6 col-lg-3">
         <p>Mejores Productos</p>
-        <canvas id="chart">{{ chart }}</canvas>
-
-        <!-- <table>
-          <th>NombreProducto</th>
-          <th></th>
-          <th>Ventas</th>
-          @for (bp of lstBestProduct; track bp) {
-            <tr>
-              <td>{{ bp.productName }}</td>
-              <td></td>
-              <td>{{ bp.quantity }}%</td>
-            </tr>
-          }
-        </table> -->
+        <canvas id="chartBestProduct">{{ chartBestProduct }}</canvas>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-3">
+        <p>Mejores Clientes</p>
+        <canvas id="chartBestClient">{{ chartBestClient }}</canvas>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-6">
+        <p>Ventas Mensuales</p>
+        <canvas id="chartMonthSales">{{ _chartMonthSales }}</canvas>
       </div>
     </div>
   </div>
 }
+
 <!-- <mat-grid-list cols="4" rowHeight="100px">
     @for (tile of tiles; track tile) {
       <a [routerLink]="[tile.routerLink]">
