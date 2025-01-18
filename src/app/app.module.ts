@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgxSpinnerModule } from "ngx-spinner";
+import { NgOptimizedImage } from '@angular/common'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -37,6 +38,7 @@ import { ClientComponent } from './client/client.component';
 import { DialogSaleComponent } from './sale/dialog-sale/dialog-sale.component';
 import { SalesComponent } from './sales/sales.component';
 import { DialogSalesComponent } from './sales/dialog-sales/dialog-sales.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 
 @NgModule({
@@ -52,7 +54,8 @@ import { DialogSalesComponent } from './sales/dialog-sales/dialog-sales.componen
     ClientComponent,
     DialogSaleComponent,
     SalesComponent,
-    DialogSalesComponent
+    DialogSalesComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,8 @@ import { DialogSalesComponent } from './sales/dialog-sales/dialog-sales.componen
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    NgOptimizedImage
   ],
   providers: [
     provideAnimationsAsync(),

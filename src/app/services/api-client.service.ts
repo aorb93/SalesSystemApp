@@ -13,7 +13,7 @@ const httpOption = {
   providedIn: 'root'
 })
 export class ApiClientService {
-  url: string = 'http://192.168.100.69/Client';
+  url: string = 'http://192.168.0.172/Client';
 
   constructor(
     private _http: HttpClient

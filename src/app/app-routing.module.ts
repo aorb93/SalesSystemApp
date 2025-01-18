@@ -7,11 +7,13 @@ import { LoginComponent } from './login/login.component';
 import { ProductComponent } from './product/product.component';
 import { SaleComponent } from './sale/sale.component';
 import { SalesComponent } from './sales/sales.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: 'category', component: CategoryComponent, canActivate: [AuthGuard] },
   { path: 'product', component: ProductComponent, canActivate: [AuthGuard] },
   { path: 'sale', component: SaleComponent, canActivate: [AuthGuard] },

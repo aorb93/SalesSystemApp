@@ -6,4 +6,5 @@ export interface Home {
     text: string;
     icon: string;
     needAdmin: boolean;
+    img: string;
   }

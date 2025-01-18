@@ -13,7 +13,7 @@ const httpOption = {
   providedIn: 'root'
 })
 export class ApiSalesService {
-  url: string = 'http://192.168.100.69/Sales/';
+  url: string = 'http://192.168.0.172/Sales/';
 
   constructor(
     private _http: HttpClient

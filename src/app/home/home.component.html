@@ -32,11 +32,14 @@
       <div class="col-sm-6 col-md-6 col-lg-3" *ngIf="(tile.needAdmin && this.userSubject.value.infoUser.userTypeId === 2) || (!tile.needAdmin)">
         <a [routerLink]="[tile.routerLink]">
           <div class="full socile_icons fb margin_bottom_30">
-              <div class="social_icon">
+              <!-- <div class="social_icon">
                 <i class="{{ tile.icon }}"></i>
-              </div>
+              </div> -->
               <div class="social_cont">
                 <span><strong>{{ tile.text }}</strong></span>
+              </div>
+              <div class="social_cont">
+                <img ngSrc="{{ tile.img }}" alt="" width="150" height="150" priority="">
               </div>
           </div>
         </a>
@@ -44,26 +47,6 @@
     }
   </div>
 </div>
-
-@if(this.userSubject.value.infoUser.userTypeId === 2){
-  <br>
-  <div class="container">
-    <div class="row column1 social_media_section">
-      <div class="col-sm-12 col-md-6 col-lg-3">
-        <p>Mejores Productos</p>
-        <canvas id="chartBestProduct">{{ chartBestProduct }}</canvas>
-      </div>
-      <div class="col-sm-12 col-md-6 col-lg-3">
-        <p>Mejores Clientes</p>
-        <canvas id="chartBestClient">{{ chartBestClient }}</canvas>
-      </div>
-      <div class="col-sm-12 col-md-6 col-lg-6">
-        <p>Ventas Mensuales</p>
-        <canvas id="chartMonthSales">{{ _chartMonthSales }}</canvas>
-      </div>
-    </div>
-  </div>
-}
 
 <!-- <mat-grid-list cols="4" rowHeight="100px">
     @for (tile of tiles; track tile) {

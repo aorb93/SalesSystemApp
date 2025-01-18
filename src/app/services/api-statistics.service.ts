@@ -14,7 +14,7 @@ const httpOption = {
 })
 export class ApiStatisticsService {
 
-  url: string = 'http://192.168.100.69/Home/';
+  url: string = 'http://192.168.0.172/Home/';
   
   constructor(
     private _http: HttpClient
