@@ -26,7 +26,7 @@ export class HomeComponent {
     this.companyId = this.userSubject.value.infoUser.companyId;
 
     this.tiles = [
-      {routerLink: '/sale', text: 'Venta', cols: 3, rows: 1, color: 'lightblue', icon: 'fa fa-shopping-bag', needAdmin: false, img: 'img/about.png'},
+      {routerLink: '/sale', text: 'Venta', cols: 3, rows: 1, color: 'lightblue', icon: 'fa fa-shopping-bag', needAdmin: false, img: 'img/cart.png'},
       {routerLink: '/product', text: 'Productos', cols: 1, rows: 2, color: 'lightgreen', icon: 'fa fa-list-alt', needAdmin: true, img: 'img/products.png'},
       {routerLink: '/sales', text: 'Ventas', cols: 1, rows: 1, color: 'lightpink', icon: 'fa fa-usd', needAdmin: true, img: 'img/sales.png'},
       {routerLink: '/category', text: 'Categorías', cols: 2, rows: 1, color: '#DDBDF1', icon: 'fa fa-file-text-o', needAdmin: true, img: 'img/about.png'},
