@@ -2,15 +2,17 @@
   <div class="row">
     <label class="col-lg-1 col-md-2 col-sm-4 col-form-label">Cliente:</label>
     <div class="col-lg-4 col-md-4 col-sm-8">
-      <select class="form-select" (change)="selectClientOpt($event)" placeholder="Clientes" [(ngModel)]="clientSelect" [value]="clientId">
+      <select2 [data]="ClientSelect2" [value]="clientId" (update)="selectClientOpt($event)"></select2>
+      <!-- <select class="form-select" (change)="selectClientOpt($event)" placeholder="Clientes" [(ngModel)]="clientSelect" [value]="clientId">
         <option *ngFor="let c of selectClient" [value]="c.clientId">{{c.clientName}}</option>
-      </select>
+      </select> -->
     </div>
     <label class="col-lg-1 col-md-2 col-sm-4 col-form-label">Producto:</label>
     <div class="col-lg-4 col-md-4 col-sm-8">
-      <select class="form-select" (change)="selectProductOpt($event)" placeholder="Productos" [(ngModel)]="productSelect" [value]="productId">
+      <select2 [data]="ProductSelect2" [value]="productId" (update)="selectProductOpt($event)"></select2>
+      <!-- <select class="form-select" (change)="selectProductOpt($event)" placeholder="Productos" [(ngModel)]="productSelect" [value]="productId">
         <option *ngFor="let p of selectProduct" [value]="p.productId">{{p.productName}}</option>
-      </select>
+      </select> -->
     </div>
   </div>
   <br>

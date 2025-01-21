@@ -19,3 +19,8 @@ export interface Product{
     iconRemove: string;
     iconColor: string;
 }
+
+export interface Select2Product{ 
+    value: string; 
+    label: string;
+}

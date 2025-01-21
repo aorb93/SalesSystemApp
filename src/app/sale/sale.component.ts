@@ -3,18 +3,19 @@ import { ProductComponent } from '../product/product.component';
 import { MatOptionModule } from '@angular/material/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user';
-import { Product } from '../models/product';
+import { Product, Select2Product } from '../models/product';
 import { ApiProductService } from '../services/api-product.service';
 import { MatTable } from '@angular/material/table';
 import { NgxSpinnerService } from "ngx-spinner";
 import { ApiClientService } from '../services/api-client.service';
-import { Client } from '../models/client';
+import { Client, Select2Client } from '../models/client';
 import { Sale } from '../models/sale';
 import { ProductSale } from '../models/sale';
 import { ApiSaleService } from '../services/api-sale.service';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { DialogSaleComponent } from './dialog-sale/dialog-sale.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Select2Module, Select2Data, Select2SelectionOverride } from 'ng-select2-component';
 
 @Component({
   selector: 'app-sale',
@@ -49,6 +50,9 @@ export class SaleComponent {
   public toggleChanged!: boolean;
 
   public width: string = '500px';
+
+  public ClientSelect2!: Select2Data;
+  public ProductSelect2!: Select2Data;
   
   @ViewChild(MatTable) table!: MatTable<Product>;
 
@@ -77,7 +81,23 @@ export class SaleComponent {
       this.selectProduct = response;
       this.disabledButtonAdd(true);
       this.disabledButtonSale();
+      this.getProduct2Client(this.selectProduct);
     });
+  }
+
+  getProduct2Client(selectProduct: Product[]){
+    let tmpData: Select2Product[] = [];
+
+    for(let i = 0; i < selectProduct.length; i++){
+      let tmpData2 = {
+        value: selectProduct[i].productId.toString(),
+        label: selectProduct[i].productName
+      };
+      
+      tmpData.push(tmpData2);
+    }
+
+    this.ProductSelect2 = JSON.parse(JSON.stringify(tmpData));
   }
 
   addProduct(){
@@ -124,11 +144,11 @@ export class SaleComponent {
 
   selectProductOpt(event: any){
     this.disabledButtonAdd(false);
-    this.selectProductId = event.target.value;
+    this.selectProductId = event.value;
   }
 
   selectClientOpt(event: any){
-    this.selectClientId = event.target.value;
+    this.selectClientId = event.value;
   }
 
   getTotal(){
@@ -199,7 +219,23 @@ export class SaleComponent {
   getClients(companyId: number) {
     this.apiClient.getClients(companyId).subscribe(response => {
       this.selectClient = response;
+      this.getSelect2Client(this.selectClient);
     });
+  }
+
+  getSelect2Client(selectClient: Client[]){
+    let tmpData: Select2Client[] = [];
+
+    for(let i = 0; i < selectClient.length; i++){
+      let tmpData2 = {
+        value: selectClient[i].clientId.toString(),
+        label: selectClient[i].clientName
+      };
+      
+      tmpData.push(tmpData2);
+    }
+
+    this.ClientSelect2 = JSON.parse(JSON.stringify(tmpData));
   }
 
   sale(){

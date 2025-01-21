@@ -8,3 +8,8 @@ export interface Client{
     creationDate: Date;
     modifyDate: Date;
 }
+
+export interface Select2Client{ 
+    value: string; 
+    label: string;
+}

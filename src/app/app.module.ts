@@ -40,6 +40,7 @@ import { SalesComponent } from './sales/sales.component';
 import { DialogSalesComponent } from './sales/dialog-sales/dialog-sales.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 
+import { Select2Module } from 'ng-select2-component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { StatisticsComponent } from './statistics/statistics.component';
     BrowserAnimationsModule,
     NgxSpinnerModule,
     MatButtonToggleModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    Select2Module
   ],
   providers: [
     provideAnimationsAsync(),
