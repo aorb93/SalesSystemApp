@@ -48,7 +48,7 @@ export class SaleComponent {
   public isChecked: boolean = false;
   public toggleChanged!: boolean;
 
-  readonly width: string = '350px';
+  public width: string = '500px';
   
   @ViewChild(MatTable) table!: MatTable<Product>;
 
@@ -124,11 +124,11 @@ export class SaleComponent {
 
   selectProductOpt(event: any){
     this.disabledButtonAdd(false);
-    this.selectProductId = event.value;
+    this.selectProductId = event.target.value;
   }
 
   selectClientOpt(event: any){
-    this.selectClientId = event.value;
+    this.selectClientId = event.target.value;
   }
 
   getTotal(){
@@ -256,6 +256,8 @@ export class SaleComponent {
   }
 
   openAdd(saleData: Sale){
+    this.width = (window.innerWidth * .85).toString() + 'px';
+    
     const dialogRef = this.dialog.open(DialogSaleComponent, {
       width: this.width,
       data: saleData

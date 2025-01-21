@@ -1,15 +1,15 @@
 <div mat-dialog-title>Confirmar Venta</div>
 <div mat-dialog-content>
     <table>
-        <tr class="borderButton">
-            <td>Cliente:</td>
-            <td>{{ saleConfirm.clientName }}</td>
-            <td></td>
+        <tr class="borderBotton">
+            <td class="space">Cliente:</td>
+            <td class="space">{{ saleConfirm.clientName }}</td>
+            <td class="space"></td>
         </tr>
         <tr>
-            <th>Producto</th>
-            <th align="center">Cantidad</th>
-            <th align="right">Precio</th>
+            <td class="font-style">Producto</td>
+            <td class="font-style" align="center">Cantidad</td>
+            <td class="font-style" align="right">Precio</td>
         </tr>
         @for (item of saleConfirm.productSale; track $index) {
             <tr>
@@ -19,9 +19,9 @@
             </tr>
         }
         <tr class="borderTop">
-            <td>Total:</td>
-            <td align="center">{{ totalQuantity }}</td>
-            <td align="right">{{ Sale.total | currency:'USD':'symbol' }}</td>
+            <td class="space">Total:</td>
+            <td class="space" align="center">{{ totalQuantity }}</td>
+            <td class="space" align="right">{{ Sale.total | currency:'USD':'symbol' }}</td>
         </tr>
     </table>
 </div>

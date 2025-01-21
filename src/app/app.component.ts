@@ -8,6 +8,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,8 @@ export class AppComponent {
   constructor(
     public apiAuthService: apiAuthService, 
     private router: Router,
-    private observer: BreakpointObserver){
+    private observer: BreakpointObserver,
+    private spinner: NgxSpinnerService){
     this.apiAuthService.user.subscribe(res => {
       this.user = res;
     })
@@ -61,5 +63,12 @@ export class AppComponent {
       this.sidenav.open(); // On desktop/tablet, the menu can never be fully closed
       this.isCollapsed = !this.isCollapsed;
     }
+  }
+
+  clickButon(val: string){
+    if (val !== this.router.url) {
+      this.spinner.show();
+    }
+    //this.spinner.show();
   }
 }

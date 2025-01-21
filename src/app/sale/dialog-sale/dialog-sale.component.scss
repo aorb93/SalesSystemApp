@@ -1,11 +1,21 @@
 table {
     width: 100%;
+    font-size: 15px;
 }
 
-.borderButton{
+.borderBotton {
     border-bottom: 1pt solid black;
 }
 
-.borderTop{
+.borderTop {
     border-top: 1pt solid black;
+}
+
+.space {
+        padding-top: 10px;
+        padding-bottom: 10px;
+}
+
+.font-style {
+    font-weight: bold;
 }
