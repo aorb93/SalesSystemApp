@@ -91,13 +91,28 @@ export class SaleComponent {
     for(let i = 0; i < selectProduct.length; i++){
       let tmpData2 = {
         value: selectProduct[i].productId.toString(),
-        label: selectProduct[i].productName
+        label: selectProduct[i].productName,
+        disabled: false
       };
       
       tmpData.push(tmpData2);
     }
 
     this.ProductSelect2 = JSON.parse(JSON.stringify(tmpData));
+  }
+
+  selectProductOpt(event: any){
+    this.disabledButtonAdd(false);
+    this.selectProductId = event.value;
+
+    this.ProductSelect2.map((dato) =>{
+      if(dato.data === Number(this.selectProductId)){
+        console.log("w")
+      }
+      
+      return dato;
+    });
+    
   }
 
   addProduct(){
@@ -140,11 +155,6 @@ export class SaleComponent {
     this.productSelect = '';
     this.getTotal();
     return add;
-  }
-
-  selectProductOpt(event: any){
-    this.disabledButtonAdd(false);
-    this.selectProductId = event.value;
   }
 
   selectClientOpt(event: any){

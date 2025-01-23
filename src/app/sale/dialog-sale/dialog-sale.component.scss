@@ -1,10 +1,14 @@
 table {
     width: 100%;
     font-size: 15px;
+    color: #000;
 }
 
 .borderBotton {
     border-bottom: 1pt solid black;
+}
+.borderBotton-th {
+    border-bottom: 1pt solid rgb(36, 36, 36);
 }
 
 .borderTop {
@@ -12,8 +16,8 @@ table {
 }
 
 .space {
-        padding-top: 10px;
-        padding-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .font-style {

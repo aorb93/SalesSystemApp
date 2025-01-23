@@ -23,4 +23,5 @@ export interface Product{
 export interface Select2Product{ 
     value: string; 
     label: string;
+    disabled: boolean;
 }
