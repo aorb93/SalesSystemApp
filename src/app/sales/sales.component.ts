@@ -4,6 +4,7 @@ import { Sales } from '../models/sales';
 import { User } from '../models/user';
 import { BehaviorSubject } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sales',
@@ -16,6 +17,7 @@ export class SalesComponent implements OnInit {
   public userSubject!: BehaviorSubject<User>;
   public companyId!: number;
   public columns: string[] = ['clientName', 'total', 'creationDate', 'actions']
+  public faEye = faEye;
 
   constructor(
       private apiSales: ApiSalesService,

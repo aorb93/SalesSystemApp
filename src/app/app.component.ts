@@ -20,6 +20,8 @@ export class AppComponent {
   title = 'SalesSystemApp';
   public user!: User;
 
+  public txtFooter = '';
+
   public pageTitle!: string;
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
@@ -33,7 +35,9 @@ export class AppComponent {
     private spinner: NgxSpinnerService){
     this.apiAuthService.user.subscribe(res => {
       this.user = res;
-    })
+    });
+
+    this.txtFooter =  '© ' + new Date().getFullYear() + ' | RSystem'
   }
 
   ngOnInit() {

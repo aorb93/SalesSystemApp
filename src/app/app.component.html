@@ -2,71 +2,46 @@
   <p style="font-size: 20px; color: white">Loading...</p>
 </ngx-spinner>
 
-    <!-- <mat-drawer-container>
-        <mat-drawer #drawer mode="side">
-            <mat-divider></mat-divider>
-            <mat-list-item><a *ngIf="user" (click)="logout()">Cerrar Sesión</a></mat-list-item>
-        </mat-drawer>
+<mat-toolbar class="navbar navbar-expand-lg bg-primary text-white" *ngIf="this.user">
+    <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+        <mat-icon class="text-white">menu</mat-icon>
+    </button>
+    <h1>{{pageTitle}}</h1>
+</mat-toolbar>
 
-        <div>
-            <mat-toolbar>
-                <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle();">
-                    <mat-icon>menu</mat-icon>
-                </button>
-                <span *ngIf="user">{{pageTitle}}</span>
-                <span class="example-spacer"></span>
-                <div style="margin-left: 20px;">
-                    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" *ngIf="user">
-                        <mat-icon [routerLink]="['/home']">home</mat-icon>
-                    </button>
-                    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" *ngIf="user" (click)="logout()">
-                        <mat-icon>logout</mat-icon>
-                    </button>
-                </div>
-            </mat-toolbar>
-            
-        </div>
-    </mat-drawer-container> -->
-    <mat-toolbar class="navbar navbar-expand-lg bg-primary text-white" *ngIf="this.user">
-        <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
-            <mat-icon class="text-white">menu</mat-icon>
-        </button>
-        <h1>{{pageTitle}}</h1>
-    </mat-toolbar>
-
-    <mat-sidenav-container autosize *ngIf="this.user">
-        <mat-sidenav [mode]="isMobile ? 'push' : 'side'" [opened]="isMobile ? 'false' : 'true'">
-            <mat-nav-list>
-                <br>
-                <a mat-list-item  [routerLink]="['/home']" (click)="toggleMenu(); clickButon('/home')">
-                    <span class="entry">
-                       <mat-icon>house</mat-icon>
-                       <span>Inicio</span>
-                    </span>
-                </a>
-                <a mat-list-item  [routerLink]="['/statistics']" (click)="toggleMenu(); clickButon('/statistics')">
-                    <span class="entry">
-                       <mat-icon>bar_chart</mat-icon>
-                       <span>Estadisticas</span>
-                    </span>
-                </a>
-                <hr>
-                <a mat-list-item class="button-bottom" (click)="logout()">
-                <span class="entry text-danger">
-                    <mat-icon>logout</mat-icon>
-                    <span>Cerrar Sesión</span>
+<mat-sidenav-container autosize *ngIf="this.user">
+    <mat-sidenav [mode]="isMobile ? 'push' : 'side'" [opened]="isMobile ? 'false' : 'true'">
+        <mat-nav-list>
+            <br>
+            <a mat-list-item  [routerLink]="['/home']" (click)="toggleMenu(); clickButon('/home')">
+                <span class="entry">
+                    <mat-icon>house</mat-icon>
+                    <span>Inicio</span>
                 </span>
-                </a>
-            </mat-nav-list>
-        </mat-sidenav>
-        <mat-sidenav-content>
-            <!-- <h2>Content</h2> -->
-             <br>
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
-
-    <app-login *ngIf="!this.user"></app-login>
-
-
-<!-- <router-outlet /> -->
+            </a>
+            <a mat-list-item  [routerLink]="['/statistics']" (click)="toggleMenu(); clickButon('/statistics')">
+                <span class="entry">
+                    <mat-icon>bar_chart</mat-icon>
+                    <span>Estadisticas</span>
+                </span>
+            </a>
+            <hr>
+            <a mat-list-item class="button-bottom" (click)="logout()">
+            <span class="entry text-danger">
+                <mat-icon>logout</mat-icon>
+                <span>Cerrar Sesión</span>
+            </span>
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <br>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+<footer class="bg-body-tertiary text-center text-lg-start fixed-bottom" *ngIf="this.user">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+        {{ txtFooter }}
+    </div>
+</footer>
+<app-login *ngIf="!this.user"></app-login>

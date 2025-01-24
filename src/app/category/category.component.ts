@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Category } from '../models/category';
 import { DialogDeleteComponente } from '../common/delete/dialogdelete.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { faEdit, faTrash, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-category',
@@ -16,7 +17,9 @@ export class CategoryComponent implements OnInit {
   public lstCategory!: Response[];
   public columns: string[] = ['categoryId', 'categoryName', 'enable', 'actions']
   readonly width: string = '300px';
-  
+  public faEdit = faEdit;
+  public faTrash = faTrash;
+  public faSquareCheck = faSquareCheck
 
   constructor(
     private apiCategory: ApiCategoryService,

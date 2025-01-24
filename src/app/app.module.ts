@@ -41,6 +41,7 @@ import { DialogSalesComponent } from './sales/dialog-sales/dialog-sales.componen
 import { StatisticsComponent } from './statistics/statistics.component';
 
 import { Select2Module } from 'ng-select2-component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { Select2Module } from 'ng-select2-component';
     NgxSpinnerModule,
     MatButtonToggleModule,
     NgOptimizedImage,
-    Select2Module
+    Select2Module,
+    FontAwesomeModule
   ],
   providers: [
     provideAnimationsAsync(),
