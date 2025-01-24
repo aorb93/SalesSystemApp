@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { Product } from '../models/product';
+import { faEdit, faTrash, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-product',
@@ -12,6 +13,10 @@ import { Product } from '../models/product';
   styleUrl: './product.component.scss'
 })
 export class ProductComponent {
+
+  public faEdit = faEdit;
+  public faTrash = faTrash;
+  public faSquareCheck = faSquareCheck
 
   public columns: string[] = ['productId', 'productName', 'price', 'quantity', 'actions']
 
