@@ -12231,3 +12231,12 @@ textarea.form-control-lg {
 .disabled2 {
     opacity: 1;
 }
+
+pagination-controls {
+  display: flex;
+  justify-content: center;
+}
+
+pagination-controls ul{
+  padding-left: 0;
+}

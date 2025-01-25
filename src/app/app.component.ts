@@ -20,7 +20,7 @@ export class AppComponent {
   title = 'SalesSystemApp';
   public user!: User;
 
-  public txtFooter = '';
+  public txtYear = '';
 
   public pageTitle!: string;
   @ViewChild(MatSidenav)
@@ -37,7 +37,7 @@ export class AppComponent {
       this.user = res;
     });
 
-    this.txtFooter =  '© ' + new Date().getFullYear() + ' | RSystem'
+    this.txtYear =  ' ' + new Date().getFullYear().toString();
   }
 
   ngOnInit() {

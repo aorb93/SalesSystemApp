@@ -18,6 +18,7 @@ export class SalesComponent implements OnInit {
   public companyId!: number;
   public columns: string[] = ['clientName', 'total', 'creationDate', 'actions']
   public faEye = faEye;
+  public sales: number = 1;
 
   constructor(
       private apiSales: ApiSalesService,

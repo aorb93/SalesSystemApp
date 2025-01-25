@@ -42,6 +42,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 
 import { Select2Module } from 'ng-select2-component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatButtonToggleModule,
     NgOptimizedImage,
     Select2Module,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgxPaginationModule
   ],
   providers: [
     provideAnimationsAsync(),

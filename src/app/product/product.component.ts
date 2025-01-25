@@ -17,6 +17,7 @@ export class ProductComponent {
   public faEdit = faEdit;
   public faTrash = faTrash;
   public faSquareCheck = faSquareCheck
+  public products: number = 1;
 
   public columns: string[] = ['productId', 'productName', 'price', 'quantity', 'actions']
 
