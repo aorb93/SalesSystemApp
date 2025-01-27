@@ -1,13 +1,45 @@
 <h1 mat-dialog-title> {{ product != null ? 'Editar Producto' : 'Nuevo Producto' }} </h1>
 <div mat-dialog-content>
-    <div>
-        <label for="productName" class="form-label mt-4">Nombre Producto:</label>
-        <input type="text" class="form-control" id="productName" placeholder="Nombre Producto:">
-    </div>
-    <div>
-        <label for="selectCategory" class="form-label mt-4">Categoria</label>
-        <select2 [data]="CategorySelect2" [value]="categoryId" (update)="selectCategoryOpt($event)" id="selectCategory"></select2>
-    </div>
+    <form>
+        <fieldset>
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <label for="productName" class="form-label">Nombre Producto:</label>
+                    <input type="text" class="form-control form-control-sm" id="productName" placeholder="Nombre Producto:">
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <label for="selectGender" class="form-label">Género</label>
+                    <select2 [data]="GenderSelect2" [value]="genderId" (update)="selectGenderOpt($event)" id="selectGender" placeholder="Seleccione un género"></select2>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <label for="selectCategory" class="form-label">Categoria</label>
+                    <select2 [data]="CategorySelect2" [value]="categoryId" (update)="selectCategoryOpt($event)" id="selectCategory" placeholder="Seleccione una categoría"></select2>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <label for="selectSubCategory" class="form-label">Sub-Categoria</label>
+                    <select2 [data]="SubCategorySelect2" [value]="subCategoryId" (update)="selectSubCategoryOpt($event)" id="selectSubCategory" placeholder="Seleccione una sub-categoría" disabled="{{subCategoryDisabled}}"></select2>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <label for="productQuantity" class="form-label">Cantidad:</label>
+                    <input type="text" class="form-control form-control-sm" id="productQuantity" placeholder="Piezas existentes:">
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <label for="productCost" class="form-label">Costo:</label>
+                    <input type="text" class="form-control form-control-sm" id="productCost" placeholder="Costo del producto:">
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <label for="productPrice" class="form-label">Precio:</label>
+                    <input type="text" class="form-control form-control-sm" id="productPrice" placeholder="Precio del producto:">
+                </div>
+            </div>
+        </fieldset>
+    </form>
 </div>
 <div mat-dialog-actions>
     <button mat-raised-button (click)="close()">Cancelar</button>

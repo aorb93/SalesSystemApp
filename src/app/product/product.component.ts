@@ -55,8 +55,11 @@ export class ProductComponent {
     
     const dialogRef = this.dialog.open(DialogProductComponent, {
       width: this.width,
-      height: '500px'
+      height: '700px'
     });
+
+    console.log(dialogRef);
+    console.log(this.dialog);
 
     dialogRef.afterClosed().subscribe(result => {
       this.getProduct(this.companyId);

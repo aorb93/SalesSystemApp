@@ -1,13 +1,13 @@
-export interface Category{
-    SubCategoryId: number;
-    SubCategoryName: string;
-    CategoryId: number;
-    Enable: boolean;
-    CreationDate: string;
-    ModifyDate: string;
-    GenderId: number;
-    CategoryName: string;
-    GenderName: string;
+export interface SubCategory{
+    subCategoryId: number;
+    subCategoryName: string;
+    categoryId: number;
+    enable: boolean;
+    creationDate: string;
+    modifyDate: string;
+    genderId: number;
+    categoryName: string;
+    genderName: string;
 }
 
 export interface Select2SubCategory{ 
