@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { Product } from '../models/product';
 import { faEdit, faTrash, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
+import { DialogProductComponent } from '../product/dialog-product/dialog-product.component';
 
 @Component({
   selector: 'app-product',
@@ -18,6 +19,7 @@ export class ProductComponent {
   public faTrash = faTrash;
   public faSquareCheck = faSquareCheck
   public products: number = 1;
+  public width: string = '500px';
 
   public columns: string[] = ['productId', 'productName', 'price', 'quantity', 'actions']
 
@@ -49,7 +51,16 @@ export class ProductComponent {
   }
 
   openAdd(){
+    this.width = (window.innerWidth * .85).toString() + 'px';
+    
+    const dialogRef = this.dialog.open(DialogProductComponent, {
+      width: this.width,
+      height: '500px'
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      this.getProduct(this.companyId);
+    });
   }
 
   openEdit(product: Product){

@@ -35,4 +35,9 @@ export class ApiCategoryService {
   deleteCategories(categoryId: number): Observable<Response[]>{
     return this._http.delete<Response[]>(`${this.url}/${categoryId}`);
   }
+
+  // Dialog Product
+  getSelectCategory(): Observable<Response[]>{
+    return this._http.get<Response[]>(this.url);
+  }
 }
