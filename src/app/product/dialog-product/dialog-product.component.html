@@ -3,11 +3,11 @@
     <form>
         <fieldset>
             <div class="row">
-                <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="col-lg-8 col-md-8 col-sm-6">
                     <label for="productName" class="form-label">Nombre Producto:</label>
-                    <input type="text" class="form-control form-control-sm" id="productName" placeholder="Nombre Producto:">
+                    <input type="text" class="form-control form-control-sm" id="productName" placeholder="Nombre Producto:" matInput [(ngModel)]="nameProduct">
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="col-lg-4 col-md-4 col-sm-6">
                     <label for="selectGender" class="form-label">Género</label>
                     <select2 [data]="GenderSelect2" [value]="genderId" (update)="selectGenderOpt($event)" id="selectGender" placeholder="Seleccione un género"></select2>
                 </div>
@@ -27,15 +27,15 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12">
                     <label for="productQuantity" class="form-label">Cantidad:</label>
-                    <input type="text" class="form-control form-control-sm" id="productQuantity" placeholder="Piezas existentes:">
+                    <input type="text" class="form-control form-control-sm" id="productQuantity" placeholder="Piezas existentes">
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="col-lg-4 col-md-4 col-sm-6">
                     <label for="productCost" class="form-label">Costo:</label>
-                    <input type="text" class="form-control form-control-sm" id="productCost" placeholder="Costo del producto:">
+                    <input type="text" class="form-control form-control-sm" id="productCost" placeholder="Costo del producto">
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="col-lg-4 col-md-4 col-sm-6">
                     <label for="productPrice" class="form-label">Precio:</label>
-                    <input type="text" class="form-control form-control-sm" id="productPrice" placeholder="Precio del producto:">
+                    <input type="text" class="form-control form-control-sm" id="productPrice" placeholder="Precio del producto">
                 </div>
             </div>
         </fieldset>

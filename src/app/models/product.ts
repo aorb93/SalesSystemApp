@@ -25,3 +25,18 @@ export interface Select2Product{
     label: string;
     disabled: boolean;
 }
+
+export interface insProduct {
+    productName: string;
+    quantity: number;
+    cost: number;
+    price: number;
+    brandId: number;
+    genderId: number;
+    seasonId: number;
+    categoryId: number;
+    subCategoryId: number;
+    colorId: number;
+    sizeId: number;
+    companyId: number;
+}

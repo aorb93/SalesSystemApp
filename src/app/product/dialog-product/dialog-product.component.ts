@@ -2,7 +2,7 @@ import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ApiProductService } from "../../services/api-product.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Product } from "../../models/product";
+import { Product, insProduct } from "../../models/product";
 import { Select2Category } from '../../models/category';
 import { SubCategory, Select2SubCategory } from '../../models/subCategory';
 import { Response } from '../../models/response';
@@ -11,6 +11,9 @@ import { Select2Data } from 'ng-select2-component';
 import { ApiSubCategoryService } from "../../services/api-sub-category.service";
 import { ApiGenderService } from "../../services/api-gender.service";
 import { Gender, Select2Gender } from "../../models/gender";
+import { NgxSpinnerService } from "ngx-spinner";
+import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-dialog-product',
@@ -18,6 +21,9 @@ import { Gender, Select2Gender } from "../../models/gender";
   styleUrl: './dialog-product.component.scss'
 })
 export class DialogProductComponent {
+  public userSubject!: BehaviorSubject<User>;
+  public companyId!: number;
+
   public nameProduct!: string;
   public response!: Response[];
   public lstCategory!: Response[];
@@ -44,11 +50,15 @@ export class DialogProductComponent {
       private apiCategory: ApiCategoryService,
       private apiSubCategory: ApiSubCategoryService,
       private apiGender: ApiGenderService,
+      private spinner: NgxSpinnerService,
       @Inject(MAT_DIALOG_DATA) public product: Product
   ){
-      if(this.product !== null){
-          this.nameProduct = product.productName
-      }
+    this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('User')!));
+    this.companyId = this.userSubject.value.infoUser.companyId;
+
+    if(this.product !== null){
+        this.nameProduct = product.productName
+    }
   }
 
   ngOnInit(): void {
@@ -61,9 +71,6 @@ export class DialogProductComponent {
   }
 
   editProduct(){
-  }
-
-  addProduct(){
   }
 
   getGender(){
@@ -152,6 +159,31 @@ export class DialogProductComponent {
 
   selectSubCategoryOpt(event: any){
     this.selectCategoryId = event.value;
+  }
+
+  addProduct(){
+
+    let tmpProduct: insProduct = {
+      productName: this.nameProduct,
+      quantity: 0,
+      cost: 0,
+      price: 0,
+      brandId: 0,
+      genderId: this.genderId,
+      seasonId: 0,
+      categoryId: this.selectCategoryId,
+      subCategoryId: this.selectSubCategoryId,
+      colorId: 0,
+      sizeId: 0,
+      companyId: this.companyId
+    }
+
+    this.apiProduct.postProduct(tmpProduct).subscribe(response => {
+      if(response){
+        this.spinner.hide();
+        window.location.reload();
+      }
+    });
   }
 
 }

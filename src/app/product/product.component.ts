@@ -20,6 +20,7 @@ export class ProductComponent {
   public faSquareCheck = faSquareCheck
   public products: number = 1;
   public width: string = '500px';
+  public height: string = '500px';
 
   public columns: string[] = ['productId', 'productName', 'price', 'quantity', 'actions']
 
@@ -52,10 +53,11 @@ export class ProductComponent {
 
   openAdd(){
     this.width = (window.innerWidth * .85).toString() + 'px';
+    this.height = (window.innerHeight * .80).toString() + 'px';
     
     const dialogRef = this.dialog.open(DialogProductComponent, {
       width: this.width,
-      height: '700px'
+      height: this.height
     });
 
     console.log(dialogRef);
