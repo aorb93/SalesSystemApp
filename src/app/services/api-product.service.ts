@@ -14,7 +14,7 @@ const httpOption = {
   providedIn: 'root'
 })
 export class ApiProductService {
-  url: string = 'http://localhost:5163/Product';
+  url: string = 'http://192.168.0.172/Product';
 
   constructor(
     private _http: HttpClient
@@ -33,5 +33,14 @@ export class ApiProductService {
 
   postProduct(product: insProduct): Observable<insProduct[]>{
     return this._http.post<insProduct[]>(this.url + '/InsProduct', product, httpOption);
+  }
+
+  putProduct(product: insProduct): Observable<insProduct[]>{
+    return this._http.put<insProduct[]>(this.url + '/UpdProduct', product, httpOption);
+  }
+
+  deleteProduct(productId: number): Observable<Response[]>{
+    const _productId: string = '/DelProduct?ProductId=';
+    return this._http.delete<Response[]>(`${this.url}${_productId}${productId}`);
   }
 }

@@ -27,6 +27,7 @@ export interface Select2Product{
 }
 
 export interface insProduct {
+    productId: number;
     productName: string;
     quantity: number;
     cost: number;

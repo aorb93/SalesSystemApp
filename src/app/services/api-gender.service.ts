@@ -13,7 +13,7 @@ export class ApiGenderService {
     private _http: HttpClient
   ) { }
 
-  getGender(): Observable<Gender[]>{
+  getGender(){
     return this._http.get<Gender[]>(this.url);
   }
 }

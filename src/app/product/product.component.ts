@@ -60,15 +60,23 @@ export class ProductComponent {
       height: this.height
     });
 
-    console.log(dialogRef);
-    console.log(this.dialog);
-
     dialogRef.afterClosed().subscribe(result => {
       this.getProduct(this.companyId);
     });
   }
 
   openEdit(product: Product){
+    this.width = (window.innerWidth * .85).toString() + 'px';
+    this.height = (window.innerHeight * .80).toString() + 'px';
+
+    const dialogRef = this.dialog.open(DialogProductComponent, {
+      width: this.width,
+      height: this.height,
+      data: product
+    });
     
+    dialogRef.afterClosed().subscribe(result => {
+      this.getProduct(this.companyId);
+    });
   }
 }
