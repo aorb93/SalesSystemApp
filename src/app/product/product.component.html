@@ -5,27 +5,27 @@
             <h2>Productos</h2>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6">
-            <button class="btn btn-success btn-right" (click)="openAdd()">Agregar Producto</button>
+            <button class="btn btn-success btn-right btn-vertical-center" (click)="openAdd()">Agregar Producto</button>
         </div>
     </div>
     
     <table class="table table-striped mat-elevation-z4">
         <thead class="table-primary">
             <tr>
-                <th scope="col">Id</th>
+                <!-- <th scope="col">Id</th> -->
                 <th scope="col">Nombre</th>
-                <th scope="col" *ngIf="!_isMobile">Precio</th>
-                <th scope="col">Cantidad</th>
-                <th scope="col">Acciones</th>
+                <th scope="col" class="horizontal-middle" *ngIf="!_isMobile">Precio</th>
+                <th scope="col" class="horizontal-middle">Cantidad</th>
+                <th scope="col" class="horizontal-middle">Acciones</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let product of lstProduct  | paginate: { itemsPerPage: 10, currentPage: products }">
-                <td scope="col">{{ product.productId }}</td>
-                <td scope="col">{{ product.productName }}</td>
-                <td scope="col" *ngIf="!_isMobile">{{ product.price | currency:'USD':'symbol' }}</td>
-                <td scope="col">{{ product.quantity }}</td>
-                <td scope="col">
+                <!-- <td scope="col" class="vertical-middle">{{ product.productId }}</td> -->
+                <td scope="col" class="vertical-middle">{{ product.productName }}</td>
+                <td scope="col" class="vertical-middle horizontal-middle" *ngIf="!_isMobile">{{ product.price | currency:'USD':'symbol' }}</td>
+                <td scope="col" class="vertical-middle horizontal-middle">{{ product.quantity }}</td>
+                <td scope="col" class="vertical-middle horizontal-middle">
                     <div class="btn-group me-2">
                         <button class="btn btn-outline-info" (click)="openEdit(product)"><fa-icon [icon]="faEdit"></fa-icon></button>
                     </div>
