@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { delay, Observable } from 'rxjs';
 import { Gender } from '../models/gender';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class ApiGenderService {
     private _http: HttpClient
   ) { }
 
-  getGender(){
+  getGender(): Observable<Gender[]>{
     return this._http.get<Gender[]>(this.url);
   }
 }

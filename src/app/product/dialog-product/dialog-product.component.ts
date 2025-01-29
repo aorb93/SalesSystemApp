@@ -12,7 +12,7 @@ import { ApiSubCategoryService } from "../../services/api-sub-category.service";
 import { ApiGenderService } from "../../services/api-gender.service";
 import { Gender, Select2Gender } from "../../models/gender";
 import { NgxSpinnerService } from "ngx-spinner";
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { User } from '../../models/user';
 import $ from "jquery";
 
@@ -44,6 +44,10 @@ export class DialogProductComponent implements OnInit{
   public selectSubCategoryId: string = '0';
   public subCategoryDisabled = true;
 
+  public loadGender: boolean = false;
+  public loadCategory: boolean = false;
+  public loadSubCategory: boolean = false;
+
   constructor(
       public dialogRef: MatDialogRef<DialogProductComponent>,
       public apiProduct: ApiProductService,
@@ -54,7 +58,6 @@ export class DialogProductComponent implements OnInit{
       private spinner: NgxSpinnerService,
       @Inject(MAT_DIALOG_DATA) public product: Product
   ){
-    this.spinner.show()
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('User')!));
     this.companyId = this.userSubject.value.infoUser.companyId;
 
@@ -63,18 +66,14 @@ export class DialogProductComponent implements OnInit{
     }
   }
 
-  ngAfterViewInit(): void{
+  ngAfterContentInit(): void{
     if(this.product !== null){
       this.subCategoryDisabled = false;
       this.nameProduct = this.product.productName;
       this.productQuantity = this.product.quantity;
       this.productCost = this.product.cost;
       this.productPrice = this.product.price;
-      this.selectGenderId = this.product.genderId.toString();
-      this.selectCategoryId = this.product.categoryId.toString();
-      this.selectSubCategoryId = this.product.subCategoryId.toString();
     }
-    this.spinner.hide();
   }
 
   ngOnInit(): void {
@@ -86,11 +85,19 @@ export class DialogProductComponent implements OnInit{
     this.dialogRef.close();
   }
 
+  loaDone(){
+    if(this.loadGender && this.loadCategory && this.loadSubCategory){
+      this.spinner.hide();
+    }
+  }
+
   getGender(){
-    this.apiGender.getGender().subscribe(response => {
-      this.lstGender = response;
-      this.getSelect2Gender(this.lstGender);
-    });
+    this.apiGender.getGender().subscribe(
+      response => {
+        this.lstGender = response;
+        this.getSelect2Gender(this.lstGender);
+      }
+    );
   }
 
   getSelect2Gender(selectGender: Gender[]){
@@ -107,7 +114,11 @@ export class DialogProductComponent implements OnInit{
     }
 
     this.GenderSelect2 = JSON.parse(JSON.stringify(tmpData));
-    
+    if(this.product !== null){
+      this.selectGenderId = this.product.genderId.toString();
+      this.loadGender = true;
+      this.loaDone();
+    }
   }
 
   selectGenderOpt(event: any){
@@ -115,8 +126,8 @@ export class DialogProductComponent implements OnInit{
     this.getSubCategory(Number(this.selectCategoryId), Number(this.selectGenderId));
   }
 
-  async getCategory(){
-    await this.apiCategory.getSelectCategory().subscribe(response => {
+  getCategory(){
+    this.apiCategory.getSelectCategory().subscribe(response => {
       this.lstCategory = response;
       this.getSelect2Category(this.lstCategory);
     });
@@ -136,6 +147,11 @@ export class DialogProductComponent implements OnInit{
     }
 
     this.CategorySelect2 = JSON.parse(JSON.stringify(tmpData));
+    if(this.product !== null){
+      this.selectCategoryId = this.product.categoryId.toString();
+      this.loadCategory = true;
+      this.loaDone();
+    }
   }
 
   selectCategoryOpt(event: any){
@@ -166,6 +182,11 @@ export class DialogProductComponent implements OnInit{
 
       this.SubCategorySelect2 = JSON.parse(JSON.stringify(tmpData));
       this.subCategoryDisabled = false;
+      if(this.product !== null){
+        this.selectSubCategoryId = this.product.subCategoryId.toString();
+        this.loadSubCategory = true;
+        this.loaDone();
+      }
     }else{
       this.subCategoryDisabled = true;
     }
@@ -197,6 +218,12 @@ export class DialogProductComponent implements OnInit{
     this.apiProduct.postProduct(tmpProduct).subscribe(response => {
       if(response){
         this.spinner.hide();
+        this.dialogRef.close();
+        this.snackBar.open('Producto ' + tmpProduct.productName + ' agregado', '', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+      });
       }
     });
   }
@@ -223,6 +250,12 @@ export class DialogProductComponent implements OnInit{
     this.apiProduct.putProduct(tmpProduct).subscribe(response => {
       if(response){
         this.spinner.hide();
+        this.dialogRef.close();
+        this.snackBar.open('Producto ' + tmpProduct.productName + ' editado', '', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+        });
       }
     });
   }

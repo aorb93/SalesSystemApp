@@ -33,11 +33,15 @@ export class AppComponent {
     private router: Router,
     private observer: BreakpointObserver,
     private spinner: NgxSpinnerService){
+    
+
+    this.txtYear =  ' ' + new Date().getFullYear().toString();
+  }
+
+  ngAfterContentInit(): void{
     this.apiAuthService.user.subscribe(res => {
       this.user = res;
     });
-
-    this.txtYear =  ' ' + new Date().getFullYear().toString();
   }
 
   ngOnInit() {
