@@ -8,6 +8,7 @@ import { Product } from '../models/product';
 import { faEdit, faTrash, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import { DialogProductComponent } from '../product/dialog-product/dialog-product.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-product',
@@ -28,8 +29,9 @@ export class ProductComponent {
   public lstProduct!: any[]; //Product[];
   public userSubject!: BehaviorSubject<User>;
   public companyId!: number;
+  public _isMobile!: boolean;
 
-  constructor( private apiProduct: ApiProductService, public dialog: MatDialog, public snackBar: MatSnackBar, private spinner: NgxSpinnerService) {
+  constructor( private apiProduct: ApiProductService, public dialog: MatDialog, public snackBar: MatSnackBar, private spinner: NgxSpinnerService, private isMobile: AppComponent) {
 
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('User')!));
     this.companyId = this.userSubject.value.infoUser.companyId;
@@ -37,6 +39,7 @@ export class ProductComponent {
   }
   
   ngOnInit(): void {
+    this._isMobile = this.isMobile.isMobile;
     this.getProduct(this.companyId);
   }
 
@@ -80,5 +83,9 @@ export class ProductComponent {
     dialogRef.afterClosed().subscribe(result => {
       this.getProduct(this.companyId);
     });
+  }
+
+  delete(){
+    
   }
 }

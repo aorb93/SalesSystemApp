@@ -3,29 +3,21 @@
     <label class="col-lg-1 col-md-2 col-sm-4 col-form-label">Cliente:</label>
     <div class="col-lg-4 col-md-4 col-sm-8">
       <select2 [data]="ClientSelect2" [value]="clientId" (update)="selectClientOpt($event)"></select2>
-      <!-- <select class="form-select" (change)="selectClientOpt($event)" placeholder="Clientes" [(ngModel)]="clientSelect" [value]="clientId">
-        <option *ngFor="let c of selectClient" [value]="c.clientId">{{c.clientName}}</option>
-      </select> -->
     </div>
     <label class="col-lg-1 col-md-2 col-sm-4 col-form-label">Producto:</label>
     <div class="col-lg-4 col-md-4 col-sm-8">
       <select2 [data]="ProductSelect2" [value]="productId" (update)="selectProductOpt($event)"></select2>
-      <!-- <select class="form-select" (change)="selectProductOpt($event)" placeholder="Productos" [(ngModel)]="productSelect" [value]="productId">
-        <option *ngFor="let p of selectProduct" [value]="p.productId">{{p.productName}}</option>
-      </select> -->
     </div>
   </div>
   <br>
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12">
-      <button type="button" class="btn btn-outline-info margin-btn-group-right" id="addButton" (click)="addProduct()">Agregar Producto</button>
-      <button type="button" class="btn btn-outline-danger" id="cleanButton" (click)="cleanTable()">Borrar Tabla</button>
-      <!-- <button class="btn btn-info btn-sm margin-btn-group-right" id="addButton" (click)="addProduct()">
-        <mat-icon class="padding-btn-icon">add</mat-icon>
-      </button> -->
-      <!-- <button class="btn btn-info btn-sm" id="cleanButton" (click)="cleanTable()">
-        <mat-icon class="padding-btn-icon">autorenew</mat-icon>
-      </button> -->
+      <div class="btn-group me-2">
+        <button type="button" class="btn btn-outline-info" id="addButton" (click)="addProduct()">Agregar Producto</button>
+      </div>
+      <div class="btn-group me-2">
+        <button type="button" class="btn btn-outline-danger" id="cleanButton" (click)="cleanTable()">Borrar Tabla</button>
+      </div>
     </div>
   </div>
   <br>
