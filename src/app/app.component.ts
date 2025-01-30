@@ -9,6 +9,7 @@ import { MatListModule } from '@angular/material/list';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { faUsers, faHome, faChartBar, faArrowRightFromBracket, faBars } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +28,12 @@ export class AppComponent {
   sidenav!: MatSidenav;
   isMobile= true;
   isCollapsed = true;
+
+  public faUsers = faUsers;
+  public faHome = faHome;
+  public faChartBar = faChartBar;
+  public faArrowRightFromBracket = faArrowRightFromBracket;
+  public faBars = faBars;
 
   constructor(
     public apiAuthService: apiAuthService, 
@@ -77,6 +84,5 @@ export class AppComponent {
     if (val !== this.router.url) {
       this.spinner.show();
     }
-    //this.spinner.show();
   }
 }

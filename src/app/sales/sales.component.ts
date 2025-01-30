@@ -29,11 +29,12 @@ export class SalesComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.getSales(this.companyId);
   }
 
   getSales(companyId: number){
-    this.spinner.show();
+    
     this.apiSales.getSales(companyId).subscribe(sales => {
       this.lstSales = sales;
       this.spinner.hide();

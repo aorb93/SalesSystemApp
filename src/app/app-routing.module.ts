@@ -8,11 +8,13 @@ import { ProductComponent } from './product/product.component';
 import { SaleComponent } from './sale/sale.component';
 import { SalesComponent } from './sales/sales.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { ClientComponent } from './client/client.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'client', component: ClientComponent, canActivate: [AuthGuard] },
   { path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: 'category', component: CategoryComponent, canActivate: [AuthGuard] },
   { path: 'product', component: ProductComponent, canActivate: [AuthGuard] },

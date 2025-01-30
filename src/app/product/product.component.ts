@@ -39,6 +39,7 @@ export class ProductComponent {
   }
   
   ngOnInit(): void {
+    this.spinner.show();
     this._isMobile = this.isMobile.isMobile;
     this.getProduct(this.companyId);
   }
@@ -46,6 +47,7 @@ export class ProductComponent {
   getProduct(companyId: number) {
     this.apiProduct.getProducts(companyId).subscribe(response => {
       this.lstProduct = response;
+      this.spinner.hide();
     });
   }
 

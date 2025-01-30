@@ -4,7 +4,8 @@
 
 <mat-toolbar class="navbar navbar-expand-lg bg-primary text-white" *ngIf="this.user">
     <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
-        <mat-icon class="text-white">menu</mat-icon>
+        
+        <fa-icon class="text-white" [icon]="faBars"></fa-icon>
     </button>
     <h1>{{pageTitle}}</h1>
 </mat-toolbar>
@@ -15,20 +16,26 @@
             <br>
             <a mat-list-item  [routerLink]="['/home']" (click)="toggleMenu(); clickButon('/home')">
                 <span class="entry">
-                    <mat-icon>house</mat-icon>
+                    <fa-icon [icon]="faHome"></fa-icon>
                     <span>Inicio</span>
+                </span>
+            </a>
+            <a mat-list-item  [routerLink]="['/client']" (click)="toggleMenu(); clickButon('/client')">
+                <span class="entry">
+                    <fa-icon [icon]="faUsers"></fa-icon>
+                    <span>Clientes</span>
                 </span>
             </a>
             <a mat-list-item  [routerLink]="['/statistics']" (click)="toggleMenu(); clickButon('/statistics')">
                 <span class="entry">
-                    <mat-icon>bar_chart</mat-icon>
+                    <fa-icon [icon]="faChartBar"></fa-icon>
                     <span>Estadisticas</span>
                 </span>
             </a>
             <hr>
             <a mat-list-item class="button-bottom" (click)="logout()">
             <span class="entry text-danger">
-                <mat-icon>logout</mat-icon>
+                <fa-icon [icon]="faArrowRightFromBracket"></fa-icon>
                 <span>Cerrar Sesión</span>
             </span>
             </a>
