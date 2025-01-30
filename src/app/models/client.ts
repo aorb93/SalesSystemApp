@@ -13,3 +13,12 @@ export interface Select2Client{
     value: string; 
     label: string;
 }
+
+export interface insClient {
+    clientId: number;
+    clientName: string;
+    surname: string;
+    credit: boolean;
+    companyId: number;
+    enable: boolean;
+}

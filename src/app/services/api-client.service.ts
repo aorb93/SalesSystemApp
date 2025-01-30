@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Client } from '../models/client';
+import { Client, insClient } from '../models/client';
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -22,6 +22,10 @@ export class ApiClientService {
   getClients(companyId: number): Observable<Client[]>{
     const _companyId: string = '/List?CompanyId=';
     return this._http.get<Client[]>(`${this.url}${_companyId}${companyId}`);
+  }
+
+  postClient(client: insClient): Observable<insClient[]>{ 
+    return this._http.post<insClient[]>(this.url + '/InsClient', client, httpOption);
   }
 
 }

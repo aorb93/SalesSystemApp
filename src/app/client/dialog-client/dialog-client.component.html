@@ -1,0 +1,26 @@
+<h1 mat-dialog-title> {{ client != null ? 'Editar Cliente' : 'Nuevo Cliente' }} </h1>
+<div mat-dialog-content>
+    <fieldset>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <label for="clientName" class="form-label">Nombre:</label>
+                <input type="text" class="form-control form-control-sm" id="clientName" placeholder="Nombre Cliente" [(ngModel)]="clientName">
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <label for="surName" class="form-label">Apellido:</label>
+                <input type="text" class="form-control form-control-sm" id="surName" placeholder="Apellido Cliente" [(ngModel)]="surName">
+            </div>
+        </div>
+        <hr>
+        <div class="">
+            <div class="form-check-reverse form-switch col-lg-6 col-md-6 col-sm-10">
+                <input class="form-check-input form-control" type="checkbox" id="flexSwitchCheckChecked" [(ngModel)]="credit">
+                <label class="form-check-label" for="flexSwitchCheckChecked">Habilitar venta a crédito:</label>
+            </div>
+        </div>
+    </fieldset>
+</div>
+<div mat-dialog-actions>
+    <button class="btn btn-outline-dark margin-btn-group-right" (click)="close()">Cancelar</button>
+    <button class="btn btn-outline-info" color="primary" (click)="client != null ? editProduct() : addProduct()">Guardar</button>
+</div>

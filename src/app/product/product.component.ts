@@ -63,7 +63,8 @@ export class ProductComponent {
     
     const dialogRef = this.dialog.open(DialogProductComponent, {
       width: this.width,
-      height: this.height
+      height: this.height,
+      autoFocus: false
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -79,7 +80,8 @@ export class ProductComponent {
     const dialogRef = this.dialog.open(DialogProductComponent, {
       width: this.width,
       height: this.height,
-      data: product
+      data: product,
+      autoFocus: false
     });
     
     dialogRef.afterClosed().subscribe(result => {

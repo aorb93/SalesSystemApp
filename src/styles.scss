@@ -2404,7 +2404,7 @@ textarea.form-control-lg {
 .form-check-reverse {
   padding-right: 1.5em;
   padding-left: 0;
-  text-align: right;
+  text-align: left;
 }
 .form-check-reverse .form-check-input {
   float: right;
@@ -2417,7 +2417,7 @@ textarea.form-control-lg {
   flex-shrink: 0;
   width: 1em;
   height: 1em;
-  margin-top: 0.25em;
+  margin-top: 0.1em; //se sube check-switch original 0.25em
   vertical-align: top;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -2500,7 +2500,7 @@ textarea.form-control-lg {
   padding-left: 0;
 }
 .form-switch.form-check-reverse .form-check-input {
-  margin-right: -2.5em;
+  margin-right: 2.5em;
   margin-left: 0;
 }
 

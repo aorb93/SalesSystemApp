@@ -44,6 +44,7 @@ import { Select2Module } from 'ng-select2-component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DialogProductComponent } from './product/dialog-product/dialog-product.component';
+import { DialogClientComponent } from './client/dialog-client/dialog-client.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { DialogProductComponent } from './product/dialog-product/dialog-product.
     SalesComponent,
     DialogSalesComponent,
     StatisticsComponent,
-    DialogProductComponent
+    DialogProductComponent,
+    DialogClientComponent
   ],
   imports: [
     BrowserModule,
