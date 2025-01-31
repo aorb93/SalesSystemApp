@@ -3,7 +3,7 @@
     <fieldset>
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-6">
-                <label for="productName" class="form-label">Nombre Producto:</label>
+                <label for="productName" class="form-label">Nombre producto:</label>
                 <input type="text" class="form-control form-control-sm" id="productName" placeholder="Nombre Producto" [(ngModel)]="nameProduct">
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6">
@@ -14,11 +14,11 @@
         <hr>
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12">
-                <label for="selectCategory" class="form-label">Categoria</label>
+                <label for="selectCategory" class="form-label">Categoría</label>
                 <select2 [data]="CategorySelect2" [value]="selectCategoryId" (update)="selectCategoryOpt($event)" id="selectCategory" placeholder="Seleccione una categoría" noResultMessage="No encontrado"></select2>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12">
-                <label for="selectSubCategory" class="form-label">Sub-Categoria</label>
+                <label for="selectSubCategory" class="form-label">Sub-categoría</label>
                 <select2 [data]="SubCategorySelect2" [value]="selectSubCategoryId" (update)="selectSubCategoryOpt($event)" id="selectSubCategory" placeholder="Seleccione una sub-categoría" disabled="{{subCategoryDisabled}}" noResultMessage="No encontrado"></select2>
             </div>
         </div>

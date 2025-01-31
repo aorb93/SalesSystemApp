@@ -21,6 +21,8 @@ export class CategoryComponent implements OnInit {
   public faTrash = faTrash;
   public faSquareCheck = faSquareCheck
 
+  public categories: number = 1;
+
   constructor(
     private apiCategory: ApiCategoryService,
     public dialog: MatDialog,
