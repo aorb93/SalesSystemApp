@@ -3,7 +3,6 @@ import { User } from '../../models/user';
 import { BehaviorSubject } from 'rxjs';
 import { Client, insClient } from '../../models/client';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { DialogProductComponent } from '../../product/dialog-product/dialog-product.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiClientService } from '../../services/api-client.service';
@@ -22,7 +21,7 @@ export class DialogClientComponent implements OnInit{
   public credit: boolean = false;
 
   constructor(
-    public dialogRef: MatDialogRef<DialogProductComponent>,
+    public dialogRef: MatDialogRef<DialogClientComponent>,
     private spinner: NgxSpinnerService,
     public snackBar: MatSnackBar,
     private apiClient: ApiClientService,

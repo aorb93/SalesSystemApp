@@ -9,6 +9,7 @@ import { AppComponent } from '../app.component';
 import { Brand } from '../models/brand';
 import { ApiBrandService } from '../services/api-brand.service';
 import { DialogBrandComponent } from './dialog-brand/dialog-brand.component';
+import { DialogDeleteComponente } from '../common/delete/dialogdelete.component';
 
 @Component({
   selector: 'app-brand',
@@ -50,7 +51,7 @@ export class BrandComponent {
 
   openAdd(){
       this.width = (window.innerWidth * .85).toString() + 'px';
-      this.height = (window.innerHeight * .80).toString() + 'px';
+      this.height = (window.innerHeight * .40).toString() + 'px';
       
       const dialogRef = this.dialog.open(DialogBrandComponent, {
         width: this.width,
@@ -66,7 +67,7 @@ export class BrandComponent {
   openEdit(brand: Brand){
     this.spinner.show();
     this.width = (window.innerWidth * .85).toString() + 'px';
-    this.height = (window.innerHeight * .80).toString() + 'px';
+    this.height = (window.innerHeight * .40).toString() + 'px';
 
     const dialogRef = this.dialog.open(DialogBrandComponent, {
       width: this.width,
@@ -80,8 +81,35 @@ export class BrandComponent {
     });
   }
 
-  delete(){
-    
-  }
+  delete(brand: Brand){
+    this.width = (window.innerWidth * .85).toString() + 'px';
+    this.height = (window.innerHeight * .25).toString() + 'px';
 
+    const dialogRef = this.dialog.open(DialogDeleteComponente, {
+      width: this.width,
+      height: this.height,
+      data: 'Marca ' + brand.brandName
+    });
+
+    let tmpbrand: Brand = {
+      brandId: brand.brandId,
+      brandName: brand.brandName,
+      companyId: this.companyId
+    }
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.apiBrand.delBrand(tmpbrand).subscribe(response => {
+          if(response){
+            this.snackBar.open('Cliente ' + brand.brandName + ' eliminado con exito', '', {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top'
+            });
+            this.getBrand(this.companyId);
+          }
+        });
+      }
+    });
+  }
 }

@@ -1,5 +1,6 @@
 export interface Brand {
-    brandId: number;
+    brandId?: number;
     brandName: string;
-    brandTypeId: number;
+    // brandTypeId?: number;
+    companyId?: number;
 }

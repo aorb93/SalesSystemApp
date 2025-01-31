@@ -23,4 +23,16 @@ export class ApiBrandService {
     const _companyId: string = '/List?CompanyId=';
     return this._http.get<Brand[]>(`${this.url}${_companyId}${companyId}`);
   }
+
+  postBrand(brand: Brand): Observable<Brand[]>{ 
+    return this._http.post<Brand[]>(this.url + '/InsBrand', brand, httpOption);
+  }
+
+  putBrand(brand: Brand): Observable<Brand[]>{ 
+    return this._http.put<Brand[]>(this.url + '/UpdBrand', brand, httpOption);
+  }
+
+  delBrand(brand: Brand): Observable<Brand[]>{
+    return this._http.put<Brand[]>(this.url + '/DelBrand', brand, httpOption);
+  }
 }
