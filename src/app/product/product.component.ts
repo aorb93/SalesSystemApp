@@ -32,10 +32,8 @@ export class ProductComponent {
   public _isMobile!: boolean;
 
   constructor( private apiProduct: ApiProductService, public dialog: MatDialog, public snackBar: MatSnackBar, private spinner: NgxSpinnerService, private isMobile: AppComponent) {
-
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('User')!));
     this.companyId = this.userSubject.value.infoUser.companyId;
-    
   }
   
   ngOnInit(): void {

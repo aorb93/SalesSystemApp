@@ -2,14 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { User } from './models/user';
 import { apiAuthService } from './services/apiAuth.service';
 import { Router } from '@angular/router';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatListModule } from '@angular/material/list';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { faUsers, faHome, faChartBar, faArrowRightFromBracket, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faUsers, faHome, faChartBar, faArrowRightFromBracket, faBars, faSuitcase } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -34,6 +30,7 @@ export class AppComponent {
   public faChartBar = faChartBar;
   public faArrowRightFromBracket = faArrowRightFromBracket;
   public faBars = faBars;
+  public faSuitcase = faSuitcase;
 
   constructor(
     public apiAuthService: apiAuthService, 

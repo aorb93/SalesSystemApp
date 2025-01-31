@@ -26,6 +26,12 @@
                     <span>Clientes</span>
                 </span>
             </a>
+            <a mat-list-item  [routerLink]="['/brand']" (click)="toggleMenu(); clickButon('/brand')">
+                <span class="entry">
+                    <fa-icon [icon]="faSuitcase"></fa-icon>
+                    <span>Clientes</span>
+                </span>
+            </a>
             <a mat-list-item  [routerLink]="['/statistics']" (click)="toggleMenu(); clickButon('/statistics')">
                 <span class="entry">
                     <fa-icon [icon]="faChartBar"></fa-icon>
