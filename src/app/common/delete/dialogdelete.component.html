@@ -1,8 +1,12 @@
 <h1 mat-dialog-title>Eliminar</h1>
 <div mat-dialog-content>
-    <h3>¿Estas seguro de eliminar?</h3>
+    <p class="lead" style="color: black;">¿Estas seguro de eliminar <strong>{{ textDialog }}</strong>?</p>
 </div>
 <div mat-dialog-actions>
-    <button mat-raised-button cdkFokusInitial [mat-dialog-close]="false">Cancelar</button>
-    <button mat-raised-button [mat-dialog-close]="true" color="warn">Eliminar</button>
+    <div class="btn-group me-2">
+        <button class="btn btn-outline-dark" [mat-dialog-close]="false">Cancelar</button>
+    </div>
+    <div class="btn-group me-2">
+        <button class="btn btn-outline-danger" [mat-dialog-close]="true" color="warn">Eliminar</button>
+    </div>
 </div>

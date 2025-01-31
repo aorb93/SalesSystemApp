@@ -28,4 +28,12 @@ export class ApiClientService {
     return this._http.post<insClient[]>(this.url + '/InsClient', client, httpOption);
   }
 
+  putClient(client: insClient): Observable<insClient[]>{ 
+    return this._http.put<insClient[]>(this.url + '/UpdClient', client, httpOption);
+  }
+
+  delClient(client: insClient): Observable<insClient[]>{
+    return this._http.put<insClient[]>(this.url + '/DelClient', client, httpOption);
+  }
+
 }

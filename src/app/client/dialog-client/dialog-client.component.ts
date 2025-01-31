@@ -47,12 +47,8 @@ export class DialogClientComponent implements OnInit{
   close(){
     this.dialogRef.close();
   }
-
-  editProduct() {
-
-  }
   
-  addProduct() {
+  addClient() {
     this.spinner.show();
 
     let tmpClient: insClient = {
@@ -68,7 +64,32 @@ export class DialogClientComponent implements OnInit{
       if(response){
         this.spinner.hide();
         this.dialogRef.close();
-        this.snackBar.open('Producto ' + tmpClient.clientName + ' ' + tmpClient.surname + ' agregado', '', {
+        this.snackBar.open('Cliente ' + tmpClient.clientName + ' ' + tmpClient.surname + ' agregado', '', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+      });
+      }
+    }); 
+  }
+  
+  editClient() {
+    this.spinner.show();
+
+    let tmpClient: insClient = {
+      clientId: this.client.clientId,
+      clientName: this.clientName,
+      surname: this.surName,
+      credit: this.credit,
+      companyId: this.companyId,
+      enable: true
+    }
+
+    this.apiClient.putClient(tmpClient).subscribe(response => {
+      if(response){
+        this.spinner.hide();
+        this.dialogRef.close();
+        this.snackBar.open('Cliente ' + tmpClient.clientName + ' ' + tmpClient.surname + ' editado', '', {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'top'
