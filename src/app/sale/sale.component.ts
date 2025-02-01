@@ -16,6 +16,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { DialogSaleComponent } from './dialog-sale/dialog-sale.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Select2Module, Select2Data, Select2SelectionOverride } from 'ng-select2-component';
+import { ApiPaymentTypeService } from '../services/api-payment-type.service';
+import { PaymentType, Select2PaymentType } from '../models/paymentType';
 
 @Component({
   selector: 'app-sale',
@@ -27,10 +29,14 @@ export class SaleComponent {
   public productSelect!: string;
   public product!: ProductComponent;
 
+  public SelectPaymentType!: PaymentType[];
+  public selectPaymentTypeId!: number;
+
   public selectProduct!: any[]; //Product[];
   public userSubject!: BehaviorSubject<User>;
   public companyId!: number;
   public productId!: number;
+  public paymentTypeId!: number;
 
   public selectProductId!: number;
 
@@ -53,6 +59,9 @@ export class SaleComponent {
 
   public ClientSelect2!: Select2Data;
   public ProductSelect2!: Select2Data;
+  public PaymentType2!: Select2Data;
+
+  // public prductsPage: number = 1
   
   @ViewChild(MatTable) table!: MatTable<Product>;
 
@@ -60,6 +69,7 @@ export class SaleComponent {
     private apiProduct: ApiProductService, 
     private apiClient: ApiClientService, 
     private apiSale: ApiSaleService, 
+    private apiPaymentType: ApiPaymentTypeService,
     public option: MatOptionModule, 
     private spinner: NgxSpinnerService,
     public dialog: MatDialog
@@ -73,7 +83,36 @@ export class SaleComponent {
     this.spinner.show();
     this.getProduct(this.companyId);
     this.getClients(this.companyId);
+    this.getPaymentType();
     this.spinner.hide();
+  }
+
+  getPaymentType() {
+    this.apiPaymentType.getPaymentTypes().subscribe(response => {
+      this.SelectPaymentType = response;
+      this.getPaymentType2Client(this.SelectPaymentType);
+    });
+  }
+
+  getPaymentType2Client(selectPaymentType: PaymentType[]){
+    let tmpData: Select2PaymentType[] = [];
+
+    for(let i = 0; i < selectPaymentType.length; i++){
+      let tmpData2 = {
+        value: selectPaymentType[i].paymentTypeId.toString(),
+        label: selectPaymentType[i].paymentTypeName,
+        disabled: false
+      };
+      
+      tmpData.push(tmpData2);
+    }
+
+    this.PaymentType2 = JSON.parse(JSON.stringify(tmpData));
+  }
+
+  selectPaymentTypeOpt(event: any){
+    this.disabledButtonAdd(false);
+    this.selectProductId = event.value;
   }
   
   getProduct(companyId: number) {
@@ -112,7 +151,6 @@ export class SaleComponent {
       
       return dato;
     });
-    
   }
 
   addProduct(){
@@ -124,7 +162,7 @@ export class SaleComponent {
           response[0].iconRemove = 'delete';
           response[0].iconColor = 'text-danger'
           this.addSelectProduct.push(response[0]);
-          this.table.renderRows();
+          // this.table.renderRows();
           this.productSelect = '';
           this.getTotal();
           this.disabledButtonAdd(true);
@@ -151,7 +189,7 @@ export class SaleComponent {
     else{
       add = true;
     }
-    this.table.renderRows();
+    // this.table.renderRows();
     this.productSelect = '';
     this.getTotal();
     return add;
@@ -185,7 +223,7 @@ export class SaleComponent {
     if(idDelete > 0){
       this.delete(idDelete);
     }
-    this.table.renderRows();
+    // this.table.renderRows();
     this.getTotal();
   }
 
@@ -210,13 +248,13 @@ export class SaleComponent {
         p.iconColor = p.quantitySale > 1 ? 'text-warning' : 'text-danger'
       }
     });
-    this.table.renderRows();
+    // this.table.renderRows();
     this.getTotal();
   }
 
   cleanTable(){
     this.addSelectProduct = [];
-    this.table.renderRows();
+    // this.table.renderRows();
     this.productSelect = '';
     // this.showTableDisplay();
     this.getTotal();
