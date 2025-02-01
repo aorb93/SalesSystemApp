@@ -19,8 +19,9 @@ export class ApiPaymentTypeService {
     private _http: HttpClient
   ) { }
 
-  getPaymentTypes(): Observable<PaymentType[]>{
-    const _metoth: string = '/List';
-    return this._http.get<PaymentType[]>(`${this.url}${_metoth}`);
+  getPaymentTypes(companyId: number, clientId: number): Observable<PaymentType[]>{
+    const _companyId: string = '/List?CompanyId=';
+    const _clientId: string = '&ClientId=';
+    return this._http.get<PaymentType[]>(`${this.url}${_companyId}${companyId}${_clientId}${clientId}`);
   }
 }

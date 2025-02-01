@@ -61,6 +61,9 @@ export class SaleComponent {
   public ProductSelect2!: Select2Data;
   public PaymentType2!: Select2Data;
 
+  public loadClient: boolean = false;
+  public loadProduct: boolean = false;
+
   // public prductsPage: number = 1
   
   @ViewChild(MatTable) table!: MatTable<Product>;
@@ -83,12 +86,11 @@ export class SaleComponent {
     this.spinner.show();
     this.getProduct(this.companyId);
     this.getClients(this.companyId);
-    this.getPaymentType();
-    this.spinner.hide();
+    // this.getPaymentType();
   }
 
-  getPaymentType() {
-    this.apiPaymentType.getPaymentTypes().subscribe(response => {
+  getPaymentType(clientId: number) {
+    this.apiPaymentType.getPaymentTypes(this.companyId, clientId).subscribe(response => {
       this.SelectPaymentType = response;
       this.getPaymentType2Client(this.SelectPaymentType);
     });
@@ -105,6 +107,7 @@ export class SaleComponent {
       };
       
       tmpData.push(tmpData2);
+      this.spinner.hide();
     }
 
     this.PaymentType2 = JSON.parse(JSON.stringify(tmpData));
@@ -138,6 +141,8 @@ export class SaleComponent {
     }
 
     this.ProductSelect2 = JSON.parse(JSON.stringify(tmpData));
+    this.loadProduct = true;
+    this.loadDone();
   }
 
   selectProductOpt(event: any){
@@ -193,10 +198,6 @@ export class SaleComponent {
     this.productSelect = '';
     this.getTotal();
     return add;
-  }
-
-  selectClientOpt(event: any){
-    this.selectClientId = event.value;
   }
 
   getTotal(){
@@ -284,6 +285,14 @@ export class SaleComponent {
     }
 
     this.ClientSelect2 = JSON.parse(JSON.stringify(tmpData));
+    this.loadClient = true;
+    this.loadDone();
+  }
+
+  selectClientOpt(event: any){
+    this.spinner.show();
+    this.selectClientId = event.value;
+    this.getPaymentType(this.selectClientId);
   }
 
   sale(){
@@ -351,5 +360,11 @@ export class SaleComponent {
     dialogRef.afterClosed().subscribe(result => {
       
     });
+  }
+
+  loadDone(){
+    if(this.loadClient && this.loadProduct){
+      this.spinner.hide();
+    }
   }
 }
