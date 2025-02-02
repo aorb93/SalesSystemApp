@@ -7,6 +7,8 @@ export interface Client{
     enable: boolean;
     creationDate: Date;
     modifyDate: Date;
+    phone: string;
+    address: string;
 }
 
 export interface Select2Client{ 
@@ -21,4 +23,6 @@ export interface insClient {
     credit: boolean;
     companyId: number;
     enable: boolean;
+    phone: string;
+    address: string;
 }

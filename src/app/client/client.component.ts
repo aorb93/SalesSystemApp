@@ -58,7 +58,7 @@ export class ClientComponent implements OnInit {
 
   openAdd(){
     this.width = (window.innerWidth * .85).toString() + 'px';
-    this.height = (window.innerHeight * .40).toString() + 'px';
+    this.height = (window.innerHeight * .55).toString() + 'px';
     
     const dialogRef = this.dialog.open(DialogClientComponent, {
       width: this.width,
@@ -74,7 +74,7 @@ export class ClientComponent implements OnInit {
   openEdit(client: Client){
     this.spinner.show();
     this.width = (window.innerWidth * .85).toString() + 'px';
-    this.height = (window.innerHeight * .40).toString() + 'px';
+    this.height = (window.innerHeight * .55).toString() + 'px';
 
     const dialogRef = this.dialog.open(DialogClientComponent, {
       width: this.width,
@@ -104,7 +104,9 @@ export class ClientComponent implements OnInit {
       surname: client.surname,
       credit: client.credit,
       companyId: this.companyId,
-      enable: false
+      enable: false,
+      phone: client.phone,
+      address: client.address
     }
 
     dialogRef.afterClosed().subscribe(result => {
