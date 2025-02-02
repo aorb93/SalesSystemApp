@@ -18,6 +18,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Select2Module, Select2Data, Select2SelectionOverride } from 'ng-select2-component';
 import { ApiPaymentTypeService } from '../services/api-payment-type.service';
 import { PaymentType, Select2PaymentType } from '../models/paymentType';
+import { ApiPeriodService } from '../services/api-period.service';
+import { Period, Select2Period, Select2CantPeriod } from '../models/period';
 
 @Component({
   selector: 'app-sale',
@@ -31,6 +33,12 @@ export class SaleComponent {
 
   public SelectPaymentType!: PaymentType[];
   public selectPaymentTypeId!: number;
+
+  public SelectPeriod!: Period[];
+  public selectPeriodId!: number;
+  public periodId!: number;
+  public cantPeriodId!: number;
+  public selectCantPeriodId!: number;
 
   public selectProduct!: any[]; //Product[];
   public userSubject!: BehaviorSubject<User>;
@@ -60,9 +68,15 @@ export class SaleComponent {
   public ClientSelect2!: Select2Data;
   public ProductSelect2!: Select2Data;
   public PaymentType2!: Select2Data;
+  public PeriodSelect2!: Select2Data;
+  public CantPeriodSelect2!: Select2Data;
 
   public loadClient: boolean = false;
   public loadProduct: boolean = false;
+
+  public periodicity: boolean = false;
+  public cantPeriodicity: boolean = false;
+  public nameCantPeriodicity!: string;
 
   // public prductsPage: number = 1
   
@@ -73,6 +87,7 @@ export class SaleComponent {
     private apiClient: ApiClientService, 
     private apiSale: ApiSaleService, 
     private apiPaymentType: ApiPaymentTypeService,
+    private apiPeriod: ApiPeriodService,
     public option: MatOptionModule, 
     private spinner: NgxSpinnerService,
     public dialog: MatDialog
@@ -89,11 +104,78 @@ export class SaleComponent {
     // this.getPaymentType();
   }
 
-  getPaymentType(clientId: number) {
-    this.apiPaymentType.getPaymentTypes(this.companyId, clientId).subscribe(response => {
-      this.SelectPaymentType = response;
-      this.getPaymentType2Client(this.SelectPaymentType);
+  getPeriod() {
+    this.apiPeriod.getPeriod().subscribe(response => {
+      this.SelectPeriod = response;
+      this.getPeriod2(this.SelectPeriod);
     });
+  }
+
+  getPeriod2(selectPeriod: Period[]){
+    let tmpData: Select2Period[] = [];
+
+    for(let i = 0; i < selectPeriod.length; i++){
+      let tmpData2 = {
+        value: selectPeriod[i].periodId.toString(),
+        label: selectPeriod[i].periodName,
+        disabled: false
+      };
+      
+      tmpData.push(tmpData2);
+      this.spinner.hide();
+    }
+
+    this.PeriodSelect2 = JSON.parse(JSON.stringify(tmpData));
+  }
+
+  selectPeriodOpt(event: any){
+    this.selectPeriodId = Number(event.value);
+
+    if(this.selectPeriodId === 1)
+      this.nameCantPeriodicity = 'Semanas:';
+    else if (this.selectPeriodId === 2)
+      this.nameCantPeriodicity = 'Quincenas:';
+    else if (this.selectPeriodId === 3)
+      this.nameCantPeriodicity = 'Meses:';
+    else
+      this.nameCantPeriodicity = '';
+
+    this.getCantPeriod2();
+  }
+
+  getCantPeriod2(){
+    let tmpData: Select2CantPeriod[] = [];
+
+    for(let i = 1; i <= 12; i++){
+      let tmpData2 = {
+        value: i.toString(),
+        label: i.toString(),
+        disabled: false
+      };
+      
+      tmpData.push(tmpData2);
+      this.spinner.hide();
+    }
+
+    this.CantPeriodSelect2 = JSON.parse(JSON.stringify(tmpData));
+    this.cantPeriodicity = true;
+  }
+
+  selectCantPeriodOpt(event: any){
+    this.selectCantPeriodId = Number(event.value);
+  }
+
+  getPaymentType(clientId: number) {
+    if(clientId.toString() != ''){
+      this.apiPaymentType.getPaymentTypes(this.companyId, clientId).subscribe(response => {
+        this.SelectPaymentType = response;
+        this.getPaymentType2Client(this.SelectPaymentType);
+      });
+    }
+    else{
+      this.PaymentType2 = [];
+      this.spinner.hide();
+    }
   }
 
   getPaymentType2Client(selectPaymentType: PaymentType[]){
@@ -107,6 +189,7 @@ export class SaleComponent {
       };
       
       tmpData.push(tmpData2);
+      this.getPeriod();
       this.spinner.hide();
     }
 
@@ -116,6 +199,13 @@ export class SaleComponent {
   selectPaymentTypeOpt(event: any){
     this.disabledButtonAdd(false);
     this.selectProductId = event.value;
+
+    if(this.selectProductId == 3){
+      this.periodicity = true;
+    }
+    else{
+      this.periodicity = false;
+    }
   }
   
   getProduct(companyId: number) {
@@ -253,12 +343,20 @@ export class SaleComponent {
     this.getTotal();
   }
 
-  cleanTable(){
+  cleanAll(){
+    this.ClientSelect2 = [];
+    this.ProductSelect2 = [];
+    this.PaymentType2 = [];
+    this.disabledButtonAdd(true);
+    this.getClients(this.companyId);
+    this.getProduct(this.companyId);
+
     this.addSelectProduct = [];
-    // this.table.renderRows();
-    this.productSelect = '';
-    // this.showTableDisplay();
-    this.getTotal();
+    // // this.table.renderRows();
+    // this.productSelect = '';
+    // // this.showTableDisplay();
+    // this.getTotal();
+    // this.spinner.hide();
   }
 
   showTableDisplay(){
@@ -291,7 +389,9 @@ export class SaleComponent {
 
   selectClientOpt(event: any){
     this.spinner.show();
+    this.periodicity = false;
     this.selectClientId = event.value;
+    this.productId = 0;
     this.getPaymentType(this.selectClientId);
   }
 
