@@ -198,9 +198,9 @@ export class SaleComponent {
 
   selectPaymentTypeOpt(event: any){
     this.disabledButtonAdd(false);
-    this.selectProductId = event.value;
+    this.selectPaymentTypeId = event.value;
 
-    if(this.selectProductId == 3){
+    if(this.selectPaymentTypeId == 3){
       this.periodicity = true;
     }
     else{
@@ -419,6 +419,10 @@ export class SaleComponent {
         clientId: this.selectClientId,
         total: this.total,
         companyId: this.companyId,
+        credit: this.selectPaymentTypeId == 3 ? true : false,
+        paymentTypeId: this.selectPaymentTypeId,
+        periodId: this.selectPaymentTypeId == 3 ? this.selectPeriodId : 0,
+        quantity: this.selectPaymentTypeId == 3 ? this.selectCantPeriodId : 0,
         productSale: productsList
       }
 

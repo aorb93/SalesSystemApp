@@ -3,6 +3,10 @@ export interface Sale{
     clientId: number;
     total: number;
     companyId: number;
+    credit?: boolean;
+    paymentTypeId: number;
+    periodId?: number;
+    quantity?: number;
     productSale: ProductSale[];
 }
 
