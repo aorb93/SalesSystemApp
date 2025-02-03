@@ -48,6 +48,7 @@ import { DialogClientComponent } from './client/dialog-client/dialog-client.comp
 import { BrandComponent } from './brand/brand.component';
 import { DialogBrandComponent } from './brand/dialog-brand/dialog-brand.component';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { SaledetailComponent } from './saledetail/saledetail.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     DialogProductComponent,
     DialogClientComponent,
     BrandComponent,
-    DialogBrandComponent
+    DialogBrandComponent,
+    SaledetailComponent
   ],
   imports: [
     BrowserModule,

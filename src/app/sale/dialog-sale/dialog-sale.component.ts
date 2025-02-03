@@ -80,10 +80,12 @@ export class DialogSaleComponent {
   }
 
   saveSale(){
+    this.spinner.show();
     this.apiSale.postSale(this.Sale).subscribe(response => {
       if(response){
-        this.spinner.hide();
-        window.location.reload();
+        this.close();
+        // this.spinner.hide();
+        // window.location.reload();
       }
     });
   }

@@ -1,7 +1,29 @@
-export interface Sales{
-    saleId: number,
-    clientId: number,
-    clientName: string,
-    total: number,
-    creationDate: Date
+export interface Sales {
+    saleId: number;
+    clientId: number;
+    clientName: string;
+    paymentTypeName: string;
+    total: number;
+    creationDate: Date;
+}
+
+export interface ProductsSale {
+    productSaleId: number;
+    saleId: number;
+    productId: number;
+    productName: string;
+    quantity: number;
+    unitPrice: number;
+    companyId: number;
+}
+
+export interface CreditSale {
+    creditId: number;
+    saleId: number;
+    periodId: number;
+    periodName: string;
+    saleCreditId: number;
+    nextPayDay: Date;
+    partialPaid: number;
+    paid: boolean;
 }

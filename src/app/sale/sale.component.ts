@@ -462,7 +462,8 @@ export class SaleComponent {
     this.spinner.hide();
 
     dialogRef.afterClosed().subscribe(result => {
-      
+      this.cleanAll();
+      this.spinner.hide();
     });
   }
 

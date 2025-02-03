@@ -5,6 +5,7 @@ import { User } from '../models/user';
 import { BehaviorSubject } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sales',
@@ -22,7 +23,8 @@ export class SalesComponent implements OnInit {
 
   constructor(
       private apiSales: ApiSalesService,
-      private spinner: NgxSpinnerService
+      private spinner: NgxSpinnerService,
+      private router: Router
     ) {
       this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('User')!));
       this.companyId = this.userSubject.value.infoUser.companyId;
@@ -39,5 +41,10 @@ export class SalesComponent implements OnInit {
       this.lstSales = sales;
       this.spinner.hide();
     });
+  }
+
+  openDetail(saleId: number){
+    const urlTree = this.router.parseUrl(this.router.url);
+    console.log(saleId);
   }
 }
