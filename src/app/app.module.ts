@@ -47,6 +47,7 @@ import { DialogProductComponent } from './product/dialog-product/dialog-product.
 import { DialogClientComponent } from './client/dialog-client/dialog-client.component';
 import { BrandComponent } from './brand/brand.component';
 import { DialogBrandComponent } from './brand/dialog-brand/dialog-brand.component';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -94,12 +95,15 @@ import { DialogBrandComponent } from './brand/dialog-brand/dialog-brand.componen
     NgOptimizedImage,
     Select2Module,
     FontAwesomeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
   providers: [
     provideAnimationsAsync(),
     provideHttpClient(withInterceptorsFromDi()),
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    provideNgxMask()
   ],
   bootstrap: [AppComponent]
 })

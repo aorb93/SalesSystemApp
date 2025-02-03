@@ -5,22 +5,22 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <label for="clientName" class="form-label">Nombre(s):</label>
-                <input type="text" class="form-control form-control-sm" id="clientName" placeholder="Nombre Cliente" [(ngModel)]="clientName">
+                <input type="text" class="form-control form-control-sm" id="clientName" placeholder="Nombre cliente" [(ngModel)]="clientName">
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <label for="surName" class="form-label">Apellido(s):</label>
-                <input type="text" class="form-control form-control-sm" id="surName" placeholder="Apellido Cliente" [(ngModel)]="surName">
+                <input type="text" class="form-control form-control-sm" id="surName" placeholder="Apellido cliente" [(ngModel)]="surName">
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
-                <label for="phone" class="form-label">Telefono:</label>
-                <input type="text" class="form-control form-control-sm" id="phone" placeholder="Nombre Cliente" [(ngModel)]="phone">
+                <label for="phone" class="form-label">Télefono:</label>
+                <input type="text" class="form-control form-control-sm" id="phone" placeholder="Télefono cliente" maxlength="14" [(ngModel)]="phone" mask='(000) 000-0000'>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <label for="address" class="form-label">Dirección:</label>
-                <input type="text" class="form-control form-control-sm" id="address" placeholder="Apellido Cliente" [(ngModel)]="address">
+                <input type="text" class="form-control form-control-sm" id="address" placeholder="Dirección cliente" [(ngModel)]="address">
             </div>
         </div>
         <br>

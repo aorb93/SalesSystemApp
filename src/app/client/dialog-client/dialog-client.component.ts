@@ -6,6 +6,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiClientService } from '../../services/api-client.service';
+import { NgxMaskConfig } from 'ngx-mask'
 
 @Component({
   selector: 'app-dialog-client',
@@ -57,12 +58,12 @@ export class DialogClientComponent implements OnInit{
     let tmpClient: insClient = {
       clientId: 0,
       clientName: this.clientName,
-      surname: this.surName,
+      surname: this.surName != null ? this.surName : '',
       credit: this.credit,
       companyId: this.companyId,
       enable: true,
-      phone: this.phone,
-      address: this.address
+      phone: this.phone != null ? this.phone : '',
+      address: this.address != null ? this.address : ''
     }
 
     this.apiClient.postClient(tmpClient).subscribe(response => {
@@ -84,12 +85,12 @@ export class DialogClientComponent implements OnInit{
     let tmpClient: insClient = {
       clientId: this.client.clientId,
       clientName: this.clientName,
-      surname: this.surName,
+      surname: this.surName != null ? this.surName : '',
       credit: this.credit,
       companyId: this.companyId,
       enable: true,
-      phone: this.phone,
-      address: this.address
+      phone: this.phone != null ? this.phone : '',
+      address: this.address != null ? this.address : ''
     }
 
     this.apiClient.putClient(tmpClient).subscribe(response => {
