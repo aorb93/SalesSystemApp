@@ -50,6 +50,11 @@ import { DialogBrandComponent } from './brand/dialog-brand/dialog-brand.componen
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { SaledetailComponent } from './saledetail/saledetail.component';
 
+import {LOCALE_ID } from '@angular/core';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeEs, 'es');
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -105,6 +110,7 @@ import { SaledetailComponent } from './saledetail/saledetail.component';
     provideAnimationsAsync(),
     provideHttpClient(withInterceptorsFromDi()),
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'es' },
     provideNgxMask()
   ],
   bootstrap: [AppComponent]

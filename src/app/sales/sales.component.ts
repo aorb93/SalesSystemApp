@@ -36,7 +36,6 @@ export class SalesComponent implements OnInit {
   }
 
   getSales(companyId: number){
-    
     this.apiSales.getSales(companyId).subscribe(sales => {
       this.lstSales = sales;
       this.spinner.hide();
@@ -44,7 +43,7 @@ export class SalesComponent implements OnInit {
   }
 
   openDetail(saleId: number){
-    const urlTree = this.router.parseUrl(this.router.url);
-    console.log(saleId);
+    this.spinner.show();
+    this.router.navigate(['/saledetail', saleId]);
   }
 }

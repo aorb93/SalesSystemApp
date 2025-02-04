@@ -1,10 +1,60 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, numberAttribute, OnInit } from '@angular/core';
+import { User } from '../models/user';
+import { BehaviorSubject } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ApiSalesService } from '../services/api-sales.service';
+import { Sales, SalesDetailProducts, SalesDetailCredit } from '../models/sales';
 
 @Component({
   selector: 'app-saledetail',
   templateUrl: './saledetail.component.html',
   styleUrl: './saledetail.component.scss'
 })
-export class SaledetailComponent {
-  @Input() recibidoDePadre!: string;
+export class SaledetailComponent implements OnInit {
+  public userSubject!: BehaviorSubject<User>;
+  public companyId!: number;
+  public lstSalesDetailProducts!: SalesDetailProducts[];
+  public lstSalesDetailCredit!: SalesDetailCredit[];
+
+  public paginationSales: number = 1;
+
+  public loadSalesDetailProducts: boolean = false;
+  public loadSalesDetailCredit: boolean = false;
+
+  public showCredit: boolean = false;
+
+  @Input({ transform: numberAttribute }) saleId!: number;
+
+  constructor(private apiSales: ApiSalesService, private spinner: NgxSpinnerService){
+    this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('User')!));
+    this.companyId = this.userSubject.value.infoUser.companyId;
+  }
+
+  ngOnInit(): void {
+    this.getSalesDetailProducts(this.companyId, this.saleId);
+    this.getSalesDetailCredit(this.companyId, this.saleId);
+  }
+
+  loaDone(){
+    if(this.loadSalesDetailProducts && this.loadSalesDetailCredit){
+      this.spinner.hide();
+    }
+  }
+
+  getSalesDetailProducts(companyId: number, saleId: number){
+    this.apiSales.getSalesDetailProducts(companyId, saleId).subscribe(sales => {
+      this.lstSalesDetailProducts = sales;
+      this.loadSalesDetailProducts = true;
+      this.loaDone();
+    });
+  }
+
+  getSalesDetailCredit(companyId: number, saleId: number){
+    this.apiSales.getSalesDetailCredit(companyId, saleId).subscribe(sales => {
+      this.lstSalesDetailCredit = sales;
+      this.showCredit = this.lstSalesDetailCredit.length > 0 ? true : false;
+      this.loadSalesDetailCredit = true;
+      this.loaDone();
+    });
+  }
 }

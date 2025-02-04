@@ -7,7 +7,7 @@ export interface Sales {
     creationDate: Date;
 }
 
-export interface ProductsSale {
+export interface SalesDetailProducts {
     productSaleId: number;
     saleId: number;
     productId: number;
@@ -17,7 +17,7 @@ export interface ProductsSale {
     companyId: number;
 }
 
-export interface CreditSale {
+export interface SalesDetailCredit {
     creditId: number;
     saleId: number;
     periodId: number;

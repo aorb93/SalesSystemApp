@@ -23,11 +23,11 @@ const routes: Routes = [
   { path: 'sale', component: SaleComponent, canActivate: [AuthGuard] },
   { path: 'sales', component: SalesComponent, canActivate: [AuthGuard] },
   { path: 'brand', component: BrandComponent, canActivate: [AuthGuard] },
-  { path: 'saledetail', component: SaledetailComponent, canActivate: [AuthGuard] }
+  { path: 'saledetail/:saleId', component: SaledetailComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {bindToComponentInputs: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
