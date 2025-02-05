@@ -24,6 +24,12 @@ export class ApiSalesService {
     return this._http.get<Sales[]>(`${this.url}${_companyId}${companyId}`);
   }
 
+  getSalesDetail(companyId: number, saleId: number): Observable<Sales[]>{
+    const _companyId: string = 'SalesDetail?CompanyId=' + companyId.toString();
+    const _saleId: string = '&SaleId=' + saleId.toString();
+    return this._http.get<Sales[]>(`${this.url}${_companyId}${_saleId}`);
+  }
+
   getSalesDetailProducts(companyId: number, saleId: number): Observable<SalesDetailProducts[]>{
     const _companyId: string = 'SalesDetailProducts?CompanyId=' + companyId.toString();
     const _saleId: string = '&SaleId=' + saleId.toString();

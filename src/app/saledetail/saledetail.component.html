@@ -12,6 +12,25 @@
     </ol>
   </div>
 
+  <table class="table table-striped mat-elevation-z4">
+    <thead class="table-primary">
+        <tr>
+            <th scope="col">Cliente</th>
+            <th scope="col">Tipo de pago</th>
+            <th scope="col" class="horizontal-middle">Total</th>
+            <th scope="col" class="horizontal-middle">Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let sale of lstSalesDetail">
+            <td scope="col" class="vertical-middle">{{ sale.clientName }}</td>
+            <td scope="col" class="vertical-middle">{{ sale.paymentTypeName }}</td>
+            <td scope="col" class="vertical-middle horizontal-middle">{{ sale.total | currency:'USD':'symbol' }}</td>
+            <td scope="col" class="vertical-middle horizontal-middle">{{ sale.creationDate | date:'MMM dd, y':'': 'es-ES' | titlecase }}</td>
+        </tr>
+    </tbody>
+  </table>
+  <br>
   <h6 *ngIf="showCredit">Detalle de productos</h6>
   <table class="table table-striped mat-elevation-z4">
       <thead class="table-primary">
@@ -25,7 +44,7 @@
           <tr *ngFor="let sale of lstSalesDetailProducts">
               <td scope="col" class="vertical-middle">{{ sale.productName }}</td>
               <td scope="col" class="vertical-middle horizontal-middle">{{ sale.quantity }}</td>
-              <td scope="col" class="vertical-middle horizontal-middle">{{ sale.unitPrice | currency: 'MXN':'symbol':undefined:'es-MX' }}</td>
+              <td scope="col" class="vertical-middle horizontal-middle">{{ sale.unitPrice | currency:'USD':'symbol' }}</td>
           </tr>
       </tbody>
   </table>
@@ -44,7 +63,7 @@
         <tr *ngFor="let sale of lstSalesDetailCredit">
             <td scope="col" class="vertical-middle">{{ sale.periodName }}</td>
             <td scope="col" class="vertical-middle horizontal-middle">{{ sale.saleCreditId }}</td>
-            <td scope="col" class="vertical-middle horizontal-middle">{{ sale.nextPayDay | date:'MMM dd, y' | titlecase }}</td>
+            <td scope="col" class="vertical-middle horizontal-middle">{{ sale.nextPayDay | date:'MMM dd, y':'': 'es-ES' | titlecase }}</td>
             <td scope="col" class="vertical-middle horizontal-middle">{{ sale.partialPaid | currency:'USD':'symbol' }}</td>
         </tr>
     </tbody>

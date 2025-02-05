@@ -13,11 +13,14 @@ import { Sales, SalesDetailProducts, SalesDetailCredit } from '../models/sales';
 export class SaledetailComponent implements OnInit {
   public userSubject!: BehaviorSubject<User>;
   public companyId!: number;
+
+  public lstSalesDetail!: Sales[];
   public lstSalesDetailProducts!: SalesDetailProducts[];
   public lstSalesDetailCredit!: SalesDetailCredit[];
 
   public paginationSales: number = 1;
 
+  public loadSalesDetail: boolean = false;
   public loadSalesDetailProducts: boolean = false;
   public loadSalesDetailCredit: boolean = false;
 
@@ -31,14 +34,23 @@ export class SaledetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getSalesDetail(this.companyId, this.saleId);
     this.getSalesDetailProducts(this.companyId, this.saleId);
     this.getSalesDetailCredit(this.companyId, this.saleId);
   }
 
   loaDone(){
-    if(this.loadSalesDetailProducts && this.loadSalesDetailCredit){
+    if(this.loadSalesDetailProducts && this.loadSalesDetailCredit && this.loadSalesDetail){
       this.spinner.hide();
     }
+  }
+
+  getSalesDetail(companyId: number, saleId: number){
+    this.apiSales.getSalesDetail(companyId, saleId).subscribe(sales => {
+      this.lstSalesDetail = sales;
+      this.loadSalesDetail = true;
+      this.loaDone();
+    });
   }
 
   getSalesDetailProducts(companyId: number, saleId: number){
