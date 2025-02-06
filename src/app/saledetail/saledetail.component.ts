@@ -3,7 +3,7 @@ import { User } from '../models/user';
 import { BehaviorSubject } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiSalesService } from '../services/api-sales.service';
-import { Sales, SalesDetailProducts, SalesDetailCredit } from '../models/sales';
+import { Sales, SalesDetail, SalesDetailProducts, SalesDetailCredit } from '../models/sales';
 
 @Component({
   selector: 'app-saledetail',
@@ -14,7 +14,7 @@ export class SaledetailComponent implements OnInit {
   public userSubject!: BehaviorSubject<User>;
   public companyId!: number;
 
-  public lstSalesDetail!: Sales[];
+  public lstSalesDetail!: SalesDetail[];
   public lstSalesDetailProducts!: SalesDetailProducts[];
   public lstSalesDetailCredit!: SalesDetailCredit[];
 

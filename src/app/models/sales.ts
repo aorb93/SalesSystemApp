@@ -7,6 +7,16 @@ export interface Sales {
     creationDate: Date;
 }
 
+export interface SalesDetail {
+    saleId: number;
+    clientId: number;
+    clientName: string;
+    paymentTypeName: string;
+    periodName:string;
+    total: number;
+    creationDate: Date;
+}
+
 export interface SalesDetailProducts {
     productSaleId: number;
     saleId: number;

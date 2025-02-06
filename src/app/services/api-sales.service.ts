@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Sales, SalesDetailProducts, SalesDetailCredit } from '../models/sales';
+import { Sales, SalesDetail, SalesDetailProducts, SalesDetailCredit } from '../models/sales';
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -24,10 +24,10 @@ export class ApiSalesService {
     return this._http.get<Sales[]>(`${this.url}${_companyId}${companyId}`);
   }
 
-  getSalesDetail(companyId: number, saleId: number): Observable<Sales[]>{
+  getSalesDetail(companyId: number, saleId: number): Observable<SalesDetail[]>{
     const _companyId: string = 'SalesDetail?CompanyId=' + companyId.toString();
     const _saleId: string = '&SaleId=' + saleId.toString();
-    return this._http.get<Sales[]>(`${this.url}${_companyId}${_saleId}`);
+    return this._http.get<SalesDetail[]>(`${this.url}${_companyId}${_saleId}`);
   }
 
   getSalesDetailProducts(companyId: number, saleId: number): Observable<SalesDetailProducts[]>{
