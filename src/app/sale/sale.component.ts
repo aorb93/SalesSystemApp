@@ -15,11 +15,12 @@ import { ApiSaleService } from '../services/api-sale.service';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { DialogSaleComponent } from './dialog-sale/dialog-sale.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Select2Module, Select2Data, Select2SelectionOverride } from 'ng-select2-component';
+import { Select2Data, Select2DataModify } from 'ng-select2-component';
 import { ApiPaymentTypeService } from '../services/api-payment-type.service';
 import { PaymentType, Select2PaymentType } from '../models/paymentType';
 import { ApiPeriodService } from '../services/api-period.service';
 import { Period, Select2Period, Select2CantPeriod } from '../models/period';
+import $ from "jquery";
 
 @Component({
   selector: 'app-sale',
@@ -66,7 +67,7 @@ export class SaleComponent {
   public width: string = '500px';
 
   public ClientSelect2!: Select2Data;
-  public ProductSelect2!: Select2Data;
+  public ProductSelect2!: Select2DataModify;
   public PaymentType2!: Select2Data;
   public PeriodSelect2!: Select2Data;
   public CantPeriodSelect2!: Select2Data;
@@ -238,14 +239,6 @@ export class SaleComponent {
   selectProductOpt(event: any){
     this.disabledButtonAdd(false);
     this.selectProductId = event.value;
-
-    this.ProductSelect2.map((dato) =>{
-      if(dato.data === Number(this.selectProductId)){
-        console.log("w")
-      }
-      
-      return dato;
-    });
   }
 
   addProduct(){
@@ -260,8 +253,18 @@ export class SaleComponent {
           // this.table.renderRows();
           this.productSelect = '';
           this.getTotal();
+          // this.disabledOptionSelect();
           this.disabledButtonAdd(true);
         });
+      }
+    }
+  }
+
+  disabledOptionSelect(){
+    for(let i = 0; i < this.ProductSelect2.length; i++){
+      if(this.ProductSelect2[i].value === this.selectProductId){
+        this.ProductSelect2[i].disabled = true;
+        break;
       }
     }
   }
@@ -269,17 +272,23 @@ export class SaleComponent {
   addProductDuplicate(id: number){
     let add: boolean = false;
     if(this.addSelectProduct.length > 0){
-      this.addSelectProduct.map(function(p){
-        if(p.productId == id){
-          p.quantitySale++;
-          p.iconRemove = p.quantitySale > 1 ? 'remove' : 'delete'
-          p.iconColor = p.quantitySale > 1 ? 'text-warning' : 'text-danger'
-          add = false;
+      for(let i = 0; i < this.addSelectProduct.length; i++){
+        if(this.addSelectProduct[i].quantitySale < this.addSelectProduct[i].quantity){
+          if(this.addSelectProduct[i].productId == Number(id)){
+            this.addSelectProduct[i].quantitySale++;
+            this.addSelectProduct[i].iconRemove = this.addSelectProduct[i].quantitySale > 1 ? 'remove' : 'delete'
+            this.addSelectProduct[i].iconColor = this.addSelectProduct[i].quantitySale > 1 ? 'text-warning' : 'text-danger'
+            add = false;
+            break;
+          }
+          else {
+            add = true;
+          }
         }
         else{
-          add = true;
+          add = false;
         }
-      });
+      }
     }
     else{
       add = true;

@@ -20,7 +20,7 @@
                 <td scope="col" class="vertical-middle">{{ sale.clientName }}</td>
                 <td scope="col" class="vertical-middle">{{ sale.paymentTypeName }}</td>
                 <td scope="col" class="vertical-middle horizontal-middle">{{ sale.total | currency:'USD':'symbol' }}</td>
-                <td scope="col" class="vertical-middle horizontal-middle">{{ sale.creationDate | date : "dd/MM/YYYY HH:mm" }}</td>
+                <td scope="col" class="vertical-middle horizontal-middle">{{ sale.creationDate | date:'MMM dd, y':'': 'es-ES' | titlecase }}</td>
                 <td scope="col" class="vertical-middle horizontal-middle">
                     <button class="btn btn-outline-info" (click)="openDetail(sale.saleId)">
                         <fa-icon [icon]="faEye"></fa-icon>
