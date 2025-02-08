@@ -1,4 +1,3 @@
-
 <div class="container">
   <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6">
@@ -6,11 +5,11 @@
     </div>
   </div>
   
-  <div class="row column1 social_media_section">
+  <div class="row">
     @for (tile of tiles; track tile) {
       <div class="col-sm-6 col-md-6 col-lg-3" *ngIf="(tile.needAdmin && this.userSubject.value.infoUser.userTypeId === 2) || (!tile.needAdmin)">
         <a [routerLink]="[tile.routerLink]">
-          <div class="full socile_icons fb margin_bottom_30">
+          <div class="socile_icons fb margin_bottom_30">
               <!-- <div class="social_icon">
                 <i class="{{ tile.icon }}"></i>
               </div> -->

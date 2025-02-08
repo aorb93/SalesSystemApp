@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { faUsers, faHome, faChartBar, faArrowRightFromBracket, faBars, faSuitcase } from '@fortawesome/free-solid-svg-icons';
+import { faUsers, faHome, faChartBar, faArrowRightFromBracket, faBars, faSuitcase, faSliders } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +31,7 @@ export class AppComponent {
   public faArrowRightFromBracket = faArrowRightFromBracket;
   public faBars = faBars;
   public faSuitcase = faSuitcase;
+  public faSliders = faSliders;
 
   constructor(
     public apiAuthService: apiAuthService, 

@@ -11,6 +11,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { ClientComponent } from './client/client.component';
 import { BrandComponent } from './brand/brand.component';
 import { SaledetailComponent } from './saledetail/saledetail.component';
+import { CatalogsComponent } from './catalogs/catalogs.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'sale', component: SaleComponent, canActivate: [AuthGuard] },
   { path: 'sales', component: SalesComponent, canActivate: [AuthGuard] },
   { path: 'brand', component: BrandComponent, canActivate: [AuthGuard] },
-  { path: 'saledetail/:saleId', component: SaledetailComponent, canActivate: [AuthGuard] }
+  { path: 'saledetail/:saleId', component: SaledetailComponent, canActivate: [AuthGuard] },
+  { path: 'catalogs', component: CatalogsComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

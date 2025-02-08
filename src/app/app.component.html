@@ -32,6 +32,12 @@
                     <span>Marcas</span>
                 </span>
             </a>
+            <a mat-list-item  [routerLink]="['/catalogs']" (click)="toggleMenu(); clickButon('/catalogs')">
+                <span class="entry">
+                    <fa-icon [icon]="faSliders"></fa-icon>
+                    <span>Catálogos</span>
+                </span>
+            </a>
             <a mat-list-item  [routerLink]="['/statistics']" (click)="toggleMenu(); clickButon('/statistics')">
                 <span class="entry">
                     <fa-icon [icon]="faChartBar"></fa-icon>

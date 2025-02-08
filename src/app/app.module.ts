@@ -54,6 +54,7 @@ import { LOCALE_ID } from '@angular/core';
 import localeEs from '@angular/common/locales/es';
 import localeEn from '@angular/common/locales/en';
 import { registerLocaleData } from '@angular/common';
+import { CatalogsComponent } from './catalogs/catalogs.component';
 registerLocaleData(localeEs, 'es');
 registerLocaleData(localeEn, 'en');
 
@@ -76,7 +77,8 @@ registerLocaleData(localeEn, 'en');
     DialogClientComponent,
     BrandComponent,
     DialogBrandComponent,
-    SaledetailComponent
+    SaledetailComponent,
+    CatalogsComponent
   ],
   imports: [
     BrowserModule,
