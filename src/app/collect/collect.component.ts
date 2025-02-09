@@ -14,7 +14,7 @@ export class CollectComponent implements OnInit {
   
     constructor(private spinner: NgxSpinnerService){
       this.tiles = [
-        {routerLink: '/collectWeek', text: 'Cobros semanales', icon: faCalendarWeek, needAdmin: true, img: ''}
+        {routerLink: '/collectWeek', text: 'Cobranza semanal', icon: faCalendarWeek, needAdmin: true, img: ''}
       ];
     }
   
