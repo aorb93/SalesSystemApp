@@ -78,7 +78,7 @@ export class DialogProductComponent implements OnInit{
 
   ngOnInit(): void {
     this.getCategory();
-    this.getGender();
+    this.getGender(this.companyId);
   }
 
   close(){
@@ -91,8 +91,8 @@ export class DialogProductComponent implements OnInit{
     }
   }
 
-  getGender(){
-    this.apiGender.getGender().subscribe(
+  getGender(companyId: number){
+    this.apiGender.getGender(companyId).subscribe(
       response => {
         this.lstGender = response;
         this.getSelect2Gender(this.lstGender);

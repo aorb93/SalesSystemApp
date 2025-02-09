@@ -55,6 +55,9 @@ import localeEs from '@angular/common/locales/es';
 import localeEn from '@angular/common/locales/en';
 import { registerLocaleData } from '@angular/common';
 import { CatalogsComponent } from './catalogs/catalogs.component';
+import { GenderComponent } from './gender/gender.component';
+import { CollectComponent } from './collect/collect.component';
+import { CollectWeekComponent } from './collect-week/collect-week.component';
 registerLocaleData(localeEs, 'es');
 registerLocaleData(localeEn, 'en');
 
@@ -78,7 +81,10 @@ registerLocaleData(localeEn, 'en');
     BrandComponent,
     DialogBrandComponent,
     SaledetailComponent,
-    CatalogsComponent
+    CatalogsComponent,
+    GenderComponent,
+    CollectComponent,
+    CollectWeekComponent
   ],
   imports: [
     BrowserModule,

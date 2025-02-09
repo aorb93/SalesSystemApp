@@ -15,7 +15,7 @@ export class CatalogsComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService){
     this.tiles = [
-      {routerLink: '/category', text: 'Género', icon: faChildren, needAdmin: true, img: ''},
+      {routerLink: '/gender', text: 'Género', icon: faChildren, needAdmin: true, img: ''},
       {routerLink: '/category', text: 'Marcas', icon: faTags, needAdmin: true, img: ''},
       {routerLink: '/category', text: 'Categorías', icon: faList, needAdmin: true, img: ''},
       {routerLink: '/category', text: 'Sub-Categorías', icon: faListCheck, needAdmin: true, img: ''},
@@ -25,7 +25,6 @@ export class CatalogsComponent implements OnInit {
       {routerLink: '/category', text: 'Periodos de pago', icon: faMoneyCheckDollar, needAdmin: true, img: ''},
       {routerLink: '/category', text: 'Tipos de pago', icon: faCreditCard, needAdmin: true, img: ''},
     ];
-
   }
 
   ngOnInit(): void {

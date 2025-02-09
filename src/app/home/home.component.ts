@@ -4,6 +4,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { AppComponent } from '../app.component';
 import { NgxSpinnerService } from "ngx-spinner";
+import { faCartShopping, faBoxOpen, faCashRegister } from '@fortawesome/free-solid-svg-icons';
+import { faShopify} from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -26,10 +28,10 @@ export class HomeComponent {
     this.companyId = this.userSubject.value.infoUser.companyId;
 
     this.tiles = [
-      {routerLink: '/sale', text: 'Venta', cols: 3, rows: 1, color: 'lightblue', needAdmin: false, img: 'img/cart.png'},
-      {routerLink: '/product', text: 'Productos', cols: 1, rows: 2, color: 'lightgreen', needAdmin: true, img: 'img/products.png'},
-      {routerLink: '/sales', text: 'Ventas', cols: 1, rows: 1, color: 'lightpink', needAdmin: true, img: 'img/sales.png'},
-      {routerLink: '/category', text: 'Categorías', cols: 2, rows: 1, color: '#DDBDF1', needAdmin: true, img: 'img/about.png'},
+      {routerLink: '/sale', text: 'Venta', icon: faCartShopping, needAdmin: true, img: ''},
+      {routerLink: '/product', text: 'Productos', icon: faBoxOpen, needAdmin: true, img: ''},
+      {routerLink: '/sales', text: 'Ventas', icon: faShopify, needAdmin: true, img: ''},
+      {routerLink: '/collect', text: 'Cobro', icon: faCashRegister, needAdmin: true, img: ''},
     ];
 
     this.spinner.hide();
