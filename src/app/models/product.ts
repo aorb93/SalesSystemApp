@@ -3,6 +3,7 @@ export interface Product{
     productName: string;
     quantity: number;
     cost: number;
+    iva: number;
     price: number;
     brandId: number;
     genderId: number;
@@ -32,6 +33,7 @@ export interface insProduct {
     quantity: number;
     cost: number;
     price: number;
+    // iva: number;
     brandId: number;
     genderId: number;
     seasonId: number;

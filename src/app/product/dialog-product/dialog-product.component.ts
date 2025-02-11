@@ -29,6 +29,7 @@ export class DialogProductComponent implements OnInit{
   public productQuantity!: number;
   public productCost!: number;
   public productPrice!: number;
+  public productIVA!: number;
   public response!: Response[];
   public lstCategory!: Response[];
   public lstSubCategory!: SubCategory[];
@@ -73,6 +74,7 @@ export class DialogProductComponent implements OnInit{
       this.productQuantity = this.product.quantity;
       this.productCost = this.product.cost;
       this.productPrice = this.product.price;
+      this.productIVA = this.calculateIVA(this.product.price);
     }
   }
 
@@ -205,6 +207,7 @@ export class DialogProductComponent implements OnInit{
       quantity: this.productQuantity,
       cost: this.productCost,
       price: this.productPrice,
+      // iva: this.productIVA,
       brandId: 1,
       genderId: Number(this.selectGenderId),
       seasonId: 1,
@@ -237,6 +240,7 @@ export class DialogProductComponent implements OnInit{
       quantity: this.productQuantity,
       cost: this.productCost,
       price: this.productPrice,
+      // iva: this.productIVA,
       brandId: 1,
       genderId: Number(this.selectGenderId),
       seasonId: 1,
@@ -258,5 +262,17 @@ export class DialogProductComponent implements OnInit{
         });
       }
     });
+  }
+
+  calculateIVAEvent(event: KeyboardEvent){
+    let productIVA = Number(event) - (Number(event) / 1.16);
+    productIVA = (Math.round(productIVA * 100) / 100);
+    this.productIVA = Number(productIVA.toFixed(2));
+  }
+
+  calculateIVA(price: number){
+    let productIVA = price - (price / 1.16);
+    productIVA = (Math.round(productIVA * 100) / 100);
+    return productIVA = Number(productIVA.toFixed(2));
   }
 }
