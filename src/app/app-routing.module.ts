@@ -15,6 +15,7 @@ import { CatalogsComponent } from './catalogs/catalogs.component';
 import { GenderComponent } from './gender/gender.component';
 import { CollectComponent } from './collect/collect.component';
 import { CollectWeekComponent } from './collect-week/collect-week.component';
+import { CollectNextThreeDaysComponent } from './collect-next-three-days/collect-next-three-days.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -31,7 +32,8 @@ const routes: Routes = [
   { path: 'catalogs', component: CatalogsComponent, canActivate: [AuthGuard] },
   { path: 'gender', component: GenderComponent, canActivate: [AuthGuard] },
   { path: 'collect', component: CollectComponent, canActivate: [AuthGuard] },
-  { path: 'collectWeek', component: CollectWeekComponent, canActivate: [AuthGuard] }
+  { path: 'collectWeek', component: CollectWeekComponent, canActivate: [AuthGuard] },
+  { path: 'collectNextThreeDays', component: CollectNextThreeDaysComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

@@ -58,6 +58,7 @@ import { CatalogsComponent } from './catalogs/catalogs.component';
 import { GenderComponent } from './gender/gender.component';
 import { CollectComponent } from './collect/collect.component';
 import { CollectWeekComponent } from './collect-week/collect-week.component';
+import { CollectNextThreeDaysComponent } from './collect-next-three-days/collect-next-three-days.component';
 registerLocaleData(localeEs, 'es');
 registerLocaleData(localeEn, 'en');
 
@@ -84,7 +85,8 @@ registerLocaleData(localeEn, 'en');
     CatalogsComponent,
     GenderComponent,
     CollectComponent,
-    CollectWeekComponent
+    CollectWeekComponent,
+    CollectNextThreeDaysComponent
   ],
   imports: [
     BrowserModule,

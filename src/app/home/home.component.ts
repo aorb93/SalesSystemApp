@@ -31,7 +31,7 @@ export class HomeComponent {
       {routerLink: '/sale', text: 'Venta', icon: faCartShopping, needAdmin: true, img: ''},
       {routerLink: '/product', text: 'Productos', icon: faBoxOpen, needAdmin: true, img: ''},
       {routerLink: '/sales', text: 'Ventas', icon: faShopify, needAdmin: true, img: ''},
-      {routerLink: '/collect', text: 'Cobro', icon: faCashRegister, needAdmin: true, img: ''},
+      {routerLink: '/collect', text: 'Cobranza', icon: faCashRegister, needAdmin: true, img: ''},
     ];
 
     this.spinner.hide();

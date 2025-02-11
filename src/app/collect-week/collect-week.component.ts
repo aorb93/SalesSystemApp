@@ -30,10 +30,10 @@ export class CollectWeekComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getGender(this.companyId);
+    this.getCollectWeek(this.companyId);
   }
 
-  getGender(companyId: number){
+  getCollectWeek(companyId: number){
     this.apiCollects.getCollectWeek(companyId).subscribe(response => {
       this.lstCollectWeek = response;
     });

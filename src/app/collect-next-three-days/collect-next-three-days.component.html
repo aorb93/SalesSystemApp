@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <h2>Cobranza 3 días</h2>
+        </div>
+    </div>
+    <div class="row">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink='/home'>Inicio</a></li>
+            <li class="breadcrumb-item"><a routerLink='/collect'>Cobranza</a></li>
+            <li class="breadcrumb-item active">Cobranza 3 días</li>
+        </ol>
+    </div>
+
+    <table class="table table-striped mat-elevation-z4">
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col" class="horizontal-middle">Vencimiento</th>
+                <th scope="col" class="horizontal-middle">Pago</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let CollectThreeDays of lstCollectNextThreeDays  | paginate: { itemsPerPage: 10, currentPage: collectNextThreeDays }" >
+                <td scope="col" class="vertical-middle">{{ CollectThreeDays.clientName }}</td>
+                <td scope="col" class="vertical-middle horizontal-middle"><span class="{{CollectThreeDays.colorDay}}">{{ CollectThreeDays.nextPayDay | date:'MMM dd, y':'': 'es-ES' | titlecase  }}</span></td>
+                <td scope="col" class="vertical-middle horizontal-middle">{{ CollectThreeDays.partialPaid | currency:'USD':'symbol' }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- <pagination-controls (pageChange)="collectNextThreeDays = $event" class="text-center"></pagination-controls> -->
+</div>

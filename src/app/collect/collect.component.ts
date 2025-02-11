@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Collects } from '../models/home';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { faCalendarWeek } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarWeek, faCalendarDay } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-collect',
@@ -14,7 +14,8 @@ export class CollectComponent implements OnInit {
   
     constructor(private spinner: NgxSpinnerService){
       this.tiles = [
-        {routerLink: '/collectWeek', text: 'Cobranza semanal', icon: faCalendarWeek, needAdmin: true, img: ''}
+        { routerLink: '/collectWeek', text: 'Cobranza semanal', icon: faCalendarWeek, needAdmin: true, img: '' },
+        { routerLink: '/collectNextThreeDays', text: 'Cobranza 3 días', icon: faCalendarDay, needAdmin: true, img: '' }
       ];
     }
   

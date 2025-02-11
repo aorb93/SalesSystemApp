@@ -4,3 +4,12 @@ export interface CollectWeek{
 	clientName: string;
 	sumPartialPaid: number;
 }
+
+export interface CollectNextThreeDays{
+	saleId: number;
+	clientId: number;
+	clientName: string;
+	nextPayDay: Date;
+	partialPaid: number;
+	colorDay: string;
+}
