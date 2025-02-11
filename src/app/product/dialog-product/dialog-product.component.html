@@ -26,7 +26,10 @@
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <label for="productQuantity" class="form-label">Cantidad:</label>
-                <input type="number" class="form-control form-control-sm" id="productQuantity" placeholder="Piezas existentes" [(ngModel)]="productQuantity">
+                <div class="input-group">
+                    <input type="number" class="form-control form-control-sm" id="productQuantity" placeholder="Piezas existentes" [(ngModel)]="productQuantity">
+                    <span class="input-group-text">pzs</span>
+                </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <label for="productCost" class="form-label">Costo:</label>
