@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12">
-            <h2>Cobranza 3 días</h2>
+            <h4>Cobranza 3 días</h4>
         </div>
     </div>
     <div class="row">
@@ -24,7 +24,7 @@
             <tr *ngFor="let CollectThreeDays of lstCollectNextThreeDays  | paginate: { itemsPerPage: 10, currentPage: collectNextThreeDays }" >
                 <td scope="col" class="vertical-middle">{{ CollectThreeDays.clientName }}</td>
                 <td scope="col" class="vertical-middle horizontal-middle"><span class="{{CollectThreeDays.colorDay}}">{{ CollectThreeDays.nextPayDay | date:'MMM dd, y':'': 'es-ES' | titlecase  }}</span></td>
-                <td scope="col" class="vertical-middle horizontal-middle">{{ CollectThreeDays.partialPaid | currency:'USD':'symbol' }}</td>
+                <td scope="col" class="vertical-middle horizontal-middle"><span class="{{CollectThreeDays.colorDay}}">{{ CollectThreeDays.partialPaid | currency:'USD':'symbol' }}</span></td>
             </tr>
         </tbody>
     </table>
