@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ApiProductService } from "../../services/api-product.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Product, insProduct } from "../../models/product";
-import { Select2Category } from '../../models/category';
+import { Category, Select2Category } from '../../models/category';
 import { SubCategory, Select2SubCategory } from '../../models/subCategory';
 import { Response } from '../../models/response';
 import { ApiCategoryService } from '../../services/api-category.service';
@@ -31,7 +31,7 @@ export class DialogProductComponent implements OnInit{
   public productPrice!: number;
   public productIVA!: number;
   public response!: Response[];
-  public lstCategory!: Response[];
+  public lstCategory!: Category[];
   public lstSubCategory!: SubCategory[];
   public lstGender!: Gender[];
 
@@ -79,7 +79,7 @@ export class DialogProductComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.getCategory();
+    this.getCategory(this.companyId);
     this.getGender(this.companyId);
   }
 
@@ -128,14 +128,14 @@ export class DialogProductComponent implements OnInit{
     this.getSubCategory(Number(this.selectCategoryId), Number(this.selectGenderId));
   }
 
-  getCategory(){
-    this.apiCategory.getSelectCategory().subscribe(response => {
+  getCategory(companyId: number){
+    this.apiCategory.getSelectCategory(companyId).subscribe(response => {
       this.lstCategory = response;
       this.getSelect2Category(this.lstCategory);
     });
   }
 
-  getSelect2Category(selectClient: Response[]){
+  getSelect2Category(selectClient: Category[]){
     let tmpData: Select2Category[] = [];
 
     for(let i = 0; i < selectClient.length; i++){

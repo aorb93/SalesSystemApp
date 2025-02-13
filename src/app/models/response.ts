@@ -5,6 +5,7 @@ export interface Response {
     enable: boolean;
     modifyDate: string;
     isSuccess: boolean;
+    companyId: number;
     
     userId: number;
     token: string;

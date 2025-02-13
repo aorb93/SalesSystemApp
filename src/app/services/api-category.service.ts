@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Response } from '../models/response';
 import { Category } from '../models/category';
 
 const httpOption = {
@@ -20,24 +19,26 @@ export class ApiCategoryService {
     private _http: HttpClient
   ) { }
 
-  getCategories(): Observable<Response[]>{
-    return this._http.get<Response[]>(this.url);
+  getCategories(companyId: number): Observable<Category[]>{
+    const _companyId: string = '/CategoryList?CompanyId=';
+    return this._http.get<Category[]>(`${this.url}${_companyId}${companyId}`);
   }
 
-  postCategories(category: Category): Observable<Response[]>{
-    return this._http.post<Response[]>(this.url, category, httpOption);
+  postCategories(category: Category): Observable<Category[]>{
+    return this._http.post<Category[]>(this.url + '/Register', category, httpOption);
   }
 
-  editCategories(category: Category): Observable<Response[]>{
-    return this._http.put<Response[]>(this.url, category, httpOption);
+  editCategories(category: Category): Observable<Category[]>{
+    return this._http.put<Category[]>(this.url + '/Edit', category, httpOption);
   }
 
-  deleteCategories(categoryId: number): Observable<Response[]>{
-    return this._http.delete<Response[]>(`${this.url}/${categoryId}`);
+  deleteCategories(categoryId: number): Observable<Category[]>{
+    return this._http.delete<Category[]>(`${this.url + '/Delete'}/${categoryId}`);
   }
 
   // Dialog Product
-  getSelectCategory(): Observable<Response[]>{
-    return this._http.get<Response[]>(this.url);
+  getSelectCategory(companyId: number): Observable<Category[]>{
+    const _companyId: string = '/CategoryList?CompanyId=';
+    return this._http.get<Category[]>(`${this.url}${_companyId}${companyId}`);
   }
 }

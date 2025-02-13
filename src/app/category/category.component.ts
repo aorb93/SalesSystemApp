@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiCategoryService } from '../services/api-category.service';
-import { Response } from '../models/response';
 import { dialogCategoryComponent } from './dialog/dialogCategory.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Category } from '../models/category';
 import { DialogDeleteComponente } from '../common/delete/dialogdelete.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { faEdit, faTrash, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
+import { User } from '../models/user';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-category',
@@ -14,7 +15,11 @@ import { faEdit, faTrash, faSquareCheck } from '@fortawesome/free-solid-svg-icon
   styleUrl: './category.component.scss'
 })
 export class CategoryComponent implements OnInit {
-  public lstCategory!: Response[];
+  
+  public userSubject!: BehaviorSubject<User>;
+  public companyId!: number;
+
+  public lstCategory!: Category[];
   public columns: string[] = ['categoryId', 'categoryName', 'enable', 'actions']
   readonly width: string = '300px';
   public faEdit = faEdit;
@@ -28,7 +33,8 @@ export class CategoryComponent implements OnInit {
     public dialog: MatDialog,
     public snackBar: MatSnackBar
   ) {
-    
+    this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('User')!));
+    this.companyId = this.userSubject.value.infoUser.companyId;
   }
 
   ngOnInit(): void {
@@ -36,7 +42,7 @@ export class CategoryComponent implements OnInit {
   }
 
   getCategory(){
-    this.apiCategory.getCategories().subscribe(response => {
+    this.apiCategory.getCategories(this.companyId).subscribe(response => {
       this.lstCategory = response;
     });
   }
