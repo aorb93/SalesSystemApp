@@ -21,7 +21,8 @@ export class CategoryComponent implements OnInit {
 
   public lstCategory!: Category[];
   public columns: string[] = ['categoryId', 'categoryName', 'enable', 'actions']
-  readonly width: string = '300px';
+  public width: string = '500px';
+  public height: string = '500px';
   public faEdit = faEdit;
   public faTrash = faTrash;
   public faSquareCheck = faSquareCheck
@@ -48,8 +49,13 @@ export class CategoryComponent implements OnInit {
   }
 
   openAdd(){
+    this.width = (window.innerWidth * .85).toString() + 'px';
+    this.height = (window.innerHeight * .40).toString() + 'px';
+
     const dialogRef = this.dialog.open(dialogCategoryComponent, {
-      width: this.width
+      width: this.width,
+      height: this.height,
+      autoFocus: false
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -58,8 +64,13 @@ export class CategoryComponent implements OnInit {
   }
 
   openEdit(category: Category){
+    this.width = (window.innerWidth * .85).toString() + 'px';
+    this.height = (window.innerHeight * .40).toString() + 'px';
+
     const dialogRef = this.dialog.open(dialogCategoryComponent, {
       width: this.width,
+      height: this.height,
+      autoFocus: false,
       data: category
     });
 
@@ -69,8 +80,13 @@ export class CategoryComponent implements OnInit {
   }
 
   delete(category: Category){
+    this.width = (window.innerWidth * .85).toString() + 'px';
+    this.height = (window.innerHeight * .25).toString() + 'px';
+    
     const dialogRef = this.dialog.open(DialogDeleteComponente, {
-      width: this.width
+      width: this.width,
+      height: this.height,
+      autoFocus: false
     });
 
     dialogRef.afterClosed().subscribe(result => {
