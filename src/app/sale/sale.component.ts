@@ -52,6 +52,7 @@ export class SaleComponent {
   public addSelectProduct: Product[] = [];
   public columns: string[] = ['productId', 'productName', 'price', 'quantity'];
   public total: number = 0;
+  public totalPerioricity: number = 0;
   public showTable!: boolean;
 
   public clientSelect!: string;
@@ -78,6 +79,7 @@ export class SaleComponent {
   public periodicity: boolean = false;
   public cantPeriodicity: boolean = false;
   public nameCantPeriodicity!: string;
+  public nameCantPeriodicity2!: string;
 
   // public prductsPage: number = 1
   
@@ -132,16 +134,31 @@ export class SaleComponent {
   selectPeriodOpt(event: any){
     this.selectPeriodId = Number(event.value);
 
-    if(this.selectPeriodId === 1)
+    if(this.selectPeriodId === 1){
       this.nameCantPeriodicity = 'Semanas:';
-    else if (this.selectPeriodId === 2)
+      this.nameCantPeriodicity2 = 'Semanal:';
+    }
+    else if (this.selectPeriodId === 2){
       this.nameCantPeriodicity = 'Quincenas:';
-    else if (this.selectPeriodId === 3)
+      this.nameCantPeriodicity2 = 'Quincenal:';
+    }
+    else if (this.selectPeriodId === 3){
       this.nameCantPeriodicity = 'Meses:';
-    else
+      this.nameCantPeriodicity2 = 'Mensual:';
+    }
+    else{
       this.nameCantPeriodicity = '';
+      this.nameCantPeriodicity2 = '';
+    }
 
     this.getCantPeriod2();
+  }
+
+  
+  getTotalPerioricity(cantPeriodId: number){
+    if(this.cantPeriodicity){
+      this.totalPerioricity = this.total / cantPeriodId;
+    }
   }
 
   getCantPeriod2(){
@@ -164,6 +181,7 @@ export class SaleComponent {
 
   selectCantPeriodOpt(event: any){
     this.selectCantPeriodId = Number(event.value);
+    this.getTotalPerioricity(this.selectCantPeriodId);
   }
 
   getPaymentType(clientId: number) {
