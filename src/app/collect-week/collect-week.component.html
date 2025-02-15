@@ -12,7 +12,7 @@
         </ol>
     </div>
 
-    <table class="table table-striped mat-elevation-z4">
+    <table class="table table-striped">
         <thead class="table-primary">
             <tr>
                 <th scope="col">Nombre</th>
@@ -21,12 +21,39 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let CollectWeek of lstCollectWeek  | paginate: { itemsPerPage: 10, currentPage: collectWeek }">
-                <td scope="col" class="vertical-middle">{{ CollectWeek.clientName }}</td>
-                <td scope="col" class="vertical-middle horizontal-middle">{{ CollectWeek.credits }}</td>
-                <td scope="col" class="vertical-middle horizontal-middle">{{ CollectWeek.sumPartialPaid | currency:'USD':'symbol' }}</td>
-            </tr>
+            <!-- <tr *ngFor="let CollectWeek of lstCollectWeek  | paginate: { itemsPerPage: 10, currentPage: collectWeek }"  -->
+             @for (CollectWeek of lstCollectWeek; track $index) {
+                <tr [id]="'heading' + CollectWeek.clientId" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + CollectWeek.clientId" aria-expanded="false" [attr.aria-controls]="'collapse' + CollectWeek.clientId">
+                    <td scope="col" class="vertical-middle">{{ CollectWeek.clientName }}</td>
+                    <td scope="col" class="vertical-middle horizontal-middle">{{ CollectWeek.credits }}</td>
+                    <td scope="col" class="vertical-middle horizontal-middle">{{ CollectWeek.sumPartialPaid | currency:'USD':'symbol' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3" [id]="'collapse' + CollectWeek.clientId" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading'+CollectWeek.clientId" data-bs-parent="#accordionExample">
+                        <!-- <div > -->
+                            <div class="accordion-body">
+                              <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            </div>
+                          <!-- </div> -->
+                    </td>
+                </tr>
+                <tr></tr>
+            }
         </tbody>
     </table>
     <pagination-controls (pageChange)="collectWeek = $event" class="text-center"></pagination-controls>
 </div>
+<!-- <div class="accordion" id="accordionExample"> -->
+    <!-- <div class="accordion-item"> -->
+      <!-- <h2 class="accordion-header" id="headingOne"> -->
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Accordion Item #1
+        </button>
+      <!-- </h2> -->
+      <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+        </div>
+      </div>
+    <!-- </div> -->
+  <!-- </div> -->
