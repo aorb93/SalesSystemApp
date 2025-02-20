@@ -106,7 +106,9 @@ export class ClientComponent implements OnInit {
       companyId: this.companyId,
       enable: false,
       phone: client.phone,
-      address: client.address
+      address: client.address,
+      interestRate: client.interestRate,
+      specialClient: client.specialClient
     }
 
     dialogRef.afterClosed().subscribe(result => {

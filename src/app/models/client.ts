@@ -9,6 +9,8 @@ export interface Client{
     modifyDate: Date;
     phone: string;
     address: string;
+    interestRate: number;
+    specialClient: boolean;
 }
 
 export interface Select2Client{ 
@@ -25,4 +27,6 @@ export interface insClient {
     enable: boolean;
     phone: string;
     address: string;
+    interestRate: number;
+    specialClient: boolean;
 }

@@ -22,6 +22,8 @@ export class DialogClientComponent implements OnInit{
   public credit: boolean = false;
   public phone!: string;
   public address!: string;
+  public interestRate!: number;
+  public specialClient!: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<DialogClientComponent>,
@@ -63,7 +65,9 @@ export class DialogClientComponent implements OnInit{
       companyId: this.companyId,
       enable: true,
       phone: this.phone != null ? this.phone : '',
-      address: this.address != null ? this.address : ''
+      address: this.address != null ? this.address : '',
+      interestRate: this.interestRate != null ? this.interestRate : 0,
+      specialClient: this.specialClient != null ? this.specialClient : false
     }
 
     this.apiClient.postClient(tmpClient).subscribe(response => {
@@ -90,7 +94,9 @@ export class DialogClientComponent implements OnInit{
       companyId: this.companyId,
       enable: true,
       phone: this.phone != null ? this.phone : '',
-      address: this.address != null ? this.address : ''
+      address: this.address != null ? this.address : '',
+      interestRate: this.interestRate != null ? this.interestRate : 0,
+      specialClient: this.specialClient != null ? this.specialClient : false
     }
 
     this.apiClient.putClient(tmpClient).subscribe(response => {
