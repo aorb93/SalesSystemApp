@@ -91,7 +91,7 @@ export class CategoryComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        this.apiCategory.deleteCategories(category.categoryId).subscribe(response => {
+        this.apiCategory.deleteCategories(category).subscribe(response => {
           if(response){
             this.snackBar.open('Categoria eliminada con exito', '', {
               duration: 2000

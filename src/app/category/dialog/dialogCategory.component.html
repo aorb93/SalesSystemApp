@@ -1,11 +1,20 @@
 <h1 mat-dialog-title> {{ category != null ? 'Editar Categoría' : 'Nueva Categoría' }} </h1>
 <div mat-dialog-content>
-    <mat-form-field>
-        <mat-label>Nombre: </mat-label>
-        <input matInput [(ngModel)]="nameCategory">
-    </mat-form-field>
+    <hr>
+    <fieldset>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <label for="nameCategory" class="form-label">Nombre:</label>
+                <input type="text" class="form-control form-control-sm" id="nameCategory" placeholder="Nombre marca" [(ngModel)]="nameCategory">
+            </div>
+        </div>
+    </fieldset>
 </div>
 <div mat-dialog-actions>
-    <button mat-raised-button (click)="close()">Cancelar</button>
-    <button mat-raised-button color="primary" (click)="category != null ? editCategory() : addCategory()">Guardar</button>
+    <div class="btn-group me-2">
+        <button class="btn btn-outline-dark" (click)="close()">Cancelar</button>
+    </div>
+    <div class="btn-group me-2">
+        <button class="btn btn-outline-info" color="primary" (click)="category != null ? editCategory() : addCategory()">Guardar</button>
+    </div>
 </div>

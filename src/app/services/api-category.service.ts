@@ -20,25 +20,25 @@ export class ApiCategoryService {
   ) { }
 
   getCategories(companyId: number): Observable<Category[]>{
-    const _companyId: string = '/CategoryList?CompanyId=';
+    const _companyId: string = '/List?CompanyId=';
     return this._http.get<Category[]>(`${this.url}${_companyId}${companyId}`);
   }
 
   postCategories(category: Category): Observable<Category[]>{
-    return this._http.post<Category[]>(this.url + '/Register', category, httpOption);
+    return this._http.post<Category[]>(this.url + '/InsCategory', category, httpOption);
   }
 
   editCategories(category: Category): Observable<Category[]>{
-    return this._http.put<Category[]>(this.url + '/Edit', category, httpOption);
+    return this._http.put<Category[]>(this.url + '/UpdCategory', category, httpOption);
   }
 
-  deleteCategories(categoryId: number): Observable<Category[]>{
-    return this._http.delete<Category[]>(`${this.url + '/Delete'}/${categoryId}`);
+  deleteCategories(category: Category): Observable<Category[]>{
+    return this._http.put<Category[]>(this.url + '/DelCategory', category, httpOption);
   }
 
   // Dialog Product
   getSelectCategory(companyId: number): Observable<Category[]>{
-    const _companyId: string = '/CategoryList?CompanyId=';
+    const _companyId: string = '/List?CompanyId=';
     return this._http.get<Category[]>(`${this.url}${_companyId}${companyId}`);
   }
 }

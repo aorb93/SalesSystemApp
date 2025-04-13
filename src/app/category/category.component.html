@@ -19,18 +19,12 @@
         <thead class="table-primary">
             <tr>
                 <th scope="col">Nombre</th>
-                <th scope="col" class="horizontal-middle">Activo</th>
                 <th scope="col" class="horizontal-middle">Acciones</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let category of lstCategory  | paginate: { itemsPerPage: 10, currentPage: categories }">
                 <td scope="col" class="vertical-middle">{{ category.categoryName }}</td>
-                <td scope="col" class="vertical-middle horizontal-middle">
-                    <button class="btn btn-outline-transparent disabled disabled2">
-                        <fa-icon class="text-success font-icon" [icon]="faSquareCheck"></fa-icon>
-                    </button>
-                </td>
                 <td scope="col" class="vertical-middle horizontal-middle">
                     <div class="btn-group me-2">
                         <button class="btn btn-outline-info" (click)="openEdit(category)"><fa-icon [icon]="faEdit"></fa-icon></button>
