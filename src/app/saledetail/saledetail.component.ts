@@ -64,6 +64,17 @@ export class SaledetailComponent implements OnInit {
   getSalesDetailCredit(companyId: number, saleId: number){
     this.apiSales.getSalesDetailCredit(companyId, saleId).subscribe(sales => {
       this.lstSalesDetailCredit = sales;
+      for(let i = 0; i < this.lstSalesDetailCredit.length; i++){
+        if(this.lstSalesDetailCredit[i].status == 'Vencido'){
+          this.lstSalesDetailCredit[i].colorStatus = 'vertical-middle horizontal-middle text-danger';
+        }
+        else if (this.lstSalesDetailCredit[i].status == 'Vigente'){
+          this.lstSalesDetailCredit[i].colorStatus = 'vertical-middle horizontal-middle text-success';
+        }
+        else if(this.lstSalesDetailCredit[i].status == 'Pagado'){
+          this.lstSalesDetailCredit[i].colorStatus = 'vertical-middle horizontal-middle text-info';
+        }
+      }
       this.showCredit = this.lstSalesDetailCredit.length > 0 ? true : false;
       this.loadSalesDetailCredit = true;
       this.loaDone();

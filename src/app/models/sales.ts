@@ -36,4 +36,6 @@ export interface SalesDetailCredit {
     nextPayDay: Date;
     partialPaid: number;
     paid: boolean;
+    status: string;
+    colorStatus?: string;
 }
