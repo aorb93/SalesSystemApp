@@ -59,6 +59,7 @@ import { GenderComponent } from './gender/gender.component';
 import { CollectComponent } from './collect/collect.component';
 import { CollectWeekComponent } from './collect-week/collect-week.component';
 import { CollectNextThreeDaysComponent } from './collect-next-three-days/collect-next-three-days.component';
+import { DialogGenderComponent } from './gender/dialog-gender/dialog-gender.component';
 registerLocaleData(localeEs, 'es');
 registerLocaleData(localeEn, 'en');
 
@@ -86,7 +87,8 @@ registerLocaleData(localeEn, 'en');
     GenderComponent,
     CollectComponent,
     CollectWeekComponent,
-    CollectNextThreeDaysComponent
+    CollectNextThreeDaysComponent,
+    DialogGenderComponent
   ],
   imports: [
     BrowserModule,
