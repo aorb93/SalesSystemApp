@@ -26,6 +26,8 @@ import { ApiBrandService } from "../../services/api-brand.service";
   styleUrl: './dialog-product.component.scss'
 })
 export class DialogProductComponent implements OnInit{
+
+  // #region Variables
   public userSubject!: BehaviorSubject<User>;
   public companyId!: number;
 
@@ -62,6 +64,7 @@ export class DialogProductComponent implements OnInit{
   public lstBrand!: Brand[];
   public BrandSelect2!: Select2Data;
   public selectBrandId: string = '0';
+  // #endregion
 
   constructor(
       public dialogRef: MatDialogRef<DialogProductComponent>,
@@ -111,6 +114,7 @@ export class DialogProductComponent implements OnInit{
     }
   }
 
+  // #region SelectGender
   getGender(companyId: number){
     this.apiGender.getGender(companyId).subscribe(
       response => {
@@ -145,7 +149,9 @@ export class DialogProductComponent implements OnInit{
     this.selectGenderId = event.value;
     this.getSubCategory(Number(this.selectCategoryId), Number(this.selectGenderId));
   }
+  // #endregion
 
+  // #region SelectCategory
   getCategory(companyId: number){
     this.apiCategory.getSelectCategory(companyId).subscribe(response => {
       this.lstCategory = response;
@@ -178,7 +184,9 @@ export class DialogProductComponent implements OnInit{
     this.selectCategoryId = event.value;
     this.getSubCategory(Number(this.selectCategoryId), Number(this.selectGenderId));
   }
+  // #endregion
 
+  // #region SelectSubCategory
   async getSubCategory(selectCategoryId: number, selectGenderId: number){
     await this.apiSubCategory.getSubCategories(selectCategoryId, selectGenderId).subscribe(response => {
       this.lstSubCategory = response;
@@ -215,7 +223,93 @@ export class DialogProductComponent implements OnInit{
   selectSubCategoryOpt(event: any){
     this.selectSubCategoryId = event.value;
   }
+  // #endregion
 
+  // #region SelectSize
+  getSize(companyId: number){
+    this.apiSize.getSizes(companyId).subscribe(
+      response => {
+        this.lstSize = response;
+        this.getSelect2Size(this.lstSize);
+      }
+    );
+  }
+
+  getSelect2Size(selectSize: Size[]){
+    let tmpData: Select2Size[] = [];
+
+    for(let i = 0; i < selectSize.length; i++){
+      let tmpData2 = {
+        value: selectSize[i].sizeId.toString(),
+        label: selectSize[i].sizeName,
+        disabled: false
+      };
+      
+      tmpData.push(tmpData2);
+    }
+
+    this.SizeSelect2 = JSON.parse(JSON.stringify(tmpData));
+    if(this.product !== null){
+      this.selectSizeId = this.product.sizeId.toString();
+      this.loadSize = true;
+      this.loaDone();
+    }
+  }
+
+  selectSizeOpt(event: any){
+    this.selectSizeId = event.value;
+    // this.getSubCategory(Number(this.selectCategoryId), Number(this.selectGenderId));
+  }
+  // #endregion
+
+  // #region SelectBrand
+  getBrand(companyId: number){
+    this.apiBrand.getBrands(companyId).subscribe(
+      response => {
+        this.lstBrand = response;
+        this.getSelect2Brand(this.lstBrand);
+      }
+    );
+  }
+
+  getSelect2Brand(selectBrand: Brand[]){
+    let tmpData: Select2Brand[] = [];
+
+    for(let i = 0; i < selectBrand.length; i++){
+      let tmpData2 = {
+        value: selectBrand[i].brandId.toString(),
+        label: selectBrand[i].brandName,
+        disabled: false
+      };
+      
+      tmpData.push(tmpData2);
+    }
+
+    this.BrandSelect2 = JSON.parse(JSON.stringify(tmpData));
+    if(this.product !== null){
+      this.selectBrandId = this.product.brandId.toString();
+      this.loadBrand = true;
+      this.loaDone();
+    }
+  }
+
+  selectBrandOpt(event: any){
+    this.selectBrandId = event.value;
+  }
+  // #endregion
+
+  calculateIVAEvent(event: KeyboardEvent){
+    let productIVA = Number(event) - (Number(event) / 1.16);
+    productIVA = (Math.round(productIVA * 100) / 100);
+    this.productIVA = Number(productIVA.toFixed(2));
+  }
+
+  calculateIVA(price: number){
+    let productIVA = price - (price / 1.16);
+    productIVA = (Math.round(productIVA * 100) / 100);
+    return productIVA = Number(productIVA.toFixed(2));
+  }
+  
   addProduct(){
     this.spinner.show();
 
@@ -280,86 +374,5 @@ export class DialogProductComponent implements OnInit{
         });
       }
     });
-  }
-
-  calculateIVAEvent(event: KeyboardEvent){
-    let productIVA = Number(event) - (Number(event) / 1.16);
-    productIVA = (Math.round(productIVA * 100) / 100);
-    this.productIVA = Number(productIVA.toFixed(2));
-  }
-
-  calculateIVA(price: number){
-    let productIVA = price - (price / 1.16);
-    productIVA = (Math.round(productIVA * 100) / 100);
-    return productIVA = Number(productIVA.toFixed(2));
-  }
-
-  getSize(companyId: number){
-    this.apiSize.getSizes(companyId).subscribe(
-      response => {
-        this.lstSize = response;
-        this.getSelect2Size(this.lstSize);
-      }
-    );
-  }
-
-  getSelect2Size(selectSize: Size[]){
-    let tmpData: Select2Size[] = [];
-
-    for(let i = 0; i < selectSize.length; i++){
-      let tmpData2 = {
-        value: selectSize[i].sizeId.toString(),
-        label: selectSize[i].sizeName,
-        disabled: false
-      };
-      
-      tmpData.push(tmpData2);
-    }
-
-    this.SizeSelect2 = JSON.parse(JSON.stringify(tmpData));
-    if(this.product !== null){
-      this.selectSizeId = this.product.sizeId.toString();
-      this.loadSize = true;
-      this.loaDone();
-    }
-  }
-
-  selectSizeOpt(event: any){
-    this.selectSizeId = event.value;
-    // this.getSubCategory(Number(this.selectCategoryId), Number(this.selectGenderId));
-  }
-
-  getBrand(companyId: number){
-    this.apiBrand.getBrands(companyId).subscribe(
-      response => {
-        this.lstBrand = response;
-        this.getSelect2Brand(this.lstBrand);
-      }
-    );
-  }
-
-  getSelect2Brand(selectBrand: Brand[]){
-    let tmpData: Select2Brand[] = [];
-
-    for(let i = 0; i < selectBrand.length; i++){
-      let tmpData2 = {
-        value: selectBrand[i].brandId.toString(),
-        label: selectBrand[i].brandName,
-        disabled: false
-      };
-      
-      tmpData.push(tmpData2);
-    }
-
-    this.BrandSelect2 = JSON.parse(JSON.stringify(tmpData));
-    if(this.product !== null){
-      this.selectBrandId = this.product.brandId.toString();
-      this.loadBrand = true;
-      this.loaDone();
-    }
-  }
-
-  selectBrandOpt(event: any){
-    this.selectBrandId = event.value;
   }
 }
