@@ -24,28 +24,35 @@
         </div>
         <hr>
         <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-12">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <label for="selectSize" class="form-label">Talla</label>
+                <select2 [data]="SizeSelect2" [value]="selectSizeId" (update)="selectSizeOpt($event)" id="selectSize" placeholder="Seleccione una talla" noResultMessage="No encontrado"></select2>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
                 <label for="productQuantity" class="form-label">Cantidad:</label>
                 <div class="input-group">
                     <input type="number" class="form-control form-control-sm" id="productQuantity" placeholder="Piezas existentes" [(ngModel)]="productQuantity">
                     <span class="input-group-text">pzs</span>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6">
                 <label for="productCost" class="form-label">Costo:</label>
                 <div class="input-group">
                     <span class="input-group-text-sm">$</span>
                     <input type="number" class="form-control form-control-sm" id="productCost" placeholder="Costo del producto" [(ngModel)]="productCost">
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-md-4 col-sm-6">
                 <label for="productPrice" class="form-label">Precio:</label>
                 <div class="input-group">
                     <span class="input-group-text-sm">$</span>
                     <input type="number" class="form-control form-control-sm" id="productPrice" placeholder="Precio del producto" [(ngModel)]="productPrice" (ngModelChange)="calculateIVAEvent($event)">
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-md-4 col-sm-6">
                 <label for="productPrice" class="form-label">IVA:</label>
                 <div class="input-group">
                     <span class="input-group-text-sm">$</span>

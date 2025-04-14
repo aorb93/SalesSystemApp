@@ -47,6 +47,7 @@ export class DialogSizeComponent {
     this.spinner.show();
 
     let tmpSize: Size = {
+      sizeId: 0,
       sizeName: this.sizeName,
       companyId: this.companyId
     }

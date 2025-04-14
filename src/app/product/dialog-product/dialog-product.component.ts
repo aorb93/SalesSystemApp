@@ -15,6 +15,8 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../../models/user';
 import $ from "jquery";
+import { ApiSizeService } from "../../services/api-size.service";
+import { Size, Select2Size } from "../../models/size";
 
 @Component({
   selector: 'app-dialog-product',
@@ -48,6 +50,11 @@ export class DialogProductComponent implements OnInit{
   public loadGender: boolean = false;
   public loadCategory: boolean = false;
   public loadSubCategory: boolean = false;
+  public loadSize: boolean = false;
+
+  public lstSize!: Size[];
+  public SizeSelect2!: Select2Data;
+  public selectSizeId: string = '0';
 
   constructor(
       public dialogRef: MatDialogRef<DialogProductComponent>,
@@ -56,6 +63,7 @@ export class DialogProductComponent implements OnInit{
       private apiCategory: ApiCategoryService,
       private apiSubCategory: ApiSubCategoryService,
       private apiGender: ApiGenderService,
+      private apiSize: ApiSizeService,
       private spinner: NgxSpinnerService,
       @Inject(MAT_DIALOG_DATA) public product: Product
   ){
@@ -81,6 +89,7 @@ export class DialogProductComponent implements OnInit{
   ngOnInit(): void {
     this.getCategory(this.companyId);
     this.getGender(this.companyId);
+    this.getSize(this.companyId);
   }
 
   close(){
@@ -88,7 +97,7 @@ export class DialogProductComponent implements OnInit{
   }
 
   loaDone(){
-    if(this.loadGender && this.loadCategory && this.loadSubCategory){
+    if(this.loadGender && this.loadCategory && this.loadSubCategory && this.loadSize){
       this.spinner.hide();
     }
   }
@@ -214,7 +223,7 @@ export class DialogProductComponent implements OnInit{
       categoryId: Number(this.selectCategoryId),
       subCategoryId: Number(this.selectSubCategoryId),
       colorId: 11,
-      sizeId: 5,
+      sizeId: Number(this.selectSizeId),
       companyId: this.companyId
     }
 
@@ -247,7 +256,7 @@ export class DialogProductComponent implements OnInit{
       categoryId: Number(this.selectCategoryId),
       subCategoryId: Number(this.selectSubCategoryId),
       colorId: 11,
-      sizeId: 5,
+      sizeId: Number(this.selectSizeId),
       companyId: this.companyId
     }
 
@@ -274,5 +283,40 @@ export class DialogProductComponent implements OnInit{
     let productIVA = price - (price / 1.16);
     productIVA = (Math.round(productIVA * 100) / 100);
     return productIVA = Number(productIVA.toFixed(2));
+  }
+
+  getSize(companyId: number){
+    this.apiSize.getSizes(companyId).subscribe(
+      response => {
+        this.lstSize = response;
+        this.getSelect2Size(this.lstSize);
+      }
+    );
+  }
+
+  getSelect2Size(selectSize: Size[]){
+    let tmpData: Select2Size[] = [];
+
+    for(let i = 0; i < selectSize.length; i++){
+      let tmpData2 = {
+        value: selectSize[i].sizeId.toString(),
+        label: selectSize[i].sizeName,
+        disabled: false
+      };
+      
+      tmpData.push(tmpData2);
+    }
+
+    this.SizeSelect2 = JSON.parse(JSON.stringify(tmpData));
+    if(this.product !== null){
+      this.selectSizeId = this.product.sizeId.toString();
+      this.loadSize = true;
+      this.loaDone();
+    }
+  }
+
+  selectSizeOpt(event: any){
+    this.selectSizeId = event.value;
+    // this.getSubCategory(Number(this.selectCategoryId), Number(this.selectGenderId));
   }
 }
