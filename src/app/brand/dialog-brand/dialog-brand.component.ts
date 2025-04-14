@@ -47,6 +47,7 @@ export class DialogBrandComponent implements OnInit{
     this.spinner.show();
 
     let tmpBrand: Brand = {
+      brandId: 0,
       brandName: this.brandName,
       companyId: this.companyId
     }

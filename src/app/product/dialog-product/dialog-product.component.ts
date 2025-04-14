@@ -17,6 +17,8 @@ import { User } from '../../models/user';
 import $ from "jquery";
 import { ApiSizeService } from "../../services/api-size.service";
 import { Size, Select2Size } from "../../models/size";
+import { Brand, Select2Brand } from "../../models/brand";
+import { ApiBrandService } from "../../services/api-brand.service";
 
 @Component({
   selector: 'app-dialog-product',
@@ -51,10 +53,15 @@ export class DialogProductComponent implements OnInit{
   public loadCategory: boolean = false;
   public loadSubCategory: boolean = false;
   public loadSize: boolean = false;
+  public loadBrand: boolean = false;
 
   public lstSize!: Size[];
   public SizeSelect2!: Select2Data;
   public selectSizeId: string = '0';
+
+  public lstBrand!: Brand[];
+  public BrandSelect2!: Select2Data;
+  public selectBrandId: string = '0';
 
   constructor(
       public dialogRef: MatDialogRef<DialogProductComponent>,
@@ -64,6 +71,7 @@ export class DialogProductComponent implements OnInit{
       private apiSubCategory: ApiSubCategoryService,
       private apiGender: ApiGenderService,
       private apiSize: ApiSizeService,
+      private apiBrand: ApiBrandService,
       private spinner: NgxSpinnerService,
       @Inject(MAT_DIALOG_DATA) public product: Product
   ){
@@ -90,6 +98,7 @@ export class DialogProductComponent implements OnInit{
     this.getCategory(this.companyId);
     this.getGender(this.companyId);
     this.getSize(this.companyId);
+    this.getBrand(this.companyId);
   }
 
   close(){
@@ -97,7 +106,7 @@ export class DialogProductComponent implements OnInit{
   }
 
   loaDone(){
-    if(this.loadGender && this.loadCategory && this.loadSubCategory && this.loadSize){
+    if(this.loadGender && this.loadCategory && this.loadSubCategory && this.loadSize && this.loadBrand){
       this.spinner.hide();
     }
   }
@@ -217,7 +226,7 @@ export class DialogProductComponent implements OnInit{
       cost: this.productCost,
       price: this.productPrice,
       // iva: this.productIVA,
-      brandId: 1,
+      brandId: Number(this.selectBrandId),
       genderId: Number(this.selectGenderId),
       seasonId: 1,
       categoryId: Number(this.selectCategoryId),
@@ -250,7 +259,7 @@ export class DialogProductComponent implements OnInit{
       cost: this.productCost,
       price: this.productPrice,
       // iva: this.productIVA,
-      brandId: 1,
+      brandId: Number(this.selectBrandId),
       genderId: Number(this.selectGenderId),
       seasonId: 1,
       categoryId: Number(this.selectCategoryId),
@@ -318,5 +327,39 @@ export class DialogProductComponent implements OnInit{
   selectSizeOpt(event: any){
     this.selectSizeId = event.value;
     // this.getSubCategory(Number(this.selectCategoryId), Number(this.selectGenderId));
+  }
+
+  getBrand(companyId: number){
+    this.apiBrand.getBrands(companyId).subscribe(
+      response => {
+        this.lstBrand = response;
+        this.getSelect2Brand(this.lstBrand);
+      }
+    );
+  }
+
+  getSelect2Brand(selectBrand: Brand[]){
+    let tmpData: Select2Brand[] = [];
+
+    for(let i = 0; i < selectBrand.length; i++){
+      let tmpData2 = {
+        value: selectBrand[i].brandId.toString(),
+        label: selectBrand[i].brandName,
+        disabled: false
+      };
+      
+      tmpData.push(tmpData2);
+    }
+
+    this.BrandSelect2 = JSON.parse(JSON.stringify(tmpData));
+    if(this.product !== null){
+      this.selectBrandId = this.product.brandId.toString();
+      this.loadBrand = true;
+      this.loaDone();
+    }
+  }
+
+  selectBrandOpt(event: any){
+    this.selectBrandId = event.value;
   }
 }
