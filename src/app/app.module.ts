@@ -60,6 +60,8 @@ import { CollectComponent } from './collect/collect.component';
 import { CollectWeekComponent } from './collect-week/collect-week.component';
 import { CollectNextThreeDaysComponent } from './collect-next-three-days/collect-next-three-days.component';
 import { DialogGenderComponent } from './gender/dialog-gender/dialog-gender.component';
+import { SizeComponent } from './size/size.component';
+import { DialogSizeComponent } from './size/dialog-size/dialog-size.component';
 registerLocaleData(localeEs, 'es');
 registerLocaleData(localeEn, 'en');
 
@@ -88,7 +90,9 @@ registerLocaleData(localeEn, 'en');
     CollectComponent,
     CollectWeekComponent,
     CollectNextThreeDaysComponent,
-    DialogGenderComponent
+    DialogGenderComponent,
+    SizeComponent,
+    DialogSizeComponent
   ],
   imports: [
     BrowserModule,

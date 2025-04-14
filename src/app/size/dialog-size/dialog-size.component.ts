@@ -4,34 +4,34 @@ import { BehaviorSubject } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Brand } from '../../models/brand';
-import { ApiBrandService } from '../../services/api-brand.service';
+import { Size } from '../../models/size';
+import { ApiSizeService } from '../../services/api-size.service';
 
 @Component({
-  selector: 'app-dialog-brand',
-  templateUrl: './dialog-brand.component.html',
-  styleUrl: './dialog-brand.component.scss'
+  selector: 'app-dialog-size',
+  templateUrl: './dialog-size.component.html',
+  styleUrl: './dialog-size.component.scss'
 })
-export class DialogBrandComponent implements OnInit{
+export class DialogSizeComponent {
   public userSubject!: BehaviorSubject<User>;
   public companyId!: number;
 
-  public brandName!: string;
+  public sizeName!: string;
 
   constructor(
-    public dialogRef: MatDialogRef<DialogBrandComponent>,
+    public dialogRef: MatDialogRef<DialogSizeComponent>,
     private spinner: NgxSpinnerService,
     public snackBar: MatSnackBar,
-    private apiBrand: ApiBrandService,
-    @Inject(MAT_DIALOG_DATA) public brand: Brand
+    private apiSize: ApiSizeService,
+    @Inject(MAT_DIALOG_DATA) public size: Size
   ){
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('User')!));
     this.companyId = this.userSubject.value.infoUser.companyId;
   }
 
   ngAfterContentInit(): void{
-    if(this.brand !== null){
-      this.brandName = this.brand.brandName;
+    if(this.size !== null){
+      this.sizeName = this.size.sizeName;
     }
   }
 
@@ -43,19 +43,19 @@ export class DialogBrandComponent implements OnInit{
     this.dialogRef.close();
   }
   
-  addBrand() {
+  addSize() {
     this.spinner.show();
 
-    let tmpBrand: Brand = {
-      brandName: this.brandName,
+    let tmpSize: Size = {
+      sizeName: this.sizeName,
       companyId: this.companyId
     }
 
-    this.apiBrand.postBrand(tmpBrand).subscribe(response => {
+    this.apiSize.postSize(tmpSize).subscribe(response => {
       if(response){
         this.spinner.hide();
         this.dialogRef.close();
-        this.snackBar.open('Marca ' + tmpBrand.brandName + ' agregada', '', {
+        this.snackBar.open('Talla ' + tmpSize.sizeName + ' agregada', '', {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'top'
@@ -64,21 +64,20 @@ export class DialogBrandComponent implements OnInit{
     }); 
   }
   
-  editBrand() {
+  editSize() {
     this.spinner.show();
 
-    let tmpBrand: Brand = {
-      brandId: this.brand.brandId,
-      brandName: this.brandName,
-      // brandTypeId: this.brand.brandTypeId,
+    let tmpSize: Size = {
+      sizeId: this.size.sizeId,
+      sizeName: this.sizeName,
       companyId: this.companyId
     }
 
-    this.apiBrand.putBrand(tmpBrand).subscribe(response => {
+    this.apiSize.putSize(tmpSize).subscribe(response => {
       if(response){
         this.spinner.hide();
         this.dialogRef.close();
-        this.snackBar.open('Marca ' + tmpBrand.brandName + ' editada', '', {
+        this.snackBar.open('Talla ' + tmpSize.sizeName + ' editada', '', {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'top'
