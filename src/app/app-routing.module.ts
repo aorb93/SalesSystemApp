@@ -18,6 +18,7 @@ import { CollectWeekComponent } from './collect-week/collect-week.component';
 import { CollectNextThreeDaysComponent } from './collect-next-three-days/collect-next-three-days.component';
 import { SizeComponent } from './size/size.component';
 import { SeasonComponent } from './season/season.component';
+import { ColorComponent } from './color/color.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'brand', component: BrandComponent, canActivate: [AuthGuard] },
   { path: 'size', component: SizeComponent, canActivate: [AuthGuard] },
   { path: 'season', component: SeasonComponent, canActivate: [AuthGuard] },
+  { path: 'color', component: ColorComponent, canActivate: [AuthGuard] },
   { path: 'saledetail/:saleId', component: SaledetailComponent, canActivate: [AuthGuard] },
   { path: 'catalogs', component: CatalogsComponent, canActivate: [AuthGuard] },
   { path: 'gender', component: GenderComponent, canActivate: [AuthGuard] },

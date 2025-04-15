@@ -64,6 +64,8 @@ import { SizeComponent } from './size/size.component';
 import { DialogSizeComponent } from './size/dialog-size/dialog-size.component';
 import { SeasonComponent } from './season/season.component';
 import { DialogSeasonComponent } from './season/dialog-season/dialog-season.component';
+import { ColorComponent } from './color/color.component';
+import { DialogColorComponent } from './color/dialog-color/dialog-color.component';
 registerLocaleData(localeEs, 'es');
 registerLocaleData(localeEn, 'en');
 
@@ -96,7 +98,9 @@ registerLocaleData(localeEn, 'en');
     SizeComponent,
     DialogSizeComponent,
     SeasonComponent,
-    DialogSeasonComponent
+    DialogSeasonComponent,
+    ColorComponent,
+    DialogColorComponent
   ],
   imports: [
     BrowserModule,
