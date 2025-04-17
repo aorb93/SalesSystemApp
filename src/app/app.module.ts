@@ -68,6 +68,8 @@ import { ColorComponent } from './color/color.component';
 import { DialogColorComponent } from './color/dialog-color/dialog-color.component';
 import { PeriodComponent } from './period/period.component';
 import { DialogPeriodComponent } from './period/dialog-period/dialog-period.component';
+import { PaymentTypeComponent } from './payment-type/payment-type.component';
+import { DialogPaymentTypeComponent } from './payment-type/dialog-payment-type/dialog-payment-type.component';
 registerLocaleData(localeEs, 'es');
 registerLocaleData(localeEn, 'en');
 
@@ -104,7 +106,9 @@ registerLocaleData(localeEn, 'en');
     ColorComponent,
     DialogColorComponent,
     PeriodComponent,
-    DialogPeriodComponent
+    DialogPeriodComponent,
+    PaymentTypeComponent,
+    DialogPaymentTypeComponent
   ],
   imports: [
     BrowserModule,

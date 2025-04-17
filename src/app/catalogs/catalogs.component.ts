@@ -23,7 +23,7 @@ export class CatalogsComponent implements OnInit {
       {routerLink: '/size', text: 'Tallas', icon: faTextHeight, needAdmin: true, img: ''},
       {routerLink: '/color', text: 'Colores', icon: faPalette, needAdmin: true, img: ''},
       {routerLink: '/period', text: 'Periodos de pago', icon: faMoneyCheckDollar, needAdmin: true, img: ''},
-      {routerLink: '/category', text: 'Tipos de pago', icon: faCreditCard, needAdmin: true, img: ''},
+      {routerLink: '/paymentType', text: 'Tipos de pago', icon: faCreditCard, needAdmin: true, img: ''},
     ];
   }
 

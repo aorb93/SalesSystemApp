@@ -17,7 +17,7 @@ import { DialogSaleComponent } from './dialog-sale/dialog-sale.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Select2Data, Select2DataModify } from 'ng-select2-component';
 import { ApiPaymentTypeService } from '../services/api-payment-type.service';
-import { PaymentType, Select2PaymentType } from '../models/paymentType';
+import { PaymentType, PaymentTypeUser, Select2PaymentType } from '../models/paymentType';
 import { ApiPeriodService } from '../services/api-period.service';
 import { Period, Select2Period, Select2CantPeriod } from '../models/period';
 import $ from "jquery";
@@ -32,7 +32,7 @@ export class SaleComponent {
   public productSelect!: string;
   public product!: ProductComponent;
 
-  public SelectPaymentType!: PaymentType[];
+  public SelectPaymentType!: PaymentTypeUser[];
   public selectPaymentTypeId!: number;
 
   public SelectPeriod!: Period[];
@@ -186,7 +186,7 @@ export class SaleComponent {
 
   getPaymentType(clientId: number) {
     if(clientId.toString() != ''){
-      this.apiPaymentType.getPaymentTypes(this.companyId, clientId).subscribe(response => {
+      this.apiPaymentType.getPaymentTypeUser(this.companyId, clientId).subscribe(response => {
         this.SelectPaymentType = response;
         this.getPaymentType2Client(this.SelectPaymentType);
       });
@@ -197,7 +197,7 @@ export class SaleComponent {
     }
   }
 
-  getPaymentType2Client(selectPaymentType: PaymentType[]){
+  getPaymentType2Client(selectPaymentType: PaymentTypeUser[]){
     let tmpData: Select2PaymentType[] = [];
 
     for(let i = 0; i < selectPaymentType.length; i++){
