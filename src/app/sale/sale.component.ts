@@ -107,8 +107,8 @@ export class SaleComponent {
     // this.getPaymentType();
   }
 
-  getPeriod() {
-    this.apiPeriod.getPeriod().subscribe(response => {
+  getPeriod(companyId: number) {
+    this.apiPeriod.getPeriod(companyId).subscribe(response => {
       this.SelectPeriod = response;
       this.getPeriod2(this.SelectPeriod);
     });
@@ -208,7 +208,7 @@ export class SaleComponent {
       };
       
       tmpData.push(tmpData2);
-      this.getPeriod();
+      this.getPeriod(this.companyId);
       this.spinner.hide();
     }
 

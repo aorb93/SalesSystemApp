@@ -1,6 +1,7 @@
 export interface Period {
     periodId: number;
     periodName: string;
+    companyId: number;
 }
 
 export interface Select2Period{ 

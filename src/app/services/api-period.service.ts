@@ -19,8 +19,20 @@ export class ApiPeriodService {
     private _http: HttpClient
   ) { }
 
-  getPeriod(): Observable<Period[]>{
-    const _list: string = '/List';
-    return this._http.get<Period[]>(`${this.url}${_list}`);
+  getPeriod(companyId: number): Observable<Period[]>{
+    const _companyId: string = '/List?CompanyId=';
+    return this._http.get<Period[]>(`${this.url}${_companyId}${companyId}`);
+  }
+
+  postPeriod(period: Period): Observable<Period[]>{ 
+    return this._http.post<Period[]>(this.url + '/InsPeriod', period, httpOption);
+  }
+
+  putPeriod(period: Period): Observable<Period[]>{ 
+    return this._http.put<Period[]>(this.url + '/UpdPeriod', period, httpOption);
+  }
+
+  delPeriod(period: Period): Observable<Period[]>{
+    return this._http.put<Period[]>(this.url + '/DelPeriod', period, httpOption);
   }
 }
