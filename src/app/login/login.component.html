@@ -6,16 +6,17 @@
             <div class="fadeIn first">
                 <i class="fa fa-user-circle"></i>
             </div>
+            <p class="text-danger" *ngIf="showMessage">{{errorMessage}}</p>
 
             <!-- Login Form -->
             <input type="text" id="login" class="fadeIn second" placeholder="Usuario" formControlName="userLogin">
             <input type="password" id="password" class="fadeIn third" placeholder="Contraseña" formControlName="password">
-            <hr>
+            <br><hr>
             <button type="submit" [disabled]="!loginForm.valid" class="fadeIn fourth">Iniciar Sesión</button>
 
             <!-- Remind Passowrd -->
             <div id="formFooter">
-                <a class="underlineHover" href="#">Forgot Password?</a>
+                <!-- <a class="underlineHover" href="#">Forgot Password?</a> -->
             </div>
         </form>
     </div>

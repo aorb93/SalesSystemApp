@@ -3,6 +3,7 @@ import { apiAuthService } from "../services/apiAuth.service";
 import { Router } from "@angular/router";
 import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
 import { NgxSpinnerService } from "ngx-spinner";
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({ 
     selector: 'app-login',
@@ -12,6 +13,8 @@ import { NgxSpinnerService } from "ngx-spinner";
 export class LoginComponent implements OnInit{
 
     public loginForm!: FormGroup;
+    public errorMessage!: string;
+    public showMessage: boolean = false;
 
     // public loginForm = this.formBuilder.group({
     //     userLogin: ['', Validators.required],
@@ -38,11 +41,19 @@ export class LoginComponent implements OnInit{
     }
 
     login(){
+        this.showMessage = false;
         this.spinner.show();
         this.apiAuthService.login(this.loginForm.value).subscribe(response => {
             if(response.result){
                 this.router.navigate(['/']);
             }
-        })
+        },
+        (error) => {
+            if(Number(error.status) == 401) {
+                this.errorMessage = "Usuario o contraseña incorrecto, intente de nuevo";
+                this.showMessage = true;
+            }
+            this.spinner.hide();
+        });
     }
 }
