@@ -5,9 +5,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { Category } from '../models/category';
 import { DialogDeleteComponente } from '../common/delete/dialogdelete.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { faEdit, faTrash, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faSquareCheck, faEye } from '@fortawesome/free-solid-svg-icons';
 import { User } from '../models/user';
 import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-category',
@@ -25,14 +26,16 @@ export class CategoryComponent implements OnInit {
   public height: string = '500px';
   public faEdit = faEdit;
   public faTrash = faTrash;
-  public faSquareCheck = faSquareCheck
+  public faSquareCheck = faSquareCheck;
+  public faEye = faEye;
 
   public categories: number = 1;
 
   constructor(
     private apiCategory: ApiCategoryService,
     public dialog: MatDialog,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private router: Router
   ) {
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('User')!));
     this.companyId = this.userSubject.value.infoUser.companyId;
@@ -101,5 +104,14 @@ export class CategoryComponent implements OnInit {
         });
       }
     });
+  }
+
+  openSubCategory(category: Category){
+    this.router.navigate(['/subCategory'], {
+      state: {
+        someData: { name: category.categoryId, description: this.companyId },
+      },
+    });
+    
   }
 }

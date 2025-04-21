@@ -8,6 +8,15 @@ export interface SubCategory{
     genderId: number;
     categoryName: string;
     genderName: string;
+    companyId: number;
+}
+
+export interface subCategory{
+    subCategoryId: number;
+    subCategoryName: string;
+    categoryId: number;
+    genderId: number;
+    companyId: number;
 }
 
 export interface Select2SubCategory{ 

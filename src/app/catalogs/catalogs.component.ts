@@ -18,7 +18,7 @@ export class CatalogsComponent implements OnInit {
       {routerLink: '/gender', text: 'Género', icon: faChildren, needAdmin: true, img: ''},
       {routerLink: '/brand', text: 'Marcas', icon: faTags, needAdmin: true, img: ''},
       {routerLink: '/category', text: 'Categorías', icon: faList, needAdmin: true, img: ''},
-      {routerLink: '/category', text: 'Sub-Categorías', icon: faListCheck, needAdmin: true, img: ''},
+      // {routerLink: '/category', text: 'Sub-Categorías', icon: faListCheck, needAdmin: true, img: ''},
       {routerLink: '/season', text: 'Temporada', icon: faCloudSun, needAdmin: true, img: ''},
       {routerLink: '/size', text: 'Tallas', icon: faTextHeight, needAdmin: true, img: ''},
       {routerLink: '/color', text: 'Colores', icon: faPalette, needAdmin: true, img: ''},

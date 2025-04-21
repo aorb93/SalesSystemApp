@@ -21,6 +21,7 @@ import { SeasonComponent } from './season/season.component';
 import { ColorComponent } from './color/color.component';
 import { PeriodComponent } from './period/period.component';
 import { PaymentTypeComponent } from './payment-type/payment-type.component';
+import { SubCategoryComponent } from './sub-category/sub-category.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'client', component: ClientComponent, canActivate: [AuthGuard] },
   { path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: 'category', component: CategoryComponent, canActivate: [AuthGuard] },
+  { path: 'subCategory', component: SubCategoryComponent, canActivate: [AuthGuard] },
   { path: 'product', component: ProductComponent, canActivate: [AuthGuard] },
   { path: 'sale', component: SaleComponent, canActivate: [AuthGuard] },
   { path: 'sales', component: SalesComponent, canActivate: [AuthGuard] },

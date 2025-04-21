@@ -70,6 +70,8 @@ import { PeriodComponent } from './period/period.component';
 import { DialogPeriodComponent } from './period/dialog-period/dialog-period.component';
 import { PaymentTypeComponent } from './payment-type/payment-type.component';
 import { DialogPaymentTypeComponent } from './payment-type/dialog-payment-type/dialog-payment-type.component';
+import { SubCategoryComponent } from './sub-category/sub-category.component';
+import { DialogSubCategoryComponent } from './sub-category/dialog-sub-category/dialog-sub-category.component';
 registerLocaleData(localeEs, 'es');
 registerLocaleData(localeEn, 'en');
 
@@ -108,7 +110,9 @@ registerLocaleData(localeEn, 'en');
     PeriodComponent,
     DialogPeriodComponent,
     PaymentTypeComponent,
-    DialogPaymentTypeComponent
+    DialogPaymentTypeComponent,
+    SubCategoryComponent,
+    DialogSubCategoryComponent
   ],
   imports: [
     BrowserModule,

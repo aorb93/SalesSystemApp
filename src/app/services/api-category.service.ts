@@ -41,4 +41,10 @@ export class ApiCategoryService {
     const _companyId: string = '/List?CompanyId=';
     return this._http.get<Category[]>(`${this.url}${_companyId}${companyId}`);
   }
+
+  getCategory(categoryId: number, companyId: number): Observable<Category[]>{
+    const _categoryId: string = '/ListCategory?CategoryId=';
+    const _companyId: string = '&CompanyId=';
+    return this._http.get<Category[]>(`${this.url}${_categoryId}${categoryId}${_companyId}${companyId}`);
+  }
 }

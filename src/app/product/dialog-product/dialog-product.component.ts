@@ -188,7 +188,7 @@ export class DialogProductComponent implements OnInit{
 
   // #region SelectSubCategory
   async getSubCategory(selectCategoryId: number, selectGenderId: number){
-    await this.apiSubCategory.getSubCategories(selectCategoryId, selectGenderId).subscribe(response => {
+    await this.apiSubCategory.getSubCategories(selectCategoryId, selectGenderId, this.companyId).subscribe(response => {
       this.lstSubCategory = response;
       this.getSelect2SubCategory(this.lstSubCategory);
     });

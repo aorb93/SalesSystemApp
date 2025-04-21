@@ -49,19 +49,19 @@ export class SizeComponent {
   }
 
   openAdd(){
-      this.width = (window.innerWidth * .85).toString() + 'px';
-      this.height = (window.innerHeight * .40).toString() + 'px';
-      
-      const dialogRef = this.dialog.open(DialogSizeComponent, {
-        width: this.width,
-        height: this.height,
-        autoFocus: false
-      });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        this.getSize(this.companyId);
-      });
-    }
+    this.width = (window.innerWidth * .85).toString() + 'px';
+    this.height = (window.innerHeight * .40).toString() + 'px';
+    
+    const dialogRef = this.dialog.open(DialogSizeComponent, {
+      width: this.width,
+      height: this.height,
+      autoFocus: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getSize(this.companyId);
+    });
+  }
 
   openEdit(size: Size){
     this.spinner.show();
