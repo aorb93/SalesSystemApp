@@ -73,6 +73,8 @@ export class DialogSaleComponent {
     for(let i = 0; i < this.Sale.productSale.length; i++){
       this.totalQuantity += this.Sale.productSale[i].quantity;
     }
+
+    console.log(this.Sale);
   }
 
   close(){

@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { AppComponent } from '../app.component';
 import { NgxSpinnerService } from "ngx-spinner";
-import { faCartShopping, faBoxOpen, faCashRegister } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faBoxOpen, faCashRegister, faBagShopping} from '@fortawesome/free-solid-svg-icons';
 import { faShopify} from '@fortawesome/free-brands-svg-icons';
 
 @Component({
@@ -30,7 +30,7 @@ export class HomeComponent {
     this.tiles = [
       {routerLink: '/sale', text: 'Venta', icon: faCartShopping, needAdmin: true, img: ''},
       {routerLink: '/product', text: 'Productos', icon: faBoxOpen, needAdmin: true, img: ''},
-      {routerLink: '/sales', text: 'Ventas', icon: faShopify, needAdmin: true, img: ''},
+      {routerLink: '/sales', text: 'Ventas', icon: faBagShopping, needAdmin: true, img: ''},
       {routerLink: '/collect', text: 'Cobranza', icon: faCashRegister, needAdmin: true, img: ''},
     ];
 

@@ -9,8 +9,8 @@
         <thead class="table-primary">
             <tr>
                 <th scope="col">Cliente</th>
-                <th scope="col">Tipo de pago</th>
-                <th scope="col" class="horizontal-middle">Total</th>
+                <th scope="col" *ngIf="!_isMobile">Tipo de pago</th>
+                <th scope="col" class="horizontal-middle" *ngIf="!_isMobile">Total</th>
                 <th scope="col" class="horizontal-middle">Fecha</th>
                 <th scope="col" class="horizontal-middle">Acciones</th>
             </tr>
@@ -18,8 +18,8 @@
         <tbody>
             <tr *ngFor="let sale of lstSales  | paginate: { itemsPerPage: 10, currentPage: sales }">
                 <td scope="col" class="vertical-middle">{{ sale.clientName }}</td>
-                <td scope="col" class="vertical-middle">{{ sale.paymentTypeName }}</td>
-                <td scope="col" class="vertical-middle horizontal-middle">{{ sale.total | currency:'USD':'symbol' }}</td>
+                <td scope="col" class="vertical-middle" *ngIf="!_isMobile">{{ sale.paymentTypeName }}</td>
+                <td scope="col" class="vertical-middle horizontal-middle" *ngIf="!_isMobile">{{ sale.total | currency:'USD':'symbol' }}</td>
                 <td scope="col" class="vertical-middle horizontal-middle">{{ sale.creationDate | date:'MMM dd, y':'': 'es-ES' | titlecase }}</td>
                 <td scope="col" class="vertical-middle horizontal-middle">
                     <button class="btn btn-outline-info" (click)="openDetail(sale.saleId)">

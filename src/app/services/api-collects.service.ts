@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CollectNextThreeDays, CollectWeek } from '../models/collect';
+import { CollectNextThreeDays, CollectWeek, OverduePayment } from '../models/collect';
 
 @Injectable({
   providedIn: 'root'
@@ -23,4 +23,10 @@ export class ApiCollectsService {
       const _companyId: string = 'CollectNextThreeDays?CompanyId=' + companyId.toString();
       return this._http.get<CollectNextThreeDays[]>(`${this.url}${_companyId}`);
     }
+
+    getOverduePayment(companyId: number): Observable<OverduePayment[]>{
+      const _companyId: string = 'OverduePayment?CompanyId=' + companyId.toString();
+      return this._http.get<OverduePayment[]>(`${this.url}${_companyId}`);
+    }
+
 }

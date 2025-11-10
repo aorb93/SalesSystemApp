@@ -13,3 +13,10 @@ export interface CollectNextThreeDays{
 	partialPaid: number;
 	colorDay: string;
 }
+
+
+export interface OverduePayment{
+	clientId: number
+	clientName: string;
+	OverduePayments: number;
+}

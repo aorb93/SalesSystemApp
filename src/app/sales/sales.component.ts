@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-sales',
@@ -14,6 +15,7 @@ import { Router } from '@angular/router';
 })
 export class SalesComponent implements OnInit {
 
+  public _isMobile!: boolean;
   public lstSales!: Sales[];
   public userSubject!: BehaviorSubject<User>;
   public companyId!: number;
@@ -24,13 +26,15 @@ export class SalesComponent implements OnInit {
   constructor(
       private apiSales: ApiSalesService,
       private spinner: NgxSpinnerService,
-      private router: Router
+      private router: Router,
+      private isMobile: AppComponent
     ) {
       this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('User')!));
       this.companyId = this.userSubject.value.infoUser.companyId;
     }
 
   ngOnInit(): void {
+    this._isMobile = this.isMobile.isMobile;
     this.spinner.show();
     this.getSales(this.companyId);
   }
