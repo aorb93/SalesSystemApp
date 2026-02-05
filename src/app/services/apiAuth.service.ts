@@ -1,3 +1,4 @@
+import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
@@ -18,8 +19,9 @@ const httpOption = {
 })
 
 export class apiAuthService {
-    url: string = 'http://192.168.0.172/Access/Login';
+    url: string = environment.apiUrl + 'Access/Login';
 
+    private expirationTimer: any;
     public userSubject!: BehaviorSubject<User>;
     public user!: Observable<User>;
     public get userData(): User{
@@ -36,9 +38,16 @@ export class apiAuthService {
             map(res => {
                 if(res.result){
                     const user: User = res;
+                    const token = user.token;
                     localStorage.setItem('User', JSON.stringify(user));
+                    localStorage.setItem('token', token);
                     this.userSubject.next(user); 
+
+                    if (token) {
+                        this.setupTokenTimer();
+                    }
                 }
+                
                 return res;
             })
         );
@@ -47,6 +56,11 @@ export class apiAuthService {
     logout(){
         localStorage.removeItem('User');
         this.userSubject.next(null!);
+
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        if (this.expirationTimer) 
+            clearTimeout(this.expirationTimer);
     }
 
     isAuth(): boolean {
@@ -62,5 +76,28 @@ export class apiAuthService {
         const payload = JSON.parse(atob(token.split('.')[1]));
         const exp = payload.exp * 1000;
         return Date.now() < exp;
+    }
+
+    setupTokenTimer() {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+        // Decodificamos el payload del JWT
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        
+        // Convertimos la expiración (exp) a milisegundos
+        const expires = new Date(payload.exp * 1000);
+        const timeout = expires.getTime() - Date.now();
+
+        if (this.expirationTimer) 
+            clearTimeout(this.expirationTimer);
+
+        if (timeout <= 0) {
+            this.logout();
+        } else {
+            this.expirationTimer = setTimeout(() => {
+            this.logout();
+            }, timeout);
+        }
     }
 }
