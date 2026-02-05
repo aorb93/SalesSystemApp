@@ -1,3 +1,4 @@
+import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -8,7 +9,7 @@ import { CollectNextThreeDays, CollectWeek, OverduePayment } from '../models/col
 })
 export class ApiCollectsService {
 
-  url: string = 'http://192.168.0.172/Collect/';
+  url: string = environment.apiUrl + 'Collect/';
   
     constructor(
       private _http: HttpClient

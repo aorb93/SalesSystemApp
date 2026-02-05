@@ -1,3 +1,4 @@
+import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -14,7 +15,7 @@ const httpOption = {
 })
 export class ApiStatisticsService {
 
-  url: string = 'http://192.168.0.172/Home/';
+  url: string = environment.apiUrl + 'Home/';
   
   constructor(
     private _http: HttpClient

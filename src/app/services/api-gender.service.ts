@@ -1,3 +1,4 @@
+import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -13,7 +14,7 @@ const httpOption = {
   providedIn: 'root'
 })
 export class ApiGenderService {
-  url: string = 'http://192.168.0.172/Gender/';
+  url: string = environment.apiUrl + 'Gender/';
 
   constructor(
     private _http: HttpClient

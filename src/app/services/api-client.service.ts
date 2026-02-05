@@ -1,3 +1,4 @@
+import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -13,7 +14,7 @@ const httpOption = {
   providedIn: 'root'
 })
 export class ApiClientService {
-  url: string = 'http://192.168.0.172/Client';
+  url: string = environment.apiUrl + 'Client';
 
   constructor(
     private _http: HttpClient
