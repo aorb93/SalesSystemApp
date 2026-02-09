@@ -2,7 +2,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
-import { map, retry } from "rxjs/operators";
+import { map, retry, tap } from "rxjs/operators";
 import { Response } from "../models/response";
 import { User } from "../models/user";
 import { Login } from "../models/login";
@@ -24,8 +24,20 @@ export class apiAuthService {
     private expirationTimer: any;
     public userSubject!: BehaviorSubject<User>;
     public user!: Observable<User>;
-    public get userData(): User{
-        return this.userSubject.value;
+    public get userData(): User | null {
+        // Primero intentamos sacar el valor del Subject (memoria)
+        const user = this.userSubject.value;
+        if (user) return user;
+
+        // Si no está en memoria (por un F5), intentamos recuperarlo del localStorage
+        const userLocal = localStorage.getItem('User');
+        if (userLocal) {
+            const parsedUser = JSON.parse(userLocal);
+            this.userSubject.next(parsedUser); // Repoblamos el Subject para futuras llamadas
+            return parsedUser;
+        }
+
+        return null;
     }
 
     constructor(private _http: HttpClient, private router: Router,){
@@ -39,12 +51,14 @@ export class apiAuthService {
                 if(res.result){
                     const user: User = res;
                     const token = user.token;
+                    const refreshToken = user.refreshToken;
                     localStorage.setItem('User', JSON.stringify(user));
                     localStorage.setItem('token', token);
+                    localStorage.setItem('refreshToken', refreshToken);
                     this.userSubject.next(user); 
 
                     if (token) {
-                        this.setupTokenTimer();
+                        // this.setupTokenTimer();
                     }
                 }
                 
@@ -99,5 +113,22 @@ export class apiAuthService {
             this.logout();
             }, timeout);
         }
+    }
+
+    refreshAccessToken() {
+        const refreshToken = localStorage.getItem('refreshToken');
+        const expiredToken = localStorage.getItem('token');
+
+        return this._http.post<any>(`${environment.apiUrl}Access/RefreshLogin`, {
+            expiredToken: expiredToken,
+            refreshToken: refreshToken
+        }).pipe(
+            tap(res => {
+                localStorage.setItem('token', res.token);
+                localStorage.setItem('refreshToken', res.refreshToken);
+                this.userSubject.next(res.data); // <--- ESTO ES VITAL
+                // this.setupTokenTimer(); // Reiniciamos el timer proactivo
+            })
+        );
     }
 }
